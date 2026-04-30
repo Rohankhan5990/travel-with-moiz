@@ -1,6 +1,8 @@
-import { MessageCircle } from "lucide-react";
+import Image from "next/image";
 import { brand, createWhatsAppUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
+
+export const whatsappIcon = "/icons/whatsapp.svg";
 
 export function WhatsAppButton({
   message,
@@ -21,7 +23,7 @@ export function WhatsAppButton({
         className,
       )}
     >
-      <MessageCircle className="h-4 w-4" />
+      <Image src={whatsappIcon} alt="" width={20} height={20} className="h-5 w-5" />
       {children}
     </a>
   );
@@ -36,7 +38,7 @@ export function FloatingWhatsApp() {
       aria-label="Chat with Travel With Moiz on WhatsApp"
       className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-600 text-white shadow-2xl shadow-emerald-950/40 transition hover:scale-105"
     >
-      <MessageCircle className="h-7 w-7" />
+      <Image src={whatsappIcon} alt="" width={34} height={34} className="h-9 w-9" />
     </a>
   );
 }

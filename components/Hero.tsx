@@ -14,7 +14,7 @@ import {
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const heroImage =
-  "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=2400&q=90";
+  "/images/brand/hero-banner.png";
 
 const thumbnails = [
   "https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&w=240&q=80",
@@ -43,16 +43,8 @@ export function Hero() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#031b24]/92 via-[#052c32]/58 to-[#031b24]/25" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_42%,transparent_0,rgba(2,6,23,0.12)_34%,rgba(2,6,23,0.76)_100%)]" />
-        <Image
-          src="/images/brand/moiz-mountain.png"
-          alt="Travel With Moiz sitting beside a mountain lake"
-          width={620}
-          height={775}
-          priority
-          className="absolute bottom-14 right-[4vw] hidden max-h-[76vh] w-auto object-contain drop-shadow-[0_35px_60px_rgba(0,0,0,0.45)] lg:block"
-        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#031b24]/88 via-[#052c32]/42 to-[#031b24]/8" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_50%,transparent_0,rgba(2,6,23,0.04)_36%,rgba(2,6,23,0.68)_100%)]" />
 
         <button
           type="button"

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, MapPin, Users } from "lucide-react";
+import { whatsappIcon } from "@/components/WhatsAppButton";
 import type { Tour } from "@/lib/tours";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
 
@@ -51,8 +52,9 @@ export function TourCard({ tour }: { tour: Tour }) {
             href={createWhatsAppUrl(tour.whatsappMessage)}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex flex-1 items-center justify-center rounded-full bg-gradient-to-r from-emerald-700 to-green-600 px-5 py-3 text-sm font-bold text-white transition hover:shadow-lg hover:shadow-emerald-500/20"
+            className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-emerald-700 to-green-600 px-5 py-3 text-sm font-bold text-white transition hover:shadow-lg hover:shadow-emerald-500/20"
           >
+            <Image src={whatsappIcon} alt="" width={18} height={18} className="h-5 w-5" />
             Book on WhatsApp
           </a>
           <Link

@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, MessageCircle, Mountain, X } from "lucide-react";
+import { Menu, Mountain, X } from "lucide-react";
+import { whatsappIcon } from "@/components/WhatsAppButton";
 import { brand } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
@@ -52,7 +54,7 @@ export function Navbar() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-amber-300/70 px-5 py-3 text-sm font-black text-white transition hover:bg-amber-300 hover:text-emerald-950"
           >
-            <MessageCircle className="h-4 w-4" />
+            <Image src={whatsappIcon} alt="" width={18} height={18} className="h-5 w-5" />
             Chat on WhatsApp
           </a>
         </div>
@@ -90,7 +92,7 @@ export function Navbar() {
             rel="noreferrer"
             className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-amber-300 px-5 py-3 font-black text-emerald-950"
           >
-            <MessageCircle className="h-4 w-4" />
+            <Image src={whatsappIcon} alt="" width={20} height={20} className="h-5 w-5" />
             Chat on WhatsApp
           </a>
         </div>
