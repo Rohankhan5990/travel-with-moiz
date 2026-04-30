@@ -7,7 +7,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Headphones,
-  Mouse,
   Mountain,
   ShieldCheck,
 } from "lucide-react";
@@ -15,14 +14,6 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 const heroImage =
   "/images/brand/hero-banner.png";
-
-const thumbnails = [
-  "https://images.unsplash.com/photo-1589553416260-f586c8f1514f?auto=format&fit=crop&w=240&q=80",
-  "https://images.unsplash.com/photo-1562979314-bee7453e911c?auto=format&fit=crop&w=240&q=80",
-  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=240&q=80",
-  "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=240&q=80",
-  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=240&q=80",
-];
 
 const trustItems = [
   { Icon: Mountain, title: "Handpicked", text: "Destinations" },
@@ -86,29 +77,7 @@ export function Hero() {
               Plan Your Trip
             </WhatsAppButton>
           </div>
-
-          <div className="mt-9 flex flex-wrap gap-4">
-            {thumbnails.map((thumb, index) => (
-              <div
-                key={thumb}
-                className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-white bg-white shadow-xl shadow-black/20 md:h-20 md:w-20"
-              >
-                <Image
-                  src={thumb}
-                  alt={`Pakistan destination preview ${index + 1}`}
-                  fill
-                  sizes="80px"
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
         </motion.div>
-
-        <div className="absolute bottom-12 left-1/2 z-30 hidden -translate-x-1/2 text-center text-white/80 md:block">
-          <Mouse className="mx-auto h-8 w-8" />
-          <p className="mt-2 text-sm">Scroll Down</p>
-        </div>
         </div>
       </div>
 
