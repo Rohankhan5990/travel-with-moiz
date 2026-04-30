@@ -1,11 +1,15 @@
-# Cloudflare Pages — static Next.js site (`output: "export"` writes to ./out)
+# Cloudflare Workers — static assets from Next.js export (`output: "export"` → ./out)
 #
-# Use Pages + static export, NOT `wrangler deploy` (Workers / OpenNext).
-# After `npm run build`, deploy with:
+# Your CI runs: npm run build && npx wrangler deploy
+# That command needs [assets] below (NOT pages_build_output_dir alone).
+#
+# If you switch to Cloudflare Pages instead, use:
 #   npx wrangler pages deploy
-#
-# Or set your CI “deploy command” to that (build command stays `npm run build`).
+# and you can set pages_build_output_dir = "./out" again.
 
 name = "travel-with-moiz"
 compatibility_date = "2025-05-01"
-pages_build_output_dir = "./out"
+
+[assets]
+directory = "./out"
+not_found_handling = "404-page"
