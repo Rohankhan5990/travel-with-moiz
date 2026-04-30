@@ -1,17 +1,51 @@
 # Travel With Moiz
 
-Premium Pakistan travel website for Hunza, Skardu, Kashmir, and custom tours.
+A premium, cinematic Pakistan travel website for Hunza, Skardu, Kashmir, Deosai, Attabad Lake, Passu Cones, and custom northern-area tours.
+
+The site is designed for fast browsing, strong visual impact, SEO-friendly tour pages, and one-click WhatsApp booking.
+
+## Highlights
+
+- Modern adventure-luxury design with deep navy, travel teal, cyan, gold, and glassmorphism.
+- Animated 3D hero built with React Three Fiber and Drei.
+- Responsive pages for Home, Tours, Tour Details, Gallery, About, and Contact.
+- Reusable tour data in `lib/tours.ts`.
+- WhatsApp deep links with pre-filled booking messages.
+- SEO metadata for Pakistan, Hunza, Skardu, and Kashmir tour searches.
+- Render-ready deployment config in `render.yaml`.
+
+## Pages
+
+- `/` - cinematic homepage with 3D hero, featured tours, gallery, reviews, FAQ, and CTA.
+- `/tours` - all tour packages with category chips.
+- `/tours/skardu-6-days` - Skardu 06 Days package.
+- `/tours/hunza-5-days` - Hunza 05 Days package.
+- `/tours/hunza-skardu-8-days` - Hunza + Skardu 08 Days package.
+- `/tours/kashmir-3-days` - Kashmir Valley 03 Days package.
+- `/gallery` - destination gallery.
+- `/about` - brand story and trust points.
+- `/contact` - WhatsApp, phone, Instagram, and service areas.
 
 ## Tech Stack
 
-- Next.js App Router with TypeScript
+- Next.js App Router
+- TypeScript
 - Tailwind CSS
 - Framer Motion
-- React Three Fiber / Drei for the animated 3D hero
-- Lucide React icons
-- WhatsApp deep-link booking, no backend required for v1
+- React Three Fiber
+- Drei
+- Lucide React
+- Next Image optimization
+
+## Brand Details
+
+- Brand: Travel With Moiz
+- WhatsApp: `+92 318 4280414`
+- Instagram: [`@travelwithmoiz__`](https://www.instagram.com/travelwithmoiz__/)
 
 ## Local Development
+
+Use Node.js 22 for best compatibility with the current Next.js version.
 
 ```bash
 nvm use 22.22.1
@@ -21,48 +55,26 @@ npm run dev
 
 Open `http://localhost:3000`.
 
-## Render Deployment
+## Quality Checks
 
-Use a Render Web Service for best Next.js image handling.
+```bash
+npm run lint
+npm run build
+```
 
+## Deploy To Render
+
+Recommended deployment type: Render Web Service. This keeps Next.js image handling and future server features available.
+
+Render settings:
+
+- Runtime: `Node`
 - Build command: `npm install && npm run build`
 - Start command: `npm start`
 - Node version: `22.22.1`
 
-The included `render.yaml` can be used as a blueprint.
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+You can also use the included `render.yaml` as a Render Blueprint.
 
-## Getting Started
+## Content Notes
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The current gallery uses high-quality remote placeholder photography. For launch, replace those image URLs with original Travel With Moiz trip photos compressed as WebP/AVIF for stronger trust and faster loading.
