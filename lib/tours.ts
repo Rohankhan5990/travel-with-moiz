@@ -307,6 +307,39 @@ export const galleryImages = [
   { title: "Adventure Camp", src: tours[0].gallery[1], alt: "Travel group enjoying a mountain campsite" },
 ];
 
+export const popularDestinations = [
+  {
+    title: "Hunza Valley",
+    subtitle: "The Heaven on Earth",
+    src: image("photo-1562979314-bee7453e911c"),
+    alt: "Hunza Valley mountains and greenery",
+  },
+  {
+    title: "Skardu",
+    subtitle: "Land of Mountains & Lakes",
+    src: image("photo-1589553416260-f586c8f1514f"),
+    alt: "Skardu lake and mountain view",
+  },
+  {
+    title: "Kashmir Valley",
+    subtitle: "Paradise on Earth",
+    src: image("photo-1518495973542-4542c06a5843"),
+    alt: "Kashmir valley blue lake and green hills",
+  },
+  {
+    title: "Neelum Valley",
+    subtitle: "Unspoiled Natural Beauty",
+    src: image("photo-1441974231531-c6227db76b6e"),
+    alt: "Neelum Valley forest stream",
+  },
+  {
+    title: "Fairy Meadows",
+    subtitle: "At the foot of Nanga Parbat",
+    src: image("photo-1500534314209-a25ddb2bd429"),
+    alt: "Fairy Meadows mountain camp landscape",
+  },
+];
+
 export const reviews = [
   {
     name: "Ayesha R.",

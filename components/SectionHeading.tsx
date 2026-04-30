@@ -5,22 +5,43 @@ export function SectionHeading({
   title,
   text,
   className,
+  tone = "dark",
 }: {
   eyebrow: string;
   title: string;
   text?: string;
   className?: string;
+  tone?: "dark" | "light";
 }) {
+  const isLight = tone === "light";
+
   return (
     <div className={cn("mx-auto max-w-3xl text-center", className)}>
-      <p className="mb-3 text-sm font-bold uppercase tracking-[0.35em] text-cyan-300">
+      <p
+        className={cn(
+          "mb-3 text-sm font-bold uppercase tracking-[0.35em]",
+          isLight ? "text-emerald-700" : "text-cyan-300",
+        )}
+      >
         {eyebrow}
       </p>
-      <h2 className="text-3xl font-black tracking-tight text-white md:text-5xl">
+      <h2
+        className={cn(
+          "text-3xl font-black tracking-tight md:text-5xl",
+          isLight ? "text-[#073b2c]" : "text-white",
+        )}
+      >
         {title}
       </h2>
       {text ? (
-        <p className="mt-5 text-base leading-8 text-slate-300 md:text-lg">{text}</p>
+        <p
+          className={cn(
+            "mt-5 text-base leading-8 md:text-lg",
+            isLight ? "text-slate-600" : "text-slate-300",
+          )}
+        >
+          {text}
+        </p>
       ) : null}
     </div>
   );

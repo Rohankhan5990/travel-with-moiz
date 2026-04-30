@@ -13,7 +13,7 @@ export function FAQ() {
       {faqs.map((faq, index) => (
         <div
           key={faq.question}
-          className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.07] text-white backdrop-blur"
+          className="overflow-hidden rounded-3xl border border-emerald-900/10 bg-white text-[#12392f] shadow-lg shadow-emerald-950/5"
         >
           <button
             type="button"
@@ -24,7 +24,7 @@ export function FAQ() {
             <ChevronDown
               className={cn(
                 "h-5 w-5 shrink-0 transition",
-                active === index ? "rotate-180 text-cyan-300" : "text-slate-400",
+                active === index ? "rotate-180 text-emerald-700" : "text-slate-400",
               )}
             />
           </button>
@@ -35,7 +35,7 @@ export function FAQ() {
             )}
           >
             <div className="overflow-hidden">
-              <p className="px-6 pb-5 leading-7 text-slate-300">{faq.answer}</p>
+              <p className="px-6 pb-5 leading-7 text-slate-600">{faq.answer}</p>
             </div>
           </div>
         </div>
