@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "serve -l 3000 out",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy:pages": "npm run build && npx wrangler pages deploy"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
