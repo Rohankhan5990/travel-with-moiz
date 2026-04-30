@@ -1,65 +1,105 @@
-import Image from "next/image";
+import { AnimatedSection } from "@/components/AnimatedSection";
+import { DestinationGallery } from "@/components/DestinationGallery";
+import { FAQ } from "@/components/FAQ";
+import { Hero } from "@/components/Hero";
+import { SectionHeading } from "@/components/SectionHeading";
+import { TourCard } from "@/components/TourCard";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { featuredTours, reviews } from "@/lib/tours";
+import { Car, HeartHandshake, Map, ShieldCheck, Users, WandSparkles } from "lucide-react";
+
+const trustPoints = [
+  { Icon: Users, title: "Group tours", text: "Social departures with clear plans and easy coordination." },
+  { Icon: WandSparkles, title: "Custom tours", text: "Private routes for families, couples, and corporate groups." },
+  { Icon: HeartHandshake, title: "Family friendly", text: "Balanced itineraries for comfort, safety, and memories." },
+  { Icon: Map, title: "Local route support", text: "Practical guidance for northern Pakistan road conditions." },
+  { Icon: Car, title: "Safe transport", text: "Comfortable vehicles planned around group size and terrain." },
+  { Icon: ShieldCheck, title: "Simple booking", text: "Confirm package details directly on WhatsApp before travel." },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <>
+      <Hero />
+
+      <section className="noise bg-slate-950 px-4 py-24">
+        <div className="relative mx-auto max-w-7xl">
+          <AnimatedSection>
+            <SectionHeading
+              eyebrow="Featured tours"
+              title="Pakistan’s most loved northern routes"
+              text="Book fast through WhatsApp, then travel with a planned route, scenic stops, and friendly support."
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </AnimatedSection>
+          <div className="mt-12 grid gap-6 lg:grid-cols-4">
+            {featuredTours.map((tour) => (
+              <TourCard key={tour.slug} tour={tour} />
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="bg-gradient-to-b from-slate-950 to-[#083344] px-4 py-24">
+        <div className="mx-auto max-w-7xl">
+          <AnimatedSection>
+            <SectionHeading
+              eyebrow="Why choose us"
+              title="Designed for comfort, trust, and unforgettable views"
+            />
+          </AnimatedSection>
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {trustPoints.map(({ Icon, title, text }) => (
+              <div key={title} className="rounded-[2rem] border border-white/10 bg-white/[0.07] p-7 text-white backdrop-blur">
+                <Icon className="h-9 w-9 text-cyan-300" />
+                <h3 className="mt-6 text-2xl font-black">{title}</h3>
+                <p className="mt-3 leading-7 text-slate-300">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#083344] px-4 py-24">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading
+            eyebrow="Gallery"
+            title="Cinematic destinations across Pakistan"
+            text="Skardu lakes, Hunza peaks, Kashmir valleys, Deosai plains, and famous adventure stops."
+          />
+          <div className="mt-12">
+            <DestinationGallery />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gradient-to-b from-[#083344] to-slate-950 px-4 py-24">
+        <div className="mx-auto max-w-7xl">
+          <SectionHeading eyebrow="Reviews" title="Travelers remember the details" />
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {reviews.map((review) => (
+              <article key={review.name} className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-7 text-white backdrop-blur">
+                <p className="text-lg leading-8 text-slate-200">“{review.text}”</p>
+                <div className="mt-6">
+                  <p className="font-black">{review.name}</p>
+                  <p className="text-sm text-cyan-300">{review.location}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-slate-950 px-4 py-24">
+        <SectionHeading eyebrow="FAQ" title="Before you book" />
+        <div className="mt-12">
+          <FAQ />
+        </div>
+        <div className="mx-auto mt-12 max-w-3xl rounded-[2rem] border border-cyan-300/20 bg-cyan-400/10 p-8 text-center text-white">
+          <h3 className="text-3xl font-black">Ready for Hunza, Skardu or Kashmir?</h3>
+          <p className="mt-3 text-slate-300">Send one message and get package details, dates, and booking guidance.</p>
+          <WhatsAppButton className="mt-6 px-8 py-4">Get Tour Details</WhatsAppButton>
+        </div>
+      </section>
+    </>
   );
 }

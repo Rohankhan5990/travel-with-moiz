@@ -1,3 +1,35 @@
+# Travel With Moiz
+
+Premium Pakistan travel website for Hunza, Skardu, Kashmir, and custom tours.
+
+## Tech Stack
+
+- Next.js App Router with TypeScript
+- Tailwind CSS
+- Framer Motion
+- React Three Fiber / Drei for the animated 3D hero
+- Lucide React icons
+- WhatsApp deep-link booking, no backend required for v1
+
+## Local Development
+
+```bash
+nvm use 22.22.1
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000`.
+
+## Render Deployment
+
+Use a Render Web Service for best Next.js image handling.
+
+- Build command: `npm install && npm run build`
+- Start command: `npm start`
+- Node version: `22.22.1`
+
+The included `render.yaml` can be used as a blueprint.
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
