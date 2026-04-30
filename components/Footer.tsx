@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Camera, MapPin, Phone } from "lucide-react";
 import { brand } from "@/lib/whatsapp";
@@ -8,7 +9,18 @@ export function Footer() {
     <footer className="border-t border-white/10 bg-slate-950 px-4 py-14 text-white">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.3fr_0.7fr_0.7fr]">
         <div>
-          <h2 className="text-3xl font-black">Travel With Moiz</h2>
+          <div className="flex flex-wrap items-center gap-4">
+            <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full shadow-lg shadow-black/40 ring-2 ring-amber-400/35">
+              <Image
+                src={brand.logoSrc}
+                alt=""
+                width={56}
+                height={56}
+                className="h-full w-full object-cover"
+              />
+            </span>
+            <h2 className="text-3xl font-black">{brand.name}</h2>
+          </div>
           <p className="mt-4 max-w-xl leading-8 text-slate-300">
             Premium Pakistan travel experiences for Hunza, Skardu, Kashmir, and
             custom northern-area adventures with simple WhatsApp booking.

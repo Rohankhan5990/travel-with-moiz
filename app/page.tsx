@@ -2,10 +2,11 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { DestinationGallery } from "@/components/DestinationGallery";
 import { FAQ } from "@/components/FAQ";
 import { Hero } from "@/components/Hero";
+import { ReviewsSection } from "@/components/ReviewsSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TourCard } from "@/components/TourCard";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { featuredTours, popularDestinations, reviews } from "@/lib/tours";
+import { featuredTours, popularDestinations } from "@/lib/tours";
 import { ArrowRight, Car, HeartHandshake, Map, ShieldCheck, Users, WandSparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -113,22 +114,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#073b2c] to-[#09251d] px-4 py-24">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Reviews" title="Travelers remember the details" />
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {reviews.map((review) => (
-              <article key={review.name} className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-7 text-white backdrop-blur">
-                <p className="text-lg leading-8 text-slate-200">“{review.text}”</p>
-                <div className="mt-6">
-                  <p className="font-black">{review.name}</p>
-                  <p className="text-sm text-cyan-300">{review.location}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ReviewsSection />
 
       <section className="bg-[#f8fbf6] px-4 py-24">
         <SectionHeading eyebrow="FAQ" title="Before you book" tone="light" />

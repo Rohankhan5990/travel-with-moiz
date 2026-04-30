@@ -372,20 +372,31 @@ export const popularDestinations = [
   },
 ];
 
-export const reviews = [
+export type Review = {
+  name: string;
+  location: string;
+  text: string;
+  /** Short label for context (e.g. package or trip type). */
+  trip?: string;
+};
+
+export const reviews: Review[] = [
   {
     name: "Ayesha R.",
     location: "Lahore",
+    trip: "Skardu · 6 days",
     text: "The Skardu tour felt premium and safe. Hotels, route planning, and photography stops were handled so well.",
   },
   {
     name: "Hamza K.",
     location: "Islamabad",
+    trip: "Hunza · 5 days",
     text: "Hunza with Travel With Moiz was smooth from booking to return. The WhatsApp support was quick.",
   },
   {
     name: "Maham S.",
     location: "Karachi",
+    trip: "Family tour",
     text: "Family friendly, comfortable, and beautifully managed. We loved the itinerary balance.",
   },
 ];

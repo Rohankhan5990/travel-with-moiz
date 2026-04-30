@@ -12,8 +12,7 @@ import {
 } from "lucide-react";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
-const heroImage =
-  "/images/brand/hero-banner.png";
+const heroImage = "/images/brand/hero-banner.png";
 
 const trustItems = [
   { Icon: Mountain, title: "Handpicked", text: "Destinations" },
@@ -28,14 +27,16 @@ export function Hero() {
       <div className="relative min-h-screen overflow-hidden bg-emerald-950 px-4 pt-28">
         <Image
           src={heroImage}
-          alt="Pakistan mountain lake hero background"
+          alt="Pakistan mountain lake hero landscape"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-center brightness-[1.08] contrast-[1.08] saturate-[1.18]"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#031b24]/88 via-[#052c32]/42 to-[#031b24]/8" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_50%,transparent_0,rgba(2,6,23,0.04)_36%,rgba(2,6,23,0.68)_100%)]" />
+        {/* Left-weighted scrim for headline legibility; right stays lighter so the photo stays vivid */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#031b24]/85 via-[#031b24]/30 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_110%_80%_at_15%_45%,rgba(2,15,20,0.55)_0%,transparent_55%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-950/35 via-transparent to-slate-950/25" />
 
         <button
           type="button"
@@ -64,7 +65,7 @@ export function Hero() {
           <div className="mb-6 text-sm font-black uppercase tracking-[0.28em] text-amber-300">
             Explore Pakistan
           </div>
-          <h1 className="text-5xl font-black uppercase leading-[1.08] tracking-wide drop-shadow-2xl md:text-7xl">
+          <h1 className="text-5xl font-black uppercase leading-[1.08] tracking-wide drop-shadow-[0_4px_24px_rgba(0,0,0,0.65)] md:text-7xl">
             Journeys That
             <span className="block">Stay Forever</span>
           </h1>

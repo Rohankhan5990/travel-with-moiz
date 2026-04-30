@@ -13,6 +13,7 @@ export function tourBookingMessage(tourTitle: string) {
 
 export const brand = {
   name: "Travel With Moiz",
+  logoSrc: "/images/brand/travelwithmoiz.png",
   phoneDisplay: "+92 318 4280414",
   phoneHref: "tel:+923184280414",
   instagram: "travelwithmoiz__",

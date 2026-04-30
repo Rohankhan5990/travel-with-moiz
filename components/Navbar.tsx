@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, Mountain, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { whatsappIcon } from "@/components/WhatsAppButton";
 import { brand } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
@@ -24,8 +24,15 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-5">
       <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-slate-950/20 px-4 py-3 text-white backdrop-blur-md">
         <Link href="/" className="flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-amber-300/70 bg-emerald-950/70 text-amber-300 shadow-lg shadow-black/20">
-            <Mountain className="h-5 w-5" />
+          <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full shadow-md shadow-black/40 ring-1 ring-white/20">
+            <Image
+              src={brand.logoSrc}
+              alt=""
+              width={48}
+              height={48}
+              className="h-full w-full object-cover"
+              priority
+            />
           </span>
           <span>
             <span className="block text-lg font-black tracking-tight">Travel With Moiz</span>

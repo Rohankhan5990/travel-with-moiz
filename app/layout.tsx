@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { FloatingWhatsApp } from "@/components/WhatsAppButton";
+import { brand } from "@/lib/whatsapp";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -38,6 +39,10 @@ export const metadata: Metadata = {
     siteName: "Travel With Moiz",
     locale: "en_PK",
     type: "website",
+  },
+  icons: {
+    icon: brand.logoSrc,
+    apple: brand.logoSrc,
   },
 };
 
