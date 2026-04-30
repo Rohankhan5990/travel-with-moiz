@@ -19,8 +19,28 @@ export type Tour = {
   whatsappMessage: string;
 };
 
-const image = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=80`;
+const placeImage = (filename: string) => `/images/pakistan-places-images/${filename}`;
+
+const placeImages = {
+  skardu: placeImage("skardu.webp"),
+  shangrila: placeImage("1280px-Shangrila_resort_skardu.jpg"),
+  skarduDeosai: placeImage("07-Days-Tour--Skardu-Deosai-National-Park-Pakistan-1606385403579.webp"),
+  deosai: placeImage("migration-at-deosai-national-park-nadeem-khawar.jpg"),
+  hunza: placeImage("huzan.jpg"),
+  passu: placeImage("passu-8.jpg"),
+  khunjerab: placeImage("Khunjerab-Pass-featured_image.jpg.jpg"),
+  chinaBorder: placeImage("China_Border,_Pakistan_khunjrab.jpg"),
+  kashmir: placeImage("kashmir-valley1.jpg"),
+  kashmirWide: placeImage("kashmir.jpg"),
+  kashmirAlt: placeImage("kashmir-vallry.jpg"),
+  neelum: placeImage("Neelum_Valley,_Azad_Jammu_&_Kashmir,_Pakistan.jpg"),
+  neelumRiver: placeImage("neulam.jpg"),
+  keran: placeImage("Keran-e1580725792977.webp"),
+  kutton: placeImage("Kutton_Waterfall_travelpakistani.jpg"),
+  fairyMeadows: placeImage("Fairy-Meadows-trek.jpg"),
+  fairyMeadowsView: placeImage("1588522856---FairyMeadows3.jpg"),
+  lake: placeImage("lake.jpg"),
+};
 
 export const tours: Tour[] = [
   {
@@ -32,11 +52,11 @@ export const tours: Tour[] = [
     couplePrice: "PKR 75,000",
     summary:
       "A cinematic north Pakistan escape through lakes, waterfalls, cold desert, valleys, and Deosai plains.",
-    heroImage: image("photo-1589553416260-f586c8f1514f"),
+    heroImage: placeImages.skardu,
     gallery: [
-      image("photo-1544735716-392fe2489ffa"),
-      image("photo-1500530855697-b586d89ba3ee"),
-      image("photo-1519681393784-d120267933ba"),
+      placeImages.shangrila,
+      placeImages.skarduDeosai,
+      placeImages.deosai,
     ],
     attractions: [
       "Hazara Expressway",
@@ -111,11 +131,11 @@ export const tours: Tour[] = [
     couplePrice: "PKR 65,000",
     summary:
       "A crisp Hunza adventure through forts, lakes, Passu Cones, Karakoram Highway, and China Border.",
-    heroImage: image("photo-1562979314-bee7453e911c"),
+    heroImage: placeImages.hunza,
     gallery: [
-      image("photo-1544551763-46a013bb70d5"),
-      image("photo-1464822759023-fed622ff2c3b"),
-      image("photo-1506905925346-21bda4d32df4"),
+      placeImages.passu,
+      placeImages.khunjerab,
+      placeImages.chinaBorder,
     ],
     attractions: [
       "Hazara Expressway",
@@ -184,11 +204,11 @@ export const tours: Tour[] = [
     couplePrice: "Custom quote",
     summary:
       "The signature grand northern route combining Hunza heritage, Karakoram drama, Skardu lakes, and Deosai.",
-    heroImage: image("photo-1483728642387-6c3bdd6c93e5"),
+    heroImage: placeImages.skarduDeosai,
     gallery: [
-      image("photo-1500534314209-a25ddb2bd429"),
-      image("photo-1470115636492-6d2b56f9146d"),
-      image("photo-1501785888041-af3ef285b470"),
+      placeImages.hunza,
+      placeImages.skardu,
+      placeImages.passu,
     ],
     attractions: [
       "Hunza",
@@ -253,11 +273,11 @@ export const tours: Tour[] = [
     couplePrice: "PKR 40,000",
     summary:
       "A refreshing short escape into waterfalls, riverside views, Keran, Upper Neelum, and lush valley roads.",
-    heroImage: image("photo-1518495973542-4542c06a5843"),
+    heroImage: placeImages.kashmir,
     gallery: [
-      image("photo-1511884642898-4c92249e20b6"),
-      image("photo-1441974231531-c6227db76b6e"),
-      image("photo-1500534314209-a25ddb2bd429"),
+      placeImages.neelum,
+      placeImages.keran,
+      placeImages.kutton,
     ],
     attractions: [
       "Neelum Valley",
@@ -299,43 +319,55 @@ export const tours: Tour[] = [
 export const featuredTours = tours;
 
 export const galleryImages = [
-  { title: "Skardu Lakes", src: tours[0].heroImage, alt: "Blue lake surrounded by Skardu mountains" },
-  { title: "Hunza Roads", src: tours[1].heroImage, alt: "Mountain road in Hunza valley" },
-  { title: "Deosai Plains", src: tours[2].heroImage, alt: "Wide alpine landscape in northern Pakistan" },
-  { title: "Kashmir Valley", src: tours[3].heroImage, alt: "Green Kashmir valley and river view" },
-  { title: "Passu Cones", src: tours[1].gallery[2], alt: "Passu Cones mountain peaks in Hunza" },
-  { title: "Adventure Camp", src: tours[0].gallery[1], alt: "Travel group enjoying a mountain campsite" },
+  { title: "Skardu", src: placeImages.skardu, alt: "Skardu mountain landscape" },
+  { title: "Shangrila Resort", src: placeImages.shangrila, alt: "Shangrila Resort in Skardu" },
+  { title: "Skardu Deosai Route", src: placeImages.skarduDeosai, alt: "Skardu and Deosai northern route" },
+  { title: "Deosai National Park", src: placeImages.deosai, alt: "Deosai National Park plains" },
+  { title: "Hunza Valley", src: placeImages.hunza, alt: "Hunza valley mountains and greenery" },
+  { title: "Passu Cones", src: placeImages.passu, alt: "Passu Cones mountain peaks in Hunza" },
+  { title: "Khunjerab Pass", src: placeImages.khunjerab, alt: "Khunjerab Pass mountain road" },
+  { title: "China Border", src: placeImages.chinaBorder, alt: "China Border at Khunjerab in Pakistan" },
+  { title: "Kashmir Valley", src: placeImages.kashmir, alt: "Kashmir valley mountain view" },
+  { title: "Kashmir Hills", src: placeImages.kashmirWide, alt: "Wide Kashmir valley landscape" },
+  { title: "Kashmir Viewpoint", src: placeImages.kashmirAlt, alt: "Kashmir viewpoint and green hills" },
+  { title: "Neelum Valley", src: placeImages.neelum, alt: "Neelum Valley in Azad Kashmir" },
+  { title: "Neelum River", src: placeImages.neelumRiver, alt: "Neelum Valley river and mountains" },
+  { title: "Keran", src: placeImages.keran, alt: "Keran valley destination" },
+  { title: "Kutton Waterfall", src: placeImages.kutton, alt: "Kutton Waterfall in Kashmir" },
+  { title: "Fairy Meadows Trek", src: placeImages.fairyMeadows, alt: "Fairy Meadows trekking landscape" },
+  { title: "Fairy Meadows", src: placeImages.fairyMeadowsView, alt: "Fairy Meadows mountain view" },
+  { title: "Mountain Lake", src: placeImages.lake, alt: "Pakistan mountain lake landscape" },
 ];
 
 export const popularDestinations = [
   {
     title: "Hunza Valley",
     subtitle: "The Heaven on Earth",
-    src: image("photo-1562979314-bee7453e911c"),
+    src: placeImages.hunza,
     alt: "Hunza Valley mountains and greenery",
   },
   {
     title: "Skardu",
     subtitle: "Land of Mountains & Lakes",
-    src: image("photo-1589553416260-f586c8f1514f"),
+    src: placeImages.skardu,
     alt: "Skardu lake and mountain view",
   },
   {
     title: "Kashmir Valley",
     subtitle: "Paradise on Earth",
-    src: image("photo-1518495973542-4542c06a5843"),
+    src: placeImages.kashmir,
     alt: "Kashmir valley blue lake and green hills",
   },
   {
     title: "Neelum Valley",
     subtitle: "Unspoiled Natural Beauty",
-    src: image("photo-1441974231531-c6227db76b6e"),
+    src: placeImages.neelumRiver,
     alt: "Neelum Valley forest stream",
   },
   {
     title: "Fairy Meadows",
     subtitle: "At the foot of Nanga Parbat",
-    src: image("photo-1500534314209-a25ddb2bd429"),
+    src: placeImages.fairyMeadows,
     alt: "Fairy Meadows mountain camp landscape",
   },
 ];

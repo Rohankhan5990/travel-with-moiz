@@ -1,11 +1,14 @@
-const WHATSAPP_NUMBER = "923184280414";
+const WHATSAPP_BOOKING_URL =
+  "https://wa.me/923184280414?text=Hi%20Travel%20With%20Moiz,%20I%20want%20to%20book%20a%20tour";
 
-export function createWhatsAppUrl(message: string) {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+export function createWhatsAppUrl(message?: string) {
+  void message;
+  return WHATSAPP_BOOKING_URL;
 }
 
 export function tourBookingMessage(tourTitle: string) {
-  return `Hi Travel With Moiz, I want to book the ${tourTitle}. Please share details.`;
+  void tourTitle;
+  return "Hi Travel With Moiz, I want to book a tour";
 }
 
 export const brand = {
@@ -14,7 +17,5 @@ export const brand = {
   phoneHref: "tel:+923184280414",
   instagram: "travelwithmoiz__",
   instagramUrl: "https://www.instagram.com/travelwithmoiz__/",
-  whatsapp: createWhatsAppUrl(
-    "Hi Travel With Moiz, I want to plan a Pakistan tour. Please share details.",
-  ),
+  whatsapp: WHATSAPP_BOOKING_URL,
 };

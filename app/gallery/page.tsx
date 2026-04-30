@@ -15,7 +15,7 @@ export default function GalleryPage() {
         <SectionHeading
           eyebrow="Gallery"
           title="Mountain frames, valley roads, and lake reflections"
-          text="A modern visual moodboard for Pakistan tours. Replace these licensed placeholders with original Travel With Moiz trip photos for maximum trust."
+          text="Explore real destination visuals from Hunza, Skardu, Kashmir, Deosai, Khunjerab, Neelum Valley, Fairy Meadows, and more."
         />
         <div className="mt-12">
           <DestinationGallery />

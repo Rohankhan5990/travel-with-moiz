@@ -108,7 +108,7 @@ export default function Home() {
             text="Skardu lakes, Hunza peaks, Kashmir valleys, Deosai plains, and famous adventure stops."
           />
           <div className="mt-12">
-            <DestinationGallery />
+            <DestinationGallery limit={8} />
           </div>
         </div>
       </section>

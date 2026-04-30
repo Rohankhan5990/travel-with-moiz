@@ -1,14 +1,20 @@
 import Image from "next/image";
 import { galleryImages } from "@/lib/tours";
 
-export function DestinationGallery() {
+type DestinationGalleryProps = {
+  limit?: number;
+};
+
+export function DestinationGallery({ limit }: DestinationGalleryProps) {
+  const images = typeof limit === "number" ? galleryImages.slice(0, limit) : galleryImages;
+
   return (
     <div className="grid auto-rows-[240px] grid-cols-1 gap-4 md:grid-cols-4">
-      {galleryImages.map((item, index) => (
+      {images.map((item, index) => (
         <div
           key={item.title}
           className={`group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 ${
-            index === 0 || index === 3 ? "md:col-span-2 md:row-span-2" : ""
+            index === 0 || index === 3 || index === 10 ? "md:col-span-2 md:row-span-2" : ""
           }`}
         >
           <Image
