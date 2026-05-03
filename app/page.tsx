@@ -2,7 +2,7 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { DestinationGallery } from "@/components/DestinationGallery";
 import { FAQ } from "@/components/FAQ";
 import { Hero } from "@/components/Hero";
-import { ReviewsSection } from "@/components/ReviewsSection";
+import { ClientReviewsSection } from "@/components/ClientReviewsSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TourCard } from "@/components/TourCard";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -114,7 +114,7 @@ export default function Home() {
         </div>
       </section>
 
-      <ReviewsSection />
+      <ClientReviewsSection />
 
       <section className="bg-[#f8fbf6] px-4 py-24">
         <SectionHeading eyebrow="FAQ" title="Before you book" tone="light" />

@@ -13,6 +13,7 @@ const navItems = [
   { label: "Tours", href: "/tours" },
   { label: "Destinations", href: "/gallery" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Client reviews", href: "/#client-reviews" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];
@@ -45,7 +46,7 @@ export function Navbar() {
         <div className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) => (
             <Link
-              key={item.href}
+              key={item.label}
               href={item.href}
               className="rounded-full px-4 py-2 text-sm font-bold text-white/90 transition hover:text-amber-300"
             >
@@ -79,13 +80,13 @@ export function Navbar() {
       <div
         className={cn(
           "mx-auto mt-3 max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-slate-950/90 text-white shadow-2xl backdrop-blur-xl transition-all lg:hidden",
-          open ? "max-h-96 p-4 opacity-100" : "max-h-0 p-0 opacity-0",
+          open ? "max-h-[32rem] p-4 opacity-100" : "max-h-0 p-0 opacity-0",
         )}
       >
         <div className="grid gap-2">
           {navItems.map((item) => (
             <Link
-              key={item.href}
+              key={item.label}
               href={item.href}
               onClick={() => setOpen(false)}
               className="rounded-2xl px-4 py-3 font-semibold hover:bg-white/10"
@@ -97,9 +98,8 @@ export function Navbar() {
             href={brand.whatsapp}
             target="_blank"
             rel="noreferrer"
-            className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-amber-300 px-5 py-3 font-black text-emerald-950"
+            className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-amber-300 px-5 py-3 font-black text-emerald-950"
           >
-            <Image src={whatsappIcon} alt="" width={20} height={20} className="h-5 w-5" />
             Chat on WhatsApp
           </a>
         </div>
