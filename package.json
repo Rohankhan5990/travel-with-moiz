@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/prepare-cf-deploy.mjs",
     "start": "serve -l 3000 out",
     "lint": "eslint",
     "deploy:pages": "npm run build && npx wrangler pages deploy",

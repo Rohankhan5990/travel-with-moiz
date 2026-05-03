@@ -3,6 +3,11 @@
 # Your CI runs: npm run build && npx wrangler deploy
 # That command needs [assets] below (NOT pages_build_output_dir alone).
 #
+# Workers assets: max 25 MiB per file. Large review MP4s can use a public URL:
+#   NEXT_PUBLIC_REVIEW_VIDEO_KASHMIR_KERAN_URL=https://…/kashmir.mp4
+# `npm run build` runs scripts/prepare-cf-deploy.mjs to strip oversized bundled
+# files when that env var is set. Or re-encode under 25 MiB with ffmpeg.
+#
 # If you switch to Cloudflare Pages instead, use:
 #   npx wrangler pages deploy
 # and you can set pages_build_output_dir = "./out" again.
