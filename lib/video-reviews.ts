@@ -1,24 +1,37 @@
 /**
- * Client video testimonials. Put `.mp4` files in `public/reviews-videos/`
- * and set `file` to the filename. For files over Cloudflare Workers’ 25 MiB
- * per-asset limit, host the video elsewhere and set `remoteSrc` (see Kashmir).
+ * Client video testimonials. Put `.mp4` files in `public/reviews-videos/`.
+ * Kashmir: if the file is ≥ 25 MiB, `npm run build` omits the local card unless
+ * you set NEXT_PUBLIC_REVIEW_VIDEO_KASHMIR_KERAN_URL (see wrangler.toml).
  */
+import { kashmirLocalBundled } from "@/lib/video-reviews.manifest";
+
 export type VideoReview = {
   id: string;
   title: string;
-  /** Local file in public/reviews-videos/ */
   file?: string;
-  /** Full https:// URL — overrides `file` when set (required for oversized clips on Workers) */
   remoteSrc?: string;
 };
 
+const KASHMIR_TITLE = "Kashmir · Keran tour — guest video";
+const KASHMIR_FILE = "Kashmir Keran Tour..mp4";
+
+const remote = process.env.NEXT_PUBLIC_REVIEW_VIDEO_KASHMIR_KERAN_URL?.trim();
+
+function kashmirEntries(): VideoReview[] {
+  if (remote) {
+    return [{ id: "kashmir-keran", title: KASHMIR_TITLE, remoteSrc: remote }];
+  }
+  if (process.env.NODE_ENV === "development") {
+    return [{ id: "kashmir-keran", title: KASHMIR_TITLE, file: KASHMIR_FILE }];
+  }
+  if (kashmirLocalBundled) {
+    return [{ id: "kashmir-keran", title: KASHMIR_TITLE, file: KASHMIR_FILE }];
+  }
+  return [];
+}
+
 export const videoReviews: VideoReview[] = [
-  {
-    id: "kashmir-keran",
-    title: "Kashmir · Keran tour — guest video",
-    file: "Kashmir Keran Tour..mp4",
-    remoteSrc: process.env.NEXT_PUBLIC_REVIEW_VIDEO_KASHMIR_KERAN_URL,
-  },
+  ...kashmirEntries(),
   {
     id: "naran",
     title: "Naran — traveler story",
@@ -32,8 +45,8 @@ export const videoReviews: VideoReview[] = [
 ];
 
 export function videoReviewSrc(review: VideoReview): string {
-  const remote = review.remoteSrc?.trim();
-  if (remote) return remote;
+  const r = review.remoteSrc?.trim();
+  if (r) return r;
   if (!review.file) return "";
   return `/reviews-videos/${encodeURIComponent(review.file)}`;
 }
