@@ -56,10 +56,10 @@ function ClientReviewVideos() {
           return (
             <li key={review.id}>
               <article className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/20 bg-gradient-to-b from-white/[0.16] to-white/[0.07] text-white shadow-[0_24px_50px_-14px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md transition duration-300 hover:-translate-y-1.5 hover:border-cyan-300/40 hover:shadow-[0_32px_64px_-16px_rgba(6,182,212,0.22)] hover:ring-cyan-400/20">
-                <div className="relative aspect-video bg-gradient-to-br from-[#062a1f] via-[#073b2c] to-[#09251d]">
+                <div className="relative h-60 w-full shrink-0 overflow-hidden bg-gradient-to-br from-[#062a1f] via-[#073b2c] to-[#09251d] sm:h-64 md:h-72">
                   <video
                     ref={(el) => setRef(review.id, el)}
-                    className="h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full object-cover"
                     preload="metadata"
                     playsInline
                     controls={isActive}
@@ -88,8 +88,8 @@ function ClientReviewVideos() {
                         : "opacity-100 backdrop-blur-[2px] group-hover:bg-emerald-950/30"
                     }`}
                   >
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-[#073b2c] shadow-xl shadow-black/40 ring-4 ring-cyan-400/35 transition duration-300 group-hover:scale-105 group-hover:ring-cyan-300/55">
-                      <Play className="ml-1 h-7 w-7 fill-current" aria-hidden />
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-[#073b2c] shadow-xl shadow-black/40 ring-4 ring-cyan-400/35 transition duration-300 group-hover:scale-105 group-hover:ring-cyan-300/55 sm:h-16 sm:w-16">
+                      <Play className="ml-1 h-6 w-6 fill-current sm:h-7 sm:w-7" aria-hidden />
                     </span>
                   </button>
 

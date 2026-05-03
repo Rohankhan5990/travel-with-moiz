@@ -25,7 +25,7 @@ function main() {
 
     fs.unlinkSync(full);
     console.warn(
-      "[prepare-cf-deploy] Removed %s (%s MiB) from out/ — over Workers 25 MiB limit. Host it elsewhere and set NEXT_PUBLIC_REVIEW_VIDEO_KASHMIR_KERAN_URL to show the Kashmir card in production.",
+      "[prepare-cf-deploy] Removed %s (%s MiB) from out/ — over Cloudflare Workers 25 MiB per-file limit. Use a smaller encode in public/reviews-videos/ or host the file elsewhere (NEXT_PUBLIC_REVIEW_VIDEO_KASHMIR_KERAN_URL for Kashmir).",
       file,
       Math.ceil(st.size / (1024 * 1024)),
     );

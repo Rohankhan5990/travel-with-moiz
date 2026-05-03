@@ -24,7 +24,13 @@ function kashmirEntries(): VideoReview[] {
     return [{ id: "kashmir-keran", title: KASHMIR_TITLE, remoteSrc: remote }];
   }
   if (process.env.NODE_ENV === "development") {
-    return [{ id: "kashmir-keran", title: KASHMIR_TITLE, file: KASHMIR_FILE }];
+    return [
+      {
+        id: "kashmir-keran",
+        title: KASHMIR_TITLE,
+        file: "Kashmir Keran Tour..mp4",
+      },
+    ];
   }
   if (kashmirLocalBundled) {
     return [{ id: "kashmir-keran", title: KASHMIR_TITLE, file: KASHMIR_FILE }];
