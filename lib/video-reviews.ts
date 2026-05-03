@@ -1,7 +1,8 @@
 /**
  * Client video testimonials. Put `.mp4` files in `public/reviews-videos/`.
- * Kashmir: if the file is ≥ 25 MiB, `npm run build` omits the local card unless
- * you set NEXT_PUBLIC_REVIEW_VIDEO_KASHMIR_KERAN_URL (see wrangler.toml).
+ * Kashmir uses `kashmir-keran-tour.mp4` (under 25 MiB for Cloudflare). Create it from your master with:
+ *   npm run compress:kashmir-review
+ * Or set NEXT_PUBLIC_REVIEW_VIDEO_KASHMIR_KERAN_URL for a hosted full-quality URL.
  */
 import { kashmirLocalBundled } from "@/lib/video-reviews.manifest";
 
@@ -13,7 +14,8 @@ export type VideoReview = {
 };
 
 const KASHMIR_TITLE = "Kashmir · Keran tour — guest video";
-const KASHMIR_FILE = "Kashmir Keran Tour..mp4";
+/** Bundled file; generate with `npm run compress:kashmir-review` from your full-quality master. */
+const KASHMIR_FILE = "kashmir-keran-tour.mp4";
 
 const remote = process.env.NEXT_PUBLIC_REVIEW_VIDEO_KASHMIR_KERAN_URL?.trim();
 

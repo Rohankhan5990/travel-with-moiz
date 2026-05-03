@@ -20,8 +20,9 @@
 # production
 /build
 
-# misc
-.DS_Store
+# Large Kashmir master (optional — keep locally, use npm run compress:kashmir-review)
+public/reviews-videos/Kashmir Keran Tour..mp4
+
 *.pem
 
 # debug

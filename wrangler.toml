@@ -3,8 +3,10 @@
 # Your CI runs: npm run build && npx wrangler deploy
 # That command needs [assets] below (NOT pages_build_output_dir alone).
 #
-# Workers assets: max 25 MiB per file. Oversized Kashmir clip is omitted from the
-# production bundle unless the file is compressed, or set:
+# Workers assets: max 25 MiB per file.
+# Kashmir review uses public/reviews-videos/kashmir-keran-tour.mp4 — create it with:
+#   npm run compress:kashmir-review
+# (reads Kashmir Keran Tour..mp4 by default). Or host the full-quality file on R2 and set:
 #   NEXT_PUBLIC_REVIEW_VIDEO_KASHMIR_KERAN_URL=https://…/kashmir.mp4
 # `generate-video-reviews-manifest.mjs` runs before build; prepare-cf-deploy.mjs
 # strips any oversize file left in out/.

@@ -7,7 +7,7 @@ import fs from "fs";
 import path from "path";
 
 const MAX_BYTES = 25 * 1024 * 1024;
-const KASHMIR_FILE = "Kashmir Keran Tour..mp4";
+const KASHMIR_FILE = "kashmir-keran-tour.mp4";
 const filePath = path.join(process.cwd(), "public", "reviews-videos", KASHMIR_FILE);
 const outPath = path.join(process.cwd(), "lib", "video-reviews.manifest.ts");
 
