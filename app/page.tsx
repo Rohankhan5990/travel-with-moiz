@@ -4,7 +4,7 @@ import { FAQ } from "@/components/FAQ";
 import { Hero } from "@/components/Hero";
 import { ClientReviewsSection } from "@/components/ClientReviewsSection";
 import { SectionHeading } from "@/components/SectionHeading";
-import { TourCard } from "@/components/TourCard";
+import { PackagesCarousel } from "@/components/PackagesCarousel";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { featuredTours, popularDestinations } from "@/lib/tours";
 import { ArrowRight, Car, HeartHandshake, Map, ShieldCheck, Users, WandSparkles } from "lucide-react";
@@ -66,16 +66,14 @@ export default function Home() {
         <div className="relative mx-auto max-w-7xl">
           <AnimatedSection>
             <SectionHeading
-              eyebrow="Featured tours"
-              title="Pakistan’s most loved northern routes"
-              text="Book fast through WhatsApp, then travel with a planned route, scenic stops, and friendly support."
+              eyebrow="Tour packages"
+              title="Browse every departure in one swipe"
+              text="Swipe through packages or use the arrows — open any card for the full flyer and WhatsApp booking."
               tone="light"
             />
           </AnimatedSection>
-          <div className="mt-12 grid gap-6 lg:grid-cols-4">
-            {featuredTours.map((tour) => (
-              <TourCard key={tour.slug} tour={tour} />
-            ))}
+          <div className="mt-10 md:mt-12">
+            <PackagesCarousel tours={featuredTours} />
           </div>
         </div>
       </section>

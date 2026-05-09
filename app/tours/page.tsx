@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { SectionHeading } from "@/components/SectionHeading";
-import { TourCard } from "@/components/TourCard";
+import { PackagesShowcase } from "@/components/PackagesShowcase";
 import { tours } from "@/lib/tours";
 
 export const metadata: Metadata = {
   title: "Pakistan Tour Packages",
   description:
-    "Browse Travel With Moiz packages for Skardu, Hunza, Hunza + Skardu, and Kashmir tours with WhatsApp booking.",
+    "Browse Travel With Moiz flyer packages — Shogran, Kumrat, Fairy Meadows, Swat, Naran, Kashmir, Hunza & Skardu — with WhatsApp booking.",
 };
 
 export default function ToursPage() {
@@ -30,10 +30,8 @@ export default function ToursPage() {
             </span>
           ))}
         </div>
-        <div className="mt-12 grid gap-6 lg:grid-cols-4">
-          {tours.map((tour) => (
-            <TourCard key={tour.slug} tour={tour} />
-          ))}
+        <div className="mt-12">
+          <PackagesShowcase tours={tours} variant="onDark" />
         </div>
       </div>
     </section>

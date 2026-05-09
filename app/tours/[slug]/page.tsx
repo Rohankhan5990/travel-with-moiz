@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { CheckCircle2, MapPin, XCircle } from "lucide-react";
 import { ItineraryAccordion } from "@/components/ItineraryAccordion";
 import { SectionHeading } from "@/components/SectionHeading";
+import { TourDetailExtras } from "@/components/TourDetailExtras";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { getTourBySlug, tours } from "@/lib/tours";
 
@@ -42,47 +43,54 @@ export default async function TourDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const extraGallery = tour.gallery.filter((src) => src !== tour.heroImage);
+
   return (
     <article className="bg-slate-950 text-white">
-      <section className="relative min-h-[78vh] overflow-hidden px-4 pt-36">
-        <Image
-          src={tour.heroImage}
-          alt={`${tour.title} hero destination`}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/20" />
-        <div className="relative mx-auto flex min-h-[60vh] max-w-7xl items-end pb-16">
-          <div className="max-w-4xl">
-            <p className="mb-4 inline-flex rounded-full bg-cyan-300 px-4 py-2 text-sm font-black uppercase tracking-[0.25em] text-slate-950">
+      <section className="border-b border-white/10 px-4 pb-10 pt-24 sm:pt-28 md:pt-32">
+        <div className="mx-auto max-w-5xl">
+          <div className="relative mx-auto w-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-900/80 shadow-2xl shadow-black/40 sm:rounded-[2rem]">
+            <div className="relative aspect-[3/4] w-full max-h-[min(92vh,1200px)] min-h-[280px] sm:aspect-[4/5] md:aspect-auto md:min-h-[min(88vh,1000px)]">
+              <Image
+                src={tour.heroImage}
+                alt={`${tour.title} — full package flyer`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 48rem, 100vw"
+                className="object-contain object-top md:object-center"
+              />
+            </div>
+          </div>
+          <div className="mt-10 text-center md:text-left">
+            <p className="inline-flex rounded-full bg-cyan-300 px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-slate-950 sm:text-sm">
               {tour.duration}
             </p>
-            <h1 className="text-5xl font-black tracking-tight md:text-7xl">{tour.title}</h1>
-            <p className="mt-5 flex items-center gap-2 text-lg text-slate-200">
-              <MapPin className="h-5 w-5 text-cyan-300" />
+            <h1 className="mt-5 text-3xl font-black tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">{tour.title}</h1>
+            <p className="mt-4 flex flex-wrap items-center justify-center gap-2 text-lg text-slate-200 md:justify-start">
+              <MapPin className="h-5 w-5 shrink-0 text-cyan-300" />
               {tour.location}
             </p>
-            <p className="mt-5 max-w-3xl text-xl leading-9 text-slate-200">{tour.summary}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-300 md:mx-0">{tour.summary}</p>
+            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center md:justify-start">
               <WhatsAppButton message={tour.whatsappMessage} className="px-8 py-4 text-base">
                 Book This Package
               </WhatsAppButton>
-              <div className="rounded-full border border-white/15 bg-white/10 px-6 py-4 font-black backdrop-blur">
-                {tour.pricePerHead} · Couple {tour.couplePrice}
+              <div className="rounded-full border border-white/15 bg-white/10 px-6 py-4 text-center font-black backdrop-blur">
+                {tour.pricePerHead}
+                <span className="mx-2 text-white/40">·</span>
+                Couple {tour.couplePrice}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="px-4 py-20">
+      <section className="px-4 py-16 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <SectionHeading
               eyebrow="Itinerary"
-              title="A route planned around the best stops"
+              title="Day-by-day plan"
               className="text-left [&_*]:text-left"
             />
             <p className="mt-6 leading-8 text-slate-300">{tour.departureInfo}</p>
@@ -91,10 +99,10 @@ export default async function TourDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="bg-[#083344] px-4 py-20">
+      <section className="bg-[#083344] px-4 py-16 md:py-20">
         <div className="mx-auto max-w-7xl">
-          <SectionHeading eyebrow="Attractions" title="What you will experience" />
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <SectionHeading eyebrow="Attractions" title="Places on this route" />
+          <div className="mt-10 flex flex-wrap justify-center gap-3 md:justify-start">
             {tour.attractions.map((attraction) => (
               <span
                 key={attraction}
@@ -107,25 +115,25 @@ export default async function TourDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="px-4 py-20">
+      <section className="px-4 py-16 md:py-20">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.07] p-8">
             <h2 className="text-3xl font-black">Included</h2>
             <div className="mt-6 space-y-4">
               {tour.included.map((item) => (
-                <p key={item} className="flex items-center gap-3 text-slate-200">
-                  <CheckCircle2 className="h-5 w-5 text-cyan-300" />
+                <p key={item} className="flex items-start gap-3 text-slate-200">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" />
                   {item}
                 </p>
               ))}
             </div>
           </div>
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.07] p-8">
-            <h2 className="text-3xl font-black">Excluded</h2>
+            <h2 className="text-3xl font-black">Not included</h2>
             <div className="mt-6 space-y-4">
               {tour.excluded.map((item) => (
-                <p key={item} className="flex items-center gap-3 text-slate-200">
-                  <XCircle className="h-5 w-5 text-amber-300" />
+                <p key={item} className="flex items-start gap-3 text-slate-200">
+                  <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-300" />
                   {item}
                 </p>
               ))}
@@ -134,21 +142,28 @@ export default async function TourDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="px-4 pb-24">
-        <div className="mx-auto grid max-w-7xl gap-4 md:grid-cols-3">
-          {tour.gallery.map((src, index) => (
-            <div key={src} className="relative h-80 overflow-hidden rounded-[2rem] border border-white/10">
-              <Image
-                src={src}
-                alt={`${tour.title} gallery image ${index + 1}`}
-                fill
-                sizes="(min-width: 768px) 33vw, 100vw"
-                className="object-cover"
-              />
+      <TourDetailExtras tour={tour} />
+
+      {extraGallery.length > 0 && (
+        <section className="px-4 pb-24">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeading eyebrow="Gallery" title="More from this trip" className="mb-10" />
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {extraGallery.map((src, index) => (
+                <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-white/10">
+                  <Image
+                    src={src}
+                    alt={`${tour.title} gallery ${index + 1}`}
+                    fill
+                    sizes="(min-width: 1024px) 33vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
     </article>
   );
 }

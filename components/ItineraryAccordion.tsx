@@ -32,7 +32,7 @@ export function ItineraryAccordion({ tour }: { tour: Tour }) {
           </button>
           <div className={cn("grid transition-all", active === index ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
             <div className="overflow-hidden">
-              <p className="px-5 pb-5 leading-8 text-slate-300">{item.details}</p>
+              <p className="whitespace-pre-line px-5 pb-5 leading-8 text-slate-300">{item.details}</p>
             </div>
           </div>
         </div>

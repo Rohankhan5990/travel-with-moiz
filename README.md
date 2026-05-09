@@ -40,7 +40,7 @@ The site is designed for fast browsing, strong visual impact, SEO-friendly tour 
 ## Brand Details
 
 - Brand: Travel With Moiz
-- WhatsApp: `+92 318 4280414`
+- WhatsApp: `+92 322 4294542`
 - Instagram: [`@travelwithmoiz__`](https://www.instagram.com/travelwithmoiz__/)
 
 ## Local Development
