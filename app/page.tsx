@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { HomepageJsonLd } from "@/components/HomepageJsonLd";
 import { DestinationGallery } from "@/components/DestinationGallery";
 import { FAQ } from "@/components/FAQ";
 import { Hero } from "@/components/Hero";
@@ -10,6 +12,12 @@ import { featuredTours, popularDestinations } from "@/lib/tours";
 import { ArrowRight, Car, HeartHandshake, Map, ShieldCheck, Users, WandSparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 const trustPoints = [
   { Icon: Users, title: "Group tours", text: "Social departures with clear plans and easy coordination." },
@@ -23,6 +31,7 @@ const trustPoints = [
 export default function Home() {
   return (
     <>
+      <HomepageJsonLd />
       <Hero />
 
       <section className="bg-[#f8fbf6] px-4 pb-10 pt-8">

@@ -12,7 +12,7 @@ const placeImages = {
   hunza: placeImage("huzan.jpg"),
   passu: placeImage("passu-8.jpg"),
   khunjerab: placeImage("Khunjerab-Pass-featured_image.jpg.jpg"),
-  chinaBorder: placeImage("China_Border,_Pakistan_khunjerab.jpg"),
+  chinaBorder: placeImage("China_Border,_Pakistan_khunjrab.jpg"),
   kashmir: placeImage("kashmir-valley1.jpg"),
   kashmirWide: placeImage("kashmir.jpg"),
   kashmirAlt: placeImage("kashmir-vallry.jpg"),

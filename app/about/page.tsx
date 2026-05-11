@@ -7,6 +7,15 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Learn about Travel With Moiz, a Pakistan travel brand for premium Hunza, Skardu, Kashmir, family, group, and custom tours.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About Travel With Moiz",
+    description:
+      "Pakistan travel brand for Hunza, Skardu, Kashmir, family, group, and custom northern Pakistan tours.",
+    url: "/about",
+  },
 };
 
 const brandValues = [

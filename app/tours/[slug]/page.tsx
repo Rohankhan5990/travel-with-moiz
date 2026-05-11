@@ -6,6 +6,7 @@ import { ItineraryAccordion } from "@/components/ItineraryAccordion";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TourDetailExtras } from "@/components/TourDetailExtras";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { TourJsonLd } from "@/components/TourJsonLd";
 import { getTourBySlug, tours } from "@/lib/tours";
 import { formatTourDurationBadge } from "@/lib/tour-duration";
 
@@ -25,10 +26,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {};
   }
 
+  const path = `/tours/${slug}`;
   return {
     title: `${tour.title} Package`,
     description: `${tour.title} by Travel With Moiz. ${tour.summary} Book by WhatsApp.`,
+    alternates: {
+      canonical: path,
+    },
     openGraph: {
+      title: `${tour.title} | Travel With Moiz`,
+      description: tour.summary,
+      url: path,
+      type: "website",
+      images: [
+        {
+          url: tour.heroImage,
+          alt: `${tour.title} tour package`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
       title: `${tour.title} | Travel With Moiz`,
       description: tour.summary,
       images: [tour.heroImage],
@@ -48,6 +66,7 @@ export default async function TourDetailPage({ params }: PageProps) {
 
   return (
     <article className="bg-slate-950 text-white">
+      <TourJsonLd tour={tour} slug={slug} />
       <section className="border-b border-white/10 px-4 pb-10 pt-24 sm:pt-28 md:pt-32">
         <div className="mx-auto max-w-5xl">
           <div className="relative mx-auto w-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-900/80 shadow-2xl shadow-black/40 sm:rounded-[2rem]">

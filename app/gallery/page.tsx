@@ -6,6 +6,14 @@ export const metadata: Metadata = {
   title: "Gallery",
   description:
     "Explore Travel With Moiz destination gallery for Hunza, Skardu, Kashmir, Deosai, Attabad Lake, and Passu Cones.",
+  alternates: {
+    canonical: "/gallery",
+  },
+  openGraph: {
+    title: "Destination Gallery | Travel With Moiz",
+    description: "Hunza, Skardu, Kashmir, Deosai, Attabad Lake, Passu Cones, and more.",
+    url: "/gallery",
+  },
 };
 
 export default function GalleryPage() {

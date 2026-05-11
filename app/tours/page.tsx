@@ -7,6 +7,15 @@ export const metadata: Metadata = {
   title: "Pakistan Tour Packages",
   description:
     "Browse Travel With Moiz flyer packages — Shogran, Kumrat, Fairy Meadows, Swat, Naran, Kashmir, Hunza & Skardu — with WhatsApp booking.",
+  alternates: {
+    canonical: "/tours",
+  },
+  openGraph: {
+    title: "Pakistan Tour Packages | Travel With Moiz",
+    description:
+      "Browse flyer packages for Shogran, Kumrat, Fairy Meadows, Swat, Naran, Kashmir, Hunza & Skardu — WhatsApp booking.",
+    url: "/tours",
+  },
 };
 
 export default function ToursPage() {

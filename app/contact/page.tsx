@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Contact Travel With Moiz on WhatsApp, phone, or Instagram to book Pakistan tours to Hunza, Skardu, and Kashmir.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact Travel With Moiz",
+    description: "WhatsApp, phone, or Instagram — book Hunza, Skardu, and Kashmir tours.",
+    url: "/contact",
+  },
 };
 
 export default function ContactPage() {
