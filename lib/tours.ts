@@ -88,7 +88,6 @@ export type Review = {
   name: string;
   location: string;
   text: string;
-  /** Short label for context (e.g. package or trip type). */
   trip?: string;
 };
 

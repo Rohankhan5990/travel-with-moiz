@@ -3,14 +3,22 @@ import { tourBookingMessage } from "@/lib/whatsapp";
 
 const pkg = (filename: string) => `/images/packages/${filename}`;
 
-export const packageTours: Tour[] = [
+/** First digit group in `duration` (e.g. "4 Days - 3 Nights" → 4) for listing order. */
+function durationDayOrder(duration: string): number {
+  const m = /\d+/.exec(duration);
+  return m ? Number(m[0]) : 999;
+}
+
+const packageToursData: Tour[] = [
   {
     title: "02 Days Shogran, Siri Paye & Khanpur",
     slug: "shogran-siri-paye-khanpur",
-    duration: "2 Days · 1 Night",
+    duration: "2 Days - 1 Night",
     location: "Shogran · Siri Paye · Kiwai · Balakot · Khanpur Dam",
     pricePerHead: "Rs. 11,000",
     couplePrice: "Rs. 25,000",
+    deluxePricePerHead: "Rs. 20,000",
+    deluxeCouplePrice: "Rs. 40,000",
     summary:
       "Friday-night departure from Lahore with Shogran & Siri Paye jeep safari, Kiwai waterfall, Balakot River, and Khanpur Dam water activities.",
     heroImage: pkg("shogran.png"),
@@ -62,7 +70,8 @@ export const packageTours: Tour[] = [
     category: ["Weekend", "Group", "Family", "Couple"],
     whatsappMessage: tourBookingMessage("02 Days Shogran, Siri Paye & Khanpur"),
     packageDetail: [
-      "Solo Rs. 11,000/- · Couple Rs. 25,000/-",
+      "Standard: Solo Rs. 11,000/- · Couple Rs. 25,000/-",
+      "Deluxe: Solo Rs. 20,000/- · Couple Rs. 40,000/-",
       "Duration: 2 Days, 1 Night — departure every Friday night",
     ],
     pickupPoints: [
@@ -96,10 +105,12 @@ export const packageTours: Tour[] = [
   {
     title: "4 Days Trip to Kumrat",
     slug: "kumrat-4-days",
-    duration: "4 Days",
+    duration: "4 Days - 3 Nights",
     location: "Thal · Kumrat · Kala Chashma · Jahaz Banda · Katora Lake",
     pricePerHead: "Rs. 22,000",
     couplePrice: "Rs. 55,000",
+    deluxePricePerHead: "Rs. 38,000",
+    deluxeCouplePrice: "Rs. 95,000",
     summary:
       "Kumrat forest, Kala Chashma, waterfalls, Taki Top, Jahaz Banda, and Katora Lake with jeep transfers and adventurous nights in the valley.",
     heroImage: pkg("kumrat.png"),
@@ -183,10 +194,12 @@ export const packageTours: Tour[] = [
   {
     title: "5 Days Tour to Fairy Meadows (Nanga Parbat)",
     slug: "fairy-meadows-5-days",
-    duration: "5 Days",
+    duration: "5 Days - 4 Nights",
     location: "Raikot · Fairy Meadows · Beyal · Base Camp · Chilas",
     pricePerHead: "Rs. 23,000",
     couplePrice: "Rs. 47,999",
+    deluxePricePerHead: "Rs. 45,000",
+    deluxeCouplePrice: "Rs. 105,000",
     summary:
       "Discounted Fairy Meadows & Nanga Parbat tour from Islamabad/Lahore with jeep safari, reflection lake, Beyal Camp, and base camp hiking.",
     heroImage: pkg("fairy.png"),
@@ -296,10 +309,12 @@ export const packageTours: Tour[] = [
   {
     title: "3 Days Swat, Bahrain, Malam Jabba & Kalam",
     slug: "swat-bahrain-malam-kalam",
-    duration: "3 Days",
+    duration: "3 Days - 2 Nights",
     location: "Swat · Malam Jabba · Bahrain · Kalam · Mahodand",
     pricePerHead: "Rs. 18,000",
     couplePrice: "Rs. 40,000",
+    deluxePricePerHead: "Rs. 32,000",
+    deluxeCouplePrice: "Rs. 75,000",
     summary:
       "Swat valley highlights: Malam Jabba, Kalam, Ushu Forest, Mahodand Lake, Bahrain bazaar, and Fizaghat — from Faisalabad, Lahore, Islamabad & Gujranwala.",
     heroImage: pkg("swat-bahrain.png"),
@@ -371,10 +386,12 @@ export const packageTours: Tour[] = [
   {
     title: "3 Days Naran Valley (Saif ul Malook · Lulusar · Babusar)",
     slug: "naran-valley-saif-malook",
-    duration: "3 Days",
+    duration: "3 Days - 2 Nights",
     location: "Naran · Babusar · Lulusar · Saif ul Malook",
     pricePerHead: "Rs. 18,000",
     couplePrice: "Rs. 40,000",
+    deluxePricePerHead: "Rs. 32,000",
+    deluxeCouplePrice: "Rs. 75,000",
     summary:
       "Kaghan/Naran classic route: Kiwai, Babusar Top, Pyala & Lulusar Lakes, Saif ul Malook, and riverside nights — couples & families welcome.",
     heroImage: pkg("naran.png"),
@@ -441,10 +458,12 @@ export const packageTours: Tour[] = [
   {
     title: "3 Days Kumrat (Couples · Separate Rooms)",
     slug: "kumrat-3-days-couples",
-    duration: "3 Days · 2 Nights",
+    duration: "3 Days - 2 Nights",
     location: "Chakdara · Timergara · Thal · Kumrat Forest",
     pricePerHead: "Rs. 18,000",
     couplePrice: "Rs. 40,000",
+    deluxePricePerHead: "Rs. 32,000",
+    deluxeCouplePrice: "Rs. 75,000",
     summary:
       "Adventure Hunters Kumrat getaway with forest BBQ, Kala Chashma, waterfalls, bonfire & musical nights — 4/5 sharing with couple room options.",
     heroImage: pkg("kumrat.png"),
@@ -515,10 +534,12 @@ export const packageTours: Tour[] = [
   {
     title: "Azad Kashmir Taobat (By Road)",
     slug: "azad-kashmir-taobat",
-    duration: "4 Days (Wed departure)",
+    duration: "4 Days - 3 Nights",
     location: "Muzaffarabad · Keran · Sharda · Kel · Taobat · Arang Kel",
     pricePerHead: "Rs. 23,000",
     couplePrice: "Rs. 55,000",
+    deluxePricePerHead: "Rs. 38,000",
+    deluxeCouplePrice: "Rs. 95,000",
     summary:
       "Wednesday-night departure: Neelum gems from Muzaffarabad to Taobat with Sharda nights, Arang Kel hike, and bonfire evening.",
     heroImage: pkg("azad-kashmor-taobutt.png"),
@@ -586,10 +607,12 @@ export const packageTours: Tour[] = [
   {
     title: "8 Days Hunza, Skardu, Deosai & Khunjerab (Summer)",
     slug: "hunza-skardu-deosai-8-days",
-    duration: "8 Days · 7 Nights",
+    duration: "8 Days - 7 Nights",
     location: "Hunza · Skardu · Deosai · Khunjerab · Naltar",
     pricePerHead: "Rs. 40,000",
     couplePrice: "Rs. 90,000",
+    deluxePricePerHead: "Rs. 65,000",
+    deluxeCouplePrice: "Rs. 160,000",
     summary:
       "Discounted summer mega route: Karakoram Highway, Skardu lakes, Deosai, Hunza, Attabad, Khunjerab, Shangrila, Mantokha & Naltar — travel like a family.",
     heroImage: pkg("hunza-skardu.png"),
@@ -709,77 +732,332 @@ export const packageTours: Tour[] = [
     ],
   },
   {
-    title: "4 Days Jahaz Banda · Kumrat Valley (Wed night)",
-    slug: "jahaz-banda-kumrat-4-days",
-    duration: "4 Days · 3 Nights",
-    location: "Dir · Thal · Kumrat · Jahaz Banda",
-    pricePerHead: "Rs. 22,000",
-    couplePrice: "Rs. 55,000",
+    title: "5 Days Hunza · Naltar · China Border",
+    slug: "hunza-naltar-china-border-5-days",
+    duration: "6 Days - 5 Nights",
+    location: "Lahore · Islamabad · Naran · Hunza · Khunjerab · China Border",
+    pricePerHead: "Rs. 30,000",
+    couplePrice: "Rs. 75,000",
+    deluxePricePerHead: "Rs. 55,000",
+    deluxeCouplePrice: "Rs. 130,000",
     summary:
-      "Wednesday-night Lahore departure: Kumrat jeep safari, Panjkora riverside, Jahaz Banda hike, optional Katora Lake trek, and bonfire night.",
-    heroImage: pkg("jaazbanda-kumrat.png"),
-    gallery: [pkg("jaazbanda-kumrat.png")],
+      "Families, couples & groups: KKH to Hunza with Naltar, Attabad, Hussaini, Passu, Khunjerab Pass & China Border — bonfire night in Hunza.",
+    heroImage: pkg("hunza-5-days.png"),
+    gallery: [pkg("hunza-5-days.png")],
     attractions: [
-      "Kumrat Valley",
-      "Panjkora riverside",
-      "Jahaz Banda meadow",
-      "Katora Lake (optional trek)",
-      "Waterfalls & forest jeep safari",
+      "Hazara Expressway",
+      "Naran",
+      "Babusar Top",
+      "River Indus",
+      "Hazara Motorway Tunnels",
+      "Chilas",
+      "Mountain junction point",
+      "Nanga Parbat viewpoint",
+      "Plate junction",
+      "Naltar Valley",
+      "Old Silk Route",
+      "Gilgit",
+      "Rakaposhi viewpoint",
+      "Baltit Fort",
+      "Karimabad Bazaar",
+      "Attabad Lake",
+      "Hussaini suspension bridge",
+      "Passu Bridge",
+      "Passu Cones",
+      "Attabad Tunnels",
+      "Karakoram Highway",
+      "Diran Peak view",
+      "Altit Royal Garden",
+      "Khunjerab Pass",
+      "Khunjerab National Park",
+      "China border",
     ],
     itinerary: [
       {
         day: "Day 00",
-        title: "Lahore 10:30pm",
-        details: "Departure from Lahore.",
+        title: "Lahore — night departure",
+        details:
+          "9:00pm pick-up Thokar Niaz Baig near Daewoo, Lahore; travelling towards Islamabad.",
       },
       {
         day: "Day 1",
-        title: "Kumrat",
+        title: "Gilgit road · Chilas",
         details:
-          "Mian Gee/Bhera stop, Islamabad pickups, breakfast Timergarah/Dir, jeep to Kumrat, Panjkora photography, camp/hotel, dinner & stay.",
+          "2:00am Rawalpindi pick-up at No. 26 Daewoo bus stop near NUST EME. Travel towards Gilgit via Hazara Expressway. Breakfast at Besham, reach Chilas; dinner & night stay at Chilas.",
       },
       {
         day: "Day 2",
-        title: "Jahaz Banda",
+        title: "Hunza",
         details:
-          "Waterfall visit, forest jeep safari, Takki Banda hike to Jahaz Banda, camp/huts, dinner & overnight.",
+          "8:00am breakfast at Chilas. Travel towards Hunza via Nanga Parbat viewpoint, mountain junction, Rakaposhi viewpoint, Naltar Valley, Baltit Fort, Karimabad Bazaar — night stay in Hunza.",
       },
       {
         day: "Day 3",
-        title: "Exploration / Katora",
+        title: "Attabad · Khunjerab",
         details:
-          "Optional Kund Banda or Katora Lake hike (3–4hrs). Return to Jahaz Banda for dinner & stay.",
+          "Breakfast; Attabad Tunnels & Attabad Lake; Hussaini suspension / Rainbow Bridge; Passu Glacier & Passu Cones; Khunjerab National Park & snow; return to Hunza for BBQ / bonfire musical night.",
       },
       {
         day: "Day 4",
-        title: "Return",
+        title: "Chilas / Besham",
         details:
-          "Trek/jeep to Thal, departure Islamabad & Lahore late night — end of services.",
+          "8:00am breakfast; travel towards Chilas / Besham, bazar visit, dinner & night at Chilas / Besham.",
+      },
+      {
+        day: "Day 5",
+        title: "Islamabad · Lahore",
+        details:
+          "Breakfast; return to Islamabad / Lahore via KKH with sightseeing; reach Islamabad ~9:00pm, Lahore ~2:00am — tour ends.",
       },
     ],
     included: [
-      "AC Grand Cabin / coaster / Yutong",
-      "Fuel, tolls & taxes",
-      "3 nights camps/hotel",
-      "4 breakfasts & 3 dinners (rotation chicken menu + cold drinks)",
-      "BBQ + bonfire (once) · first aid · driver/guide",
+      "AC luxury transport (4C saloon coaster & Grand Cabin)",
+      "Accommodation (4 persons sharing per room)",
+      "Meals: 5 breakfasts & 4 dinners",
+      "Professional tour guide",
+      "Fuel",
+      "All tolls & taxes",
     ],
     excluded: [
-      "Hotel extras & heating",
-      "Kumrat & Jahaz Banda jeep charges",
-      "Boating/porters/tickets · insurance",
+      "Jeep charges",
+      "Hotel extras (hot drinks, soft drinks, mineral water)",
+      "Entry tickets",
+      "Insurance & liability",
+      "Any item not listed above",
     ],
-    departureInfo: "Females, families, couples & students welcome — family environment.",
-    category: ["Kumrat", "Trek", "Family", "Group"],
-    whatsappMessage: tourBookingMessage("4 Days Jahaz Banda Kumrat"),
+    departureInfo:
+      "Pick-ups: Lahore (Thokar Niaz Baig near Daewoo), Islamabad/Rawalpindi (No. 26 Daewoo near NUST EME). Families · female · bachelor · groups · couples welcome.",
+    category: ["Hunza", "Khunjerab", "Naltar", "Family", "Group"],
+    whatsappMessage: tourBookingMessage("5 Days Hunza Naltar China Border"),
     bookingContact: "0322 4294542",
+    pickupPoints: [
+      "Lahore: Thokar Niaz Baig near Daewoo",
+      "Rawalpindi: No. 26 Daewoo near NUST EME",
+    ],
+    mealInfo: ["5 breakfasts · 4 dinners (as per flyer rotation)"],
+    equipment: [
+      "Day bag, raincoat, sun block, sunglasses, warm clothes, power bank",
+      "Joggers, slippers, jackets",
+      "Original CNIC for all participants",
+    ],
+    terms: [
+      "Drugs or intoxication on the bus or during the trip leads to immediate removal without refund.",
+      "Organizer may cancel the trip; in that case registered participants receive full refund.",
+      "Unforeseen costs from natural events, politics, or security issues are borne by the participant.",
+      "Itinerary may change for weather, transport, or local conditions; leaders will choose the best alternative.",
+      "No smoking in transport. Valid CNIC or passport required.",
+      "Punctuality required. Use non-slip shoes (no heels/dress shoes).",
+      "AC on mountain ascents may run intermittently to protect the vehicle.",
+      "Per-head price may adjust slightly if fuel prices change, including on already booked tours.",
+      "Operator not liable for injury, damage, or loss.",
+    ],
+    notes: ["Thank you for choosing Travel With Moiz."],
+  },
+  {
+    title: "4 Days Kashmir · Neelum Valley · Sharda · Arang Kel",
+    slug: "kashmir-neelum-sharda-arang-kel-3-days",
+    duration: "4 Days - 3 Nights",
+    location: "Neelum Valley · Keran · Sharda · Arang Kel",
+    pricePerHead: "Rs. 18,000",
+    couplePrice: "Rs. 40,000",
+    deluxePricePerHead: "Rs. 38,000",
+    deluxeCouplePrice: "Rs. 95,000",
+    summary:
+      "Thursday-night departure from Faisalabad, Lahore, Islamabad, Multan & Gujranwala: Dhani & Kutton waterfalls, LOC, Keran, Sharda & Arang Kel with bonfire night.",
+    heroImage: pkg("kashmir-3-days.png"),
+    gallery: [pkg("kashmir-3-days.png")],
+    attractions: [
+      "Neelum Valley",
+      "Dhani Waterfall",
+      "Kutton Waterfall",
+      "LOC",
+      "Upper Neelum",
+      "Keran",
+      "Sharda",
+      "Sharda Bridge",
+      "Arang Kel",
+    ],
+    itinerary: [
+      {
+        day: "Day 00",
+        title: "Departure",
+        details:
+          "Night departure from Faisalabad, Lahore, Islamabad, Multan & Gujranwala.",
+      },
+      {
+        day: "Day 1",
+        title: "Waterfalls · LOC · Keran",
+        details:
+          "Breakfast at Muzaffarabad. Dhani Waterfall & surroundings, Kutton Waterfall, LOC. Travel to Keran; hotel check-in, dinner & night stay.",
+      },
+      {
+        day: "Day 2",
+        title: "Arang Kel",
+        details:
+          "Breakfast at hotel. Day trip to Arang Kel & surroundings; evening back toward Sharda, return to Keran by ~9pm; dinner, bonfire & night stay.",
+      },
+      {
+        day: "Day 3",
+        title: "Upper Neelum · return",
+        details:
+          "Breakfast; departure for Lahore route; Upper Neelum & Kohala sightseeing; return to Faisalabad, Lahore, Islamabad, Multan & Gujranwala — end of services.",
+      },
+    ],
+    included: [
+      "AC luxury transport (4C saloon coaster & Grand Cabin, 2021–2022 models)",
+      "Accommodation (4–5 persons sharing per room)",
+      "Meals: 3 breakfasts & 2 dinners",
+      "Professional tour guide",
+      "Fuel",
+      "All tolls & taxes",
+    ],
+    excluded: [
+      "Hotel extras (hot & soft drinks, mineral water)",
+      "Entry tickets",
+      "Insurance & liability",
+      "Jeep charges",
+      "Any item not listed above",
+    ],
+    departureInfo:
+      "Every Thursday night · pick-ups Faisalabad, Lahore, Islamabad, Multan & Gujranwala.",
+    category: ["Kashmir", "Neelum", "Family", "Couple", "Group"],
+    whatsappMessage: tourBookingMessage("4 Days Kashmir Neelum Sharda Arang Kel"),
+    bookingContact: "0322 4294542",
+    pickupPoints: [
+      "Faisalabad",
+      "Lahore",
+      "Islamabad",
+      "Multan",
+      "Gujranwala",
+    ],
     mealInfo: [
-      "Breakfast: egg/chanay, paratha/bread & tea",
-      "Dinner: one-dish chicken with raita/salad & cold drink (rotation)",
+      "Breakfast: egg, tea, paratha, channay",
+      "Dinner: chicken BBQ / karahi, dal, roti, cold drink, salad (rotation)",
     ],
-    registration: ["50% advance or full payment", "Balance at departure."],
-    notes: [
-      "Plan may change slightly for comfort or unforeseen circumstances.",
+    equipment: [
+      "Day bag, raincoat, sun block, sunglasses, warm clothes, power bank",
+      "Original CNIC for all participants",
     ],
+    notes: ["Stay blessed & happy — Travel With Moiz."],
+  },
+  {
+    title: "6 Days Skardu · Manthoka · Deosai · Basho Valley",
+    slug: "skardu-manthoka-deosai-basho-6-days",
+    duration: "7 Days - 6 Nights",
+    location: "Skardu · Shangrila · Kachura · Manthoka · Basho · Deosai",
+    pricePerHead: "Rs. 36,000",
+    couplePrice: "Rs. 80,000",
+    deluxePricePerHead: "Rs. 55,000",
+    deluxeCouplePrice: "Rs. 130,000",
+    summary:
+      "Lahore/Islamabad/Karachi joins: Babusar & KKH to Skardu, Shangrila & Kachura lakes, Manthoka, Shigar desert & fort, Basho & Deosai/Sheosar (jeep not included), return via Chilas.",
+    heroImage: pkg("skardu-6-days.png"),
+    gallery: [pkg("skardu-6-days.png")],
+    attractions: [
+      "Hazara Expressway",
+      "Babusar Top",
+      "Naran",
+      "Nanga Parbat viewpoint",
+      "Three mountain junction",
+      "Shangrila Resort",
+      "Upper Kachura Lake",
+      "Lower Kachura Lake",
+      "Shigar cold desert",
+      "Shigar Fort",
+      "Manthoka Waterfall",
+      "Basho Valley",
+      "Sadpara Lake",
+      "Deosai Plains",
+      "Sheosar Lake",
+      "Kala Pani · Bada Pani",
+      "Skardu Bazaar",
+    ],
+    itinerary: [
+      {
+        day: "Day 00",
+        title: "Night departure",
+        details: "10:00pm departure from Lahore / Islamabad.",
+      },
+      {
+        day: "Day 1",
+        title: "Naran · Chilas",
+        details:
+          "4:00am Karachi & Islamabad pick-ups. Breakfast in Naran ~9:00am; Babusar Top sightseeing. Arrival Chilas ~7:00pm; dinner & overnight at Chilas.",
+      },
+      {
+        day: "Day 2",
+        title: "Skardu · Kachura",
+        details:
+          "8:00am depart for Skardu; Nanga Parbat viewpoint, three mountain junction, Skardu road. Upper & Lower Kachura lakes & Shangrila Resort. Dinner & overnight in Skardu.",
+      },
+      {
+        day: "Day 3",
+        title: "Manthoka · Shigar",
+        details:
+          "8:00am breakfast. Manthoka Waterfall; Shigar Valley, Sarfranga cold desert, Shigar Fort. Return to Skardu; dinner & overnight.",
+      },
+      {
+        day: "Day 4",
+        title: "Basho · Deosai · Sheosar",
+        details:
+          "8:00am breakfast. Basho Valley / Sadpara Lake, Deosai, Sheosar Lake (jeep charges not included). Return Skardu; bonfire night; dinner & overnight.",
+      },
+      {
+        day: "Day 5",
+        title: "Chilas",
+        details:
+          "8:00am breakfast. 9:00am towards Chilas; optional Shangrila if missed earlier. Arrival Chilas ~7:00pm; dinner & overnight.",
+      },
+      {
+        day: "Day 6",
+        title: "Islamabad · Lahore",
+        details:
+          "5:00am departure for Islamabad; breakfast ~10:00am at Naran; Babusar Top. Islamabad ~5:00pm; Lahore late night (~11:30pm ±2–3h). End of services.",
+      },
+    ],
+    included: [
+      "AC luxury transport (4C saloon coaster & Grand Cabin)",
+      "Accommodation (4 persons sharing per room)",
+      "Meals: 6 breakfasts & 5 dinners",
+      "Professional tour guide",
+      "Fuel",
+      "All tolls & taxes",
+    ],
+    excluded: [
+      "Jeep charges",
+      "Hotel extras (hot drinks, soft drinks, mineral water)",
+      "Entry tickets",
+      "Insurance & liability",
+      "Any item not listed above",
+    ],
+    departureInfo:
+      "10:00pm departure from Lahore/Islamabad; Karachi guests coordinated at 4:00am Islamabad pick-up. Families · couples · groups welcome.",
+    category: ["Skardu", "Deosai", "Family", "Group"],
+    whatsappMessage: tourBookingMessage("6 Days Skardu Manthoka Deosai Basho"),
+    bookingContact: "0322 4294542",
+    mealInfo: ["6 breakfasts · 5 dinners (rotation menu)"],
+    equipment: [
+      "Day bag, raincoat, sun block, sunglasses, warm clothes, power bank",
+      "Joggers, slippers, jackets",
+      "Original CNIC for all participants",
+    ],
+    terms: [
+      "Drugs or intoxication on the bus or during the trip leads to immediate removal without refund.",
+      "Organizer may cancel the trip; in that case registered participants receive full refund.",
+      "Unforeseen costs from natural events, politics, or security issues are borne by the participant.",
+      "Itinerary may change for weather, transport, or local conditions; leaders will choose the best alternative.",
+      "No smoking in transport. Valid CNIC or passport required.",
+      "Punctuality required. Use non-slip shoes (no heels/dress shoes).",
+      "AC on mountain ascents may run intermittently to protect the vehicle.",
+      "Per-head price may adjust slightly if fuel prices change, including on already booked tours.",
+      "Operator not liable for injury, damage, or loss.",
+    ],
+    notes: ["Thank you for choosing Travel With Moiz."],
   },
 ];
+
+/** Shortest trips first (2-day, then 3-day, …); same length sorted A→Z by title. */
+export const packageTours: Tour[] = [...packageToursData].sort((a, b) => {
+  const byDays = durationDayOrder(a.duration) - durationDayOrder(b.duration);
+  return byDays !== 0 ? byDays : a.title.localeCompare(b.title);
+});

@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { TourDetailExtras } from "@/components/TourDetailExtras";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { getTourBySlug, tours } from "@/lib/tours";
+import { formatTourDurationBadge } from "@/lib/tour-duration";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -63,7 +64,7 @@ export default async function TourDetailPage({ params }: PageProps) {
           </div>
           <div className="mt-10 text-center md:text-left">
             <p className="inline-flex rounded-full bg-cyan-300 px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-slate-950 sm:text-sm">
-              {tour.duration}
+              {formatTourDurationBadge(tour.duration)}
             </p>
             <h1 className="mt-5 text-3xl font-black tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">{tour.title}</h1>
             <p className="mt-4 flex flex-wrap items-center justify-center gap-2 text-lg text-slate-200 md:justify-start">
@@ -71,15 +72,42 @@ export default async function TourDetailPage({ params }: PageProps) {
               {tour.location}
             </p>
             <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-300 md:mx-0">{tour.summary}</p>
-            <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center md:justify-start">
-              <WhatsAppButton message={tour.whatsappMessage} className="px-8 py-4 text-base">
+            <div className="mt-8 flex w-full max-w-3xl flex-col gap-4 sm:mx-auto md:mx-0">
+              <WhatsAppButton message={tour.whatsappMessage} className="w-full px-8 py-4 text-base sm:w-auto sm:self-start">
                 Book This Package
               </WhatsAppButton>
-              <div className="rounded-full border border-white/15 bg-white/10 px-6 py-4 text-center font-black backdrop-blur">
-                {tour.pricePerHead}
-                <span className="mx-2 text-white/40">·</span>
-                Couple {tour.couplePrice}
-              </div>
+              {tour.deluxePricePerHead && tour.deluxeCouplePrice ? (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-emerald-400/30 bg-gradient-to-br from-emerald-500/15 to-lime-500/10 px-5 py-4 text-center shadow-lg shadow-black/10 backdrop-blur sm:text-left">
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-200/95">Standard</p>
+                    <p className="mt-2 text-lg font-black text-white sm:text-xl">
+                      {tour.pricePerHead}
+                      <span className="mx-2 text-white/35">·</span>
+                      Couple {tour.couplePrice}
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-indigo-400/40 bg-gradient-to-br from-indigo-600/35 via-violet-600/20 to-amber-500/15 px-5 py-4 text-center shadow-lg shadow-indigo-950/30 backdrop-blur sm:text-left">
+                    <p className="flex items-center justify-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-amber-100/95 sm:justify-start">
+                      <span
+                        aria-hidden
+                        className="inline-flex h-2 w-2 rounded-full bg-gradient-to-r from-indigo-300 to-amber-300 shadow shadow-amber-500/40"
+                      />
+                      Deluxe
+                    </p>
+                    <p className="mt-2 text-lg font-black text-white sm:text-xl">
+                      {tour.deluxePricePerHead}
+                      <span className="mx-2 text-white/35">·</span>
+                      Couple {tour.deluxeCouplePrice}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="rounded-2xl border border-emerald-400/30 bg-gradient-to-r from-emerald-500/15 to-lime-500/10 px-6 py-4 text-center font-black shadow-lg shadow-black/10 backdrop-blur sm:text-left">
+                  {tour.pricePerHead}
+                  <span className="mx-2 text-white/35">·</span>
+                  Couple {tour.couplePrice}
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -5,6 +5,9 @@ export type Tour = {
   location: string;
   pricePerHead: string;
   couplePrice: string;
+  /** Optional deluxe tier — shown on cards and detail when set. */
+  deluxePricePerHead?: string;
+  deluxeCouplePrice?: string;
   summary: string;
   heroImage: string;
   gallery: string[];
