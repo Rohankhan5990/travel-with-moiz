@@ -927,9 +927,9 @@ const packageToursData: Tour[] = [
     ],
   },
   {
-    title: "4 Days Kashmir · Neelum Valley · Sharda · Arang Kel",
+    title: "3 Days Kashmir · Neelum Valley · Sharda · Arang Kel",
     slug: "kashmir-neelum-sharda-arang-kel-3-days",
-    duration: "4 Days - 3 Nights",
+    duration: "3 Days - 2 Nights",
     location: "Neelum Valley · Keran · Sharda · Arang Kel",
     pricePerHead: "Rs. 18,000",
     couplePrice: "Rs. 40,000",
@@ -994,7 +994,7 @@ const packageToursData: Tour[] = [
     departureInfo:
       "Every Thursday night · pick-ups Faisalabad, Lahore, Islamabad, Multan & Gujranwala.",
     category: ["Kashmir", "Neelum", "Family", "Couple", "Group"],
-    whatsappMessage: tourBookingMessage("4 Days Kashmir Neelum Sharda Arang Kel"),
+    whatsappMessage: tourBookingMessage("3 Days Kashmir Neelum Sharda Arang Kel"),
     bookingContact: "0322 4294542",
     pickupPoints: [
       "Faisalabad",
