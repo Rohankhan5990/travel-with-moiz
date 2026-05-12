@@ -1,0 +1,8 @@
+# Copy to `.dev.vars` in this folder (never commit `.dev.vars`).
+# Wrangler loads these only for `wrangler dev` on your machine.
+#
+# GEMINI_API_KEY = Google AI Studio key (same as production secret).
+# ADMIN_SECRET   = Same string you use for Bearer uploads locally.
+
+GEMINI_API_KEY=
+ADMIN_SECRET=

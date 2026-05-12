@@ -1,7 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# dependencies (any subdirectory, e.g. workers/chatbot-api)
+node_modules/
+
 /.pnp
 .pnp.*
 .yarn/*
@@ -31,8 +32,15 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files — do not ignore committed templates (e.g. .env.example)
 .env*
+!.env.example
+
+**/.dev.vars
+
+# Cloudflare Wrangler local dev (D1 SQLite, caches, temp bundles)
+.wrangler/
+**/.wrangler/
 
 # vercel
 .vercel
@@ -40,3 +48,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Cloudflare Workers — regenerated locally: cd workers/chatbot-api && npx wrangler types
+workers/chatbot-api/worker-configuration.d.ts

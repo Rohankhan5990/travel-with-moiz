@@ -13,6 +13,43 @@ type PackagesCarouselProps = {
 const arrowBtnClass =
   "flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-emerald-900/15 bg-white text-emerald-900 shadow-md shadow-emerald-950/10 transition active:scale-95 hover:border-emerald-700/30 hover:bg-emerald-50 disabled:pointer-events-none disabled:opacity-30 sm:h-12 sm:w-12";
 
+function CarouselNavPair({
+  className,
+  canPrev,
+  canNext,
+  onPrev,
+  onNext,
+}: {
+  className?: string;
+  canPrev: boolean;
+  canNext: boolean;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  return (
+    <div className={cn("flex items-center justify-center gap-4", className)}>
+      <button
+        type="button"
+        aria-label="Previous packages"
+        onClick={onPrev}
+        disabled={!canPrev}
+        className={arrowBtnClass}
+      >
+        <ChevronLeft className="h-6 w-6" strokeWidth={2.25} aria-hidden />
+      </button>
+      <button
+        type="button"
+        aria-label="Next packages"
+        onClick={onNext}
+        disabled={!canNext}
+        className={arrowBtnClass}
+      >
+        <ChevronRight className="h-6 w-6" strokeWidth={2.25} aria-hidden />
+      </button>
+    </div>
+  );
+}
+
 export function PackagesCarousel({ tours }: PackagesCarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canPrev, setCanPrev] = useState(false);
@@ -48,36 +85,19 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
     el.scrollBy({ left: dir * (w + gap), behavior: "smooth" });
   };
 
-  const NavPair = ({ className }: { className?: string }) => (
-    <div className={cn("flex items-center justify-center gap-4", className)}>
-      <button
-        type="button"
-        aria-label="Previous packages"
-        onClick={() => scrollByDir(-1)}
-        disabled={!canPrev}
-        className={arrowBtnClass}
-      >
-        <ChevronLeft className="h-6 w-6" strokeWidth={2.25} aria-hidden />
-      </button>
-      <button
-        type="button"
-        aria-label="Next packages"
-        onClick={() => scrollByDir(1)}
-        disabled={!canNext}
-        className={arrowBtnClass}
-      >
-        <ChevronRight className="h-6 w-6" strokeWidth={2.25} aria-hidden />
-      </button>
-    </div>
-  );
-
   return (
     <div
       className={cn(
         "rounded-2xl border border-emerald-900/10 bg-white/95 p-3 shadow-xl shadow-emerald-950/10 sm:rounded-[2rem] sm:p-4 md:p-5",
       )}
     >
-      <NavPair className="mb-3 sm:hidden" />
+      <CarouselNavPair
+        className="mb-3 sm:hidden"
+        canPrev={canPrev}
+        canNext={canNext}
+        onPrev={() => scrollByDir(-1)}
+        onNext={() => scrollByDir(1)}
+      />
 
       <div className="grid items-stretch gap-2 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-3 md:gap-4">
         <div className="hidden min-w-[3rem] place-self-center sm:flex sm:justify-end">

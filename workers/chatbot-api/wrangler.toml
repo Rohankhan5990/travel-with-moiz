@@ -1,0 +1,15 @@
+name = "travel-with-moiz-chatbot-api"
+main = "src/index.ts"
+compatibility_date = "2026-05-01"
+
+[[vectorize]]
+binding = "VECTORIZE"
+index_name = "travel-with-moiz-rag"
+# Local `wrangler dev`: use your real Cloudflare Vectorize index (login required).
+remote = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "travel-with-moiz-chatbot"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
