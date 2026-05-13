@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { brand } from "@/lib/whatsapp";
-import { Loader2, SendHorizontal } from "lucide-react";
+import { Loader2, RotateCcw, SendHorizontal } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Components } from "react-markdown";
 import ReactMarkdown from "react-markdown";
@@ -186,6 +186,15 @@ export function ChatbotWidget() {
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const fetchAbortRef = useRef<AbortController | null>(null);
+
+  const resetChat = useCallback(() => {
+    fetchAbortRef.current?.abort();
+    fetchAbortRef.current = null;
+    setLoading(false);
+    setInput("");
+    setMessages([WELCOME_MESSAGE]);
+  }, []);
 
   const togglePanel = () => {
     setOpen((prev) => {
@@ -207,6 +216,10 @@ export function ChatbotWidget() {
     const trimmed = input.trim();
     if (!trimmed || !apiBase || loading) return;
 
+    fetchAbortRef.current?.abort();
+    const ctrl = new AbortController();
+    fetchAbortRef.current = ctrl;
+
     const userMsg: ChatMessage = {
       id: crypto.randomUUID(),
       role: "user",
@@ -222,6 +235,7 @@ export function ChatbotWidget() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed }),
+        signal: ctrl.signal,
       });
 
       const data = (await res.json()) as {
@@ -238,11 +252,18 @@ export function ChatbotWidget() {
         throw new Error("Empty reply from assistant");
       }
 
+      if (ctrl.signal.aborted) {
+        return;
+      }
+
       setMessages((prev) => [
         ...prev,
         { id: crypto.randomUUID(), role: "assistant", text: answer },
       ]);
     } catch (e) {
+      if (e instanceof Error && e.name === "AbortError") {
+        return;
+      }
       const msg =
         e instanceof Error ? e.message : "Something went wrong. Try again.";
       setMessages((prev) => [
@@ -254,6 +275,9 @@ export function ChatbotWidget() {
         },
       ]);
     } finally {
+      if (fetchAbortRef.current === ctrl) {
+        fetchAbortRef.current = null;
+      }
       setLoading(false);
     }
   }, [apiBase, input, loading]);
@@ -330,6 +354,15 @@ export function ChatbotWidget() {
                 </span>
               </div>
             </div>
+            <button
+              type="button"
+              aria-label="Start new conversation"
+              title="New chat — clear conversation"
+              onClick={resetChat}
+              className="inline-flex shrink-0 touch-manipulation items-center justify-center rounded-lg border border-white/15 bg-white/5 p-1.5 text-amber-200/95 transition hover:border-amber-400/35 hover:bg-amber-400/10 hover:text-amber-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300/60 sm:p-2"
+            >
+              <RotateCcw className="h-4 w-4 stroke-[2.25]" aria-hidden />
+            </button>
           </header>
 
           <div
