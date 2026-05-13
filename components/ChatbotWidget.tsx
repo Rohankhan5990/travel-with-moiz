@@ -4,7 +4,10 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { brand } from "@/lib/whatsapp";
 import { Loader2, SendHorizontal } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { Components } from "react-markdown";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 /** Public asset: `public/chatbot.png`. */
 const CHATBOT_ICON_SRC = "/chatbot.png";
@@ -15,12 +18,6 @@ type ChatMessage = {
   id: string;
   role: Role;
   text: string;
-};
-
-type ChatApiSource = {
-  title: string;
-  chunk_id: string;
-  score: number;
 };
 
 function normalizeApiBase(raw: string | undefined): string | null {
@@ -39,17 +36,17 @@ function WelcomeAssistantMessage() {
     <div className="mr-auto w-full max-w-[95%]" role="status">
       <div
         className={cn(
-          "rounded-2xl border border-amber-500/15 bg-slate-800/95 px-3 py-3 shadow-inner shadow-black/15 ring-1 ring-white/5",
+          "rounded-xl border border-amber-500/15 bg-slate-800/95 px-2.5 py-2.5 shadow-inner shadow-black/15 ring-1 ring-white/5 sm:rounded-2xl sm:px-3 sm:py-3",
         )}
       >
-        <p className="text-[0.875rem] font-bold leading-snug tracking-tight text-amber-100">
+        <p className="text-[0.8125rem] font-bold leading-snug tracking-tight text-amber-100 sm:text-[0.875rem]">
           🌍 Welcome to Travel With Moiz!
         </p>
-        <div className="my-2 h-px bg-slate-600/35" aria-hidden />
-        <p className="text-[0.8125rem] font-medium leading-snug text-white">
+        <div className="my-1.5 h-px bg-slate-600/35 sm:my-2" aria-hidden />
+        <p className="text-[0.75rem] font-medium leading-snug text-white sm:text-[0.8125rem]">
           Your travel assistant is online ✨
         </p>
-        <p className="mt-2 text-[0.8125rem] leading-snug text-slate-400">
+        <p className="mt-1.5 text-[0.75rem] leading-snug text-slate-400 sm:mt-2 sm:text-[0.8125rem]">
           Ask me about tours, destinations, pricing, itineraries, hotels, and
           travel plans across Pakistan.
         </p>
@@ -58,46 +55,124 @@ function WelcomeAssistantMessage() {
   );
 }
 
-function splitAssistantText(text: string): { body: string; sources: string[] } {
-  const sep = /\n\nSources:\n/;
-  const match = sep.exec(text);
-  if (!match) return { body: text, sources: [] };
-  const body = text.slice(0, match.index).trimEnd();
-  const rest = text.slice(match.index + match[0].length);
-  const sources = rest
-    .split("\n")
-    .map((l) => l.replace(/^[•\-]\s*/, "").trim())
-    .filter(Boolean);
-  return { body, sources };
-}
+const assistantMarkdownComponents: Partial<Components> = {
+  p: ({ children }) => (
+    <p className="mb-2 text-[0.8125rem] leading-relaxed text-slate-100 last:mb-0 sm:text-[0.9375rem]">
+      {children}
+    </p>
+  ),
+  strong: ({ children }) => (
+    <strong className="font-semibold text-amber-100">{children}</strong>
+  ),
+  em: ({ children }) => <em className="italic text-slate-200">{children}</em>,
+  ul: ({ children }) => (
+    <ul className="mb-2 list-disc space-y-1.5 pl-4 text-[0.8125rem] text-slate-100 marker:text-amber-300/90 last:mb-0 sm:text-[0.9375rem]">
+      {children}
+    </ul>
+  ),
+  ol: ({ children }) => (
+    <ol className="mb-2 list-decimal space-y-1.5 pl-4 text-[0.8125rem] text-slate-100 marker:font-medium marker:text-amber-300/90 last:mb-0 sm:pl-5 sm:text-[0.9375rem]">
+      {children}
+    </ol>
+  ),
+  li: ({ children }) => (
+    <li className="leading-relaxed [&>p]:mb-0">{children}</li>
+  ),
+  h1: ({ children }) => (
+    <h3 className="mb-2 mt-3 text-[0.92rem] font-bold text-amber-50 first:mt-0 sm:text-[1rem]">
+      {children}
+    </h3>
+  ),
+  h2: ({ children }) => (
+    <h3 className="mb-2 mt-2.5 text-[0.88rem] font-bold text-amber-50 first:mt-0 sm:text-[0.96rem]">
+      {children}
+    </h3>
+  ),
+  h3: ({ children }) => (
+    <h3 className="mb-1.5 mt-2 text-[0.8rem] font-semibold text-amber-100/95 first:mt-0 sm:text-[0.875rem]">
+      {children}
+    </h3>
+  ),
+  hr: () => (
+    <hr className="my-3 border-0 border-t border-slate-600/55" aria-hidden />
+  ),
+  a: ({ href, children }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="break-words font-medium text-amber-200 underline decoration-amber-400/45 underline-offset-2 hover:text-amber-50"
+    >
+      {children}
+    </a>
+  ),
+  blockquote: ({ children }) => (
+    <blockquote className="my-2 border-l-2 border-amber-400/40 pl-3 text-slate-300">
+      {children}
+    </blockquote>
+  ),
+  pre: ({ children }) => (
+    <pre className="mb-2 max-w-full overflow-x-auto rounded-lg border border-white/10 bg-slate-950/85 p-2.5 font-mono text-[0.75rem] leading-snug text-slate-100 last:mb-0 [&>code]:block [&>code]:border-0 [&>code]:bg-transparent [&>code]:p-0">
+      {children}
+    </pre>
+  ),
+  code: ({ className, children, ...props }) => {
+    const isBlock =
+      !!className && String(className).includes("language-");
+    if (isBlock) {
+      return (
+        <code className={cn("block font-mono", className)} {...props}>
+          {children}
+        </code>
+      );
+    }
+    return (
+      <code
+        className="rounded bg-slate-900/90 px-1 py-[0.05rem] font-mono text-[0.84em]"
+        {...props}
+      >
+        {children}
+      </code>
+    );
+  },
+  table: ({ children }) => (
+    <div className="my-2 max-w-full overflow-x-auto rounded-lg border border-white/10">
+      <table className="w-full border-collapse text-[0.75rem] sm:text-[0.8125rem]">
+        {children}
+      </table>
+    </div>
+  ),
+  thead: ({ children }) => (
+    <thead className="bg-slate-900/75">{children}</thead>
+  ),
+  th: ({ children }) => (
+    <th className="border border-white/15 px-2 py-1.5 text-left font-semibold text-amber-100">
+      {children}
+    </th>
+  ),
+  td: ({ children }) => (
+    <td className="border border-white/10 px-2 py-1.5 leading-snug text-slate-200">
+      {children}
+    </td>
+  ),
+};
 
 function AssistantMessage({ text }: { text: string }) {
-  const { body, sources } = useMemo(() => splitAssistantText(text), [text]);
-
   return (
     <div className="mr-auto max-w-[95%]">
       <div
         className={cn(
-          "rounded-2xl border border-amber-500/15 bg-slate-800/95 px-3.5 py-3 text-[0.9375rem] leading-relaxed text-slate-100 shadow-inner shadow-black/20",
-          "ring-1 ring-white/5",
+          "rounded-xl border border-amber-500/15 bg-slate-800/95 px-2.5 py-2.5 text-slate-100 shadow-inner shadow-black/20 ring-1 ring-white/5 sm:rounded-2xl sm:px-3.5 sm:py-3",
         )}
       >
-        <p className="whitespace-pre-wrap">{body}</p>
-        {sources.length > 0 ? (
-          <div className="mt-3 border-t border-slate-600/50 pt-3">
-            <p className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-amber-200/80">
-              From your FAQs
-            </p>
-            <ul className="space-y-1.5 text-xs text-slate-400">
-              {sources.map((line, i) => (
-                <li key={i} className="flex gap-2">
-                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-400/70" aria-hidden />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
+        <div className="assistant-markdown break-words">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={assistantMarkdownComponents}
+          >
+            {text}
+          </ReactMarkdown>
+        </div>
       </div>
     </div>
   );
@@ -152,7 +227,6 @@ export function ChatbotWidget() {
       const data = (await res.json()) as {
         answer?: string;
         error?: string;
-        sources?: ChatApiSource[];
       };
 
       if (!res.ok) {
@@ -164,17 +238,9 @@ export function ChatbotWidget() {
         throw new Error("Empty reply from assistant");
       }
 
-      let full = answer;
-      if (data.sources?.length) {
-        const lines = data.sources
-          .slice(0, 5)
-          .map((s) => `• ${s.title} (${s.score})`);
-        full += `\n\nSources:\n${lines.join("\n")}`;
-      }
-
       setMessages((prev) => [
         ...prev,
-        { id: crypto.randomUUID(), role: "assistant", text: full },
+        { id: crypto.randomUUID(), role: "assistant", text: answer },
       ]);
     } catch (e) {
       const msg =
@@ -207,9 +273,9 @@ export function ChatbotWidget() {
         }
         onClick={togglePanel}
         className={cn(
-          "fixed z-[55] flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white shadow-2xl shadow-black/35 ring-1 ring-black/10 transition hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300/70 sm:h-14 sm:w-14",
-          "bottom-[6rem] right-4 sm:bottom-[6.25rem] sm:right-5",
-          "max-[480px]:bottom-[11rem] max-[480px]:right-4",
+          "fixed z-[55] flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white shadow-2xl shadow-black/35 ring-1 ring-black/10 transition hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300/70 sm:h-14 sm:w-14",
+          "bottom-[5.75rem] right-3 sm:bottom-[6.25rem] sm:right-5",
+          "max-[480px]:bottom-[10.25rem] max-[480px]:right-3",
         )}
       >
         <Image
@@ -228,29 +294,31 @@ export function ChatbotWidget() {
           aria-modal="false"
           aria-label="Travel with Moiz chat"
           className={cn(
-            "fixed bottom-[11rem] right-4 z-[56] flex max-h-[min(72vh,32rem)] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-amber-500/25 bg-slate-950/96 shadow-2xl shadow-black/60 backdrop-blur-xl sm:bottom-[11.25rem] sm:right-5",
-            "max-[480px]:bottom-[15.5rem]",
+            "fixed z-[56] flex flex-col overflow-hidden rounded-xl border border-amber-500/25 bg-slate-950/96 shadow-2xl shadow-black/60 backdrop-blur-xl",
+            "bottom-[14.75rem] right-2.5 max-h-[min(52vh,22.5rem)] w-[min(17.75rem,calc(100vw-1.125rem))]",
+            "max-[480px]:bottom-[13.75rem]",
+            "sm:bottom-[11.25rem] sm:right-5 sm:max-h-[min(72vh,32rem)] sm:w-[min(22rem,calc(100vw-2rem))] sm:rounded-2xl",
           )}
         >
-          <header className="flex items-center gap-3 border-b border-white/10 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 px-4 py-3.5">
-            <span className="relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-900/95 ring-2 ring-amber-300/35 shadow-md shadow-black/50">
+          <header className="flex items-center gap-2 border-b border-white/10 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 px-2.5 py-2 sm:gap-3 sm:px-4 sm:py-3.5">
+            <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-900/95 ring-2 ring-amber-300/35 shadow-md shadow-black/50 sm:h-12 sm:w-12">
               <Image
                 src={CHATBOT_ICON_SRC}
                 alt="Tour assistant"
                 width={48}
                 height={48}
-                className="h-full w-full object-contain p-1"
+                className="h-full w-full object-contain p-[3px] sm:p-1"
               />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[0.95rem] font-black tracking-tight text-white">
+              <p className="truncate text-[0.875rem] font-black tracking-tight text-white sm:text-[0.95rem]">
                 {brand.name}
               </p>
-              <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
-                <p className="text-[0.62rem] font-bold uppercase tracking-[0.42em] text-amber-300">
+              <div className="mt-0.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5 sm:mt-1 sm:gap-x-2 sm:gap-y-1">
+                <p className="text-[0.52rem] font-bold uppercase tracking-[0.28em] text-amber-300 sm:text-[0.62rem] sm:tracking-[0.42em]">
                   Explore Pakistan · Assistant
                 </p>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/50 px-2 py-0.5 text-[10px] font-semibold text-emerald-300/95">
+                <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-950/50 px-[5px] py-[1px] text-[9px] font-semibold text-emerald-300/95 sm:gap-1.5 sm:px-2 sm:py-0.5 sm:text-[10px]">
                   <span
                     className="relative flex h-1.5 w-1.5"
                     aria-hidden
@@ -266,7 +334,7 @@ export function ChatbotWidget() {
 
           <div
             ref={scrollRef}
-            className="flex flex-1 flex-col gap-3 overflow-y-auto bg-slate-950/40 px-3 py-4"
+            className="flex flex-1 flex-col gap-2 overflow-y-auto bg-slate-950/40 px-2 py-2.5 sm:gap-3 sm:px-3 sm:py-4"
           >
             {messages.map((m) => {
               if (m.role === "user") {
@@ -274,7 +342,7 @@ export function ChatbotWidget() {
                   <div
                     key={m.id}
                     className={cn(
-                      "ml-auto max-w-[92%] rounded-2xl border border-amber-400/25 bg-gradient-to-br from-slate-800/90 to-slate-900/90 px-3.5 py-3 text-[0.9375rem] leading-relaxed whitespace-pre-wrap text-slate-50 shadow-md shadow-black/20",
+                      "ml-auto max-w-[92%] rounded-xl border border-amber-400/25 bg-gradient-to-br from-slate-800/90 to-slate-900/90 px-3 py-2 text-[0.8125rem] leading-relaxed whitespace-pre-wrap text-slate-50 shadow-md shadow-black/20 sm:rounded-2xl sm:px-3.5 sm:py-3 sm:text-[0.9375rem]",
                     )}
                   >
                     {m.text}
@@ -287,15 +355,15 @@ export function ChatbotWidget() {
               return <AssistantMessage key={m.id} text={m.text} />;
             })}
             {loading ? (
-              <div className="mr-auto flex max-w-[92%] items-center gap-2 rounded-2xl border border-slate-600/40 bg-slate-800/80 px-4 py-3 text-sm text-slate-300">
+              <div className="mr-auto flex max-w-[92%] items-center gap-1.5 rounded-xl border border-slate-600/40 bg-slate-800/80 px-3 py-2 text-xs text-slate-300 sm:gap-2 sm:rounded-2xl sm:px-4 sm:py-3 sm:text-sm">
                 <Loader2 className="h-4 w-4 shrink-0 animate-spin text-amber-300" aria-hidden />
                 Finding an answer…
               </div>
             ) : null}
           </div>
 
-          <footer className="border-t border-white/10 bg-slate-950/95 px-3 py-3">
-            <div className="flex gap-2">
+          <footer className="border-t border-white/10 bg-slate-950/95 px-2 py-2 sm:px-3 sm:py-3">
+            <div className="flex gap-1.5 sm:gap-2">
               <label htmlFor="travel-chat-input" className="sr-only">
                 Message
               </label>
@@ -305,7 +373,7 @@ export function ChatbotWidget() {
                 value={input}
                 disabled={loading}
                 placeholder="Ask about destinations, tours, booking…"
-                className="min-h-11 flex-1 rounded-xl border border-slate-600/60 bg-slate-900/80 px-3.5 text-sm text-slate-100 placeholder:text-slate-500 focus:border-amber-400/50 focus:outline-none focus:ring-2 focus:ring-amber-400/25 disabled:opacity-60"
+                className="min-h-10 flex-1 rounded-lg border border-slate-600/60 bg-slate-900/80 px-2.5 text-[0.8125rem] text-slate-100 placeholder:text-slate-500 focus:border-amber-400/50 focus:outline-none focus:ring-2 focus:ring-amber-400/25 disabled:opacity-60 sm:min-h-11 sm:rounded-xl sm:px-3.5 sm:text-sm"
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
@@ -319,7 +387,7 @@ export function ChatbotWidget() {
                 disabled={loading || !input.trim()}
                 aria-label="Send message"
                 onClick={() => void sendMessage()}
-                className="inline-flex h-11 min-w-11 shrink-0 items-center justify-center rounded-xl border border-amber-300/70 bg-slate-900 text-white transition hover:bg-amber-300 hover:text-emerald-950 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-slate-900 disabled:hover:text-white"
+                className="inline-flex h-10 min-w-10 shrink-0 items-center justify-center rounded-lg border border-amber-300/70 bg-slate-900 text-white transition hover:bg-amber-300 hover:text-emerald-950 disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:bg-slate-900 disabled:hover:text-white sm:h-11 sm:min-w-11 sm:rounded-xl"
               >
                 <SendHorizontal className="h-5 w-5" aria-hidden strokeWidth={2} />
               </button>
