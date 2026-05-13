@@ -9,16 +9,16 @@ function Block({
   children: ReactNode;
 }) {
   return (
-    <div className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-8">
-      <h2 className="text-2xl font-black text-white">{title}</h2>
-      <div className="mt-5 space-y-3 text-slate-200">{children}</div>
+    <div className="rounded-[1.25rem] border border-white/10 bg-white/[0.06] p-5 sm:rounded-[2rem] sm:p-8">
+      <h2 className="text-xl font-black text-white sm:text-2xl">{title}</h2>
+      <div className="mt-3 space-y-2 text-sm text-slate-200 sm:mt-5 sm:space-y-3 sm:text-base">{children}</div>
     </div>
   );
 }
 
 function BulletList({ items }: { items: string[] }) {
   return (
-    <ul className="list-inside list-disc space-y-2 leading-8 marker:text-cyan-300">
+    <ul className="list-inside list-disc space-y-1.5 text-sm leading-7 marker:text-cyan-300 sm:space-y-2 sm:text-base sm:leading-8">
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}
@@ -42,7 +42,7 @@ export function TourDetailExtras({ tour }: { tour: Tour }) {
   if (!hasAny) return null;
 
   return (
-    <section className="px-4 pb-16">
+    <section className="px-4 pb-12 md:pb-16">
       <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2">
         {tour.packageDetail && tour.packageDetail.length > 0 && (
           <Block title="Package detail">

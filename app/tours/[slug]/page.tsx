@@ -67,10 +67,10 @@ export default async function TourDetailPage({ params }: PageProps) {
   return (
     <article className="bg-slate-950 text-white">
       <TourJsonLd tour={tour} slug={slug} />
-      <section className="border-b border-white/10 px-4 pb-10 pt-24 sm:pt-28 md:pt-32">
+      <section className="border-b border-white/10 px-4 pb-8 pt-[5.25rem] sm:pb-10 sm:pt-28 md:pt-32">
         <div className="mx-auto max-w-5xl">
-          <div className="relative mx-auto w-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-900/80 shadow-2xl shadow-black/40 sm:rounded-[2rem]">
-            <div className="relative aspect-[3/4] w-full max-h-[min(92vh,1200px)] min-h-[280px] sm:aspect-[4/5] md:aspect-auto md:min-h-[min(88vh,1000px)]">
+          <div className="relative mx-auto w-full overflow-hidden rounded-[1.15rem] border border-white/10 bg-slate-900/80 shadow-2xl shadow-black/40 sm:rounded-[2rem]">
+            <div className="relative aspect-[3/4] w-full max-h-[min(82vh,1200px)] min-h-[220px] sm:max-h-[min(92vh,1200px)] sm:aspect-[4/5] md:aspect-auto md:min-h-[min(88vh,1000px)]">
               <Image
                 src={tour.heroImage}
                 alt={`${tour.title} — full package flyer`}
@@ -81,39 +81,45 @@ export default async function TourDetailPage({ params }: PageProps) {
               />
             </div>
           </div>
-          <div className="mt-10 text-center md:text-left">
-            <p className="inline-flex rounded-full bg-cyan-300 px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-slate-950 sm:text-sm">
+          <div className="mt-6 text-center sm:mt-10 md:text-left">
+            <p className="inline-flex rounded-full bg-cyan-300 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-slate-950 sm:px-4 sm:py-2 sm:text-sm sm:tracking-[0.25em]">
               {formatTourDurationBadge(tour.duration)}
             </p>
-            <h1 className="mt-5 text-3xl font-black tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">{tour.title}</h1>
-            <p className="mt-4 flex flex-wrap items-center justify-center gap-2 text-lg text-slate-200 md:justify-start">
-              <MapPin className="h-5 w-5 shrink-0 text-cyan-300" />
+            <h1 className="mt-3 text-[1.65rem] font-black leading-tight tracking-tight sm:mt-5 sm:text-4xl md:text-5xl lg:text-6xl">
+              {tour.title}
+            </h1>
+            <p className="mt-3 flex flex-wrap items-center justify-center gap-2 text-base text-slate-200 md:justify-start sm:mt-4 sm:text-lg">
+              <MapPin className="h-4 w-4 shrink-0 text-cyan-300 sm:h-5 sm:w-5" />
               {tour.location}
             </p>
-            <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-300 md:mx-0">{tour.summary}</p>
-            <div className="mt-8 flex w-full max-w-3xl flex-col gap-4 sm:mx-auto md:mx-0">
-              <WhatsAppButton message={tour.whatsappMessage} className="w-full px-8 py-4 text-base sm:w-auto sm:self-start">
+            <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-slate-300 md:mx-0 sm:mt-5 sm:text-lg sm:leading-8">
+              {tour.summary}
+            </p>
+            <div className="mt-6 flex w-full max-w-3xl flex-col gap-3 sm:mx-auto sm:mt-8 sm:gap-4 md:mx-0">
+              <WhatsAppButton message={tour.whatsappMessage} className="w-full px-6 py-3 text-sm sm:w-auto sm:px-8 sm:py-4 sm:text-base sm:self-start">
                 Book This Package
               </WhatsAppButton>
               {tour.deluxePricePerHead && tour.deluxeCouplePrice ? (
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-emerald-400/30 bg-gradient-to-br from-emerald-500/15 to-lime-500/10 px-5 py-4 text-center shadow-lg shadow-black/10 backdrop-blur sm:text-left">
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-emerald-200/95">Standard</p>
-                    <p className="mt-2 text-lg font-black text-white sm:text-xl">
+                  <div className="rounded-xl border border-emerald-400/30 bg-gradient-to-br from-emerald-500/15 to-lime-500/10 px-4 py-3 text-center shadow-lg shadow-black/10 backdrop-blur sm:rounded-2xl sm:px-5 sm:py-4 sm:text-left">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-200/95 sm:text-xs">
+                      Standard
+                    </p>
+                    <p className="mt-1.5 text-base font-black text-white sm:mt-2 sm:text-xl">
                       {tour.pricePerHead}
                       <span className="mx-2 text-white/35">·</span>
                       Couple {tour.couplePrice}
                     </p>
                   </div>
-                  <div className="rounded-2xl border border-indigo-400/40 bg-gradient-to-br from-indigo-600/35 via-violet-600/20 to-amber-500/15 px-5 py-4 text-center shadow-lg shadow-indigo-950/30 backdrop-blur sm:text-left">
-                    <p className="flex items-center justify-center gap-2 text-xs font-black uppercase tracking-[0.2em] text-amber-100/95 sm:justify-start">
+                  <div className="rounded-xl border border-indigo-400/40 bg-gradient-to-br from-indigo-600/35 via-violet-600/20 to-amber-500/15 px-4 py-3 text-center shadow-lg shadow-indigo-950/30 backdrop-blur sm:rounded-2xl sm:px-5 sm:py-4 sm:text-left">
+                    <p className="flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-amber-100/95 sm:justify-start sm:text-xs sm:tracking-[0.2em]">
                       <span
                         aria-hidden
                         className="inline-flex h-2 w-2 rounded-full bg-gradient-to-r from-indigo-300 to-amber-300 shadow shadow-amber-500/40"
                       />
                       Deluxe
                     </p>
-                    <p className="mt-2 text-lg font-black text-white sm:text-xl">
+                    <p className="mt-1.5 text-base font-black text-white sm:mt-2 sm:text-xl">
                       {tour.deluxePricePerHead}
                       <span className="mx-2 text-white/35">·</span>
                       Couple {tour.deluxeCouplePrice}
@@ -121,7 +127,7 @@ export default async function TourDetailPage({ params }: PageProps) {
                   </div>
                 </div>
               ) : (
-                <div className="rounded-2xl border border-emerald-400/30 bg-gradient-to-r from-emerald-500/15 to-lime-500/10 px-6 py-4 text-center font-black shadow-lg shadow-black/10 backdrop-blur sm:text-left">
+                <div className="rounded-xl border border-emerald-400/30 bg-gradient-to-r from-emerald-500/15 to-lime-500/10 px-4 py-3 text-center font-black shadow-lg shadow-black/10 backdrop-blur text-sm sm:rounded-2xl sm:px-6 sm:py-4 sm:text-left sm:text-base">
                   {tour.pricePerHead}
                   <span className="mx-2 text-white/35">·</span>
                   Couple {tour.couplePrice}
@@ -132,28 +138,30 @@ export default async function TourDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="px-4 py-16 md:py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <section className="px-4 py-10 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 md:gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <SectionHeading
               eyebrow="Itinerary"
               title="Day-by-day plan"
               className="text-left [&_*]:text-left"
             />
-            <p className="mt-6 leading-8 text-slate-300">{tour.departureInfo}</p>
+            <p className="mt-4 text-sm leading-7 text-slate-300 sm:mt-6 sm:text-base sm:leading-8">
+              {tour.departureInfo}
+            </p>
           </div>
           <ItineraryAccordion tour={tour} />
         </div>
       </section>
 
-      <section className="bg-[#083344] px-4 py-16 md:py-20">
+      <section className="bg-[#083344] px-4 py-10 md:py-20">
         <div className="mx-auto max-w-7xl">
           <SectionHeading eyebrow="Attractions" title="Places on this route" />
-          <div className="mt-10 flex flex-wrap justify-center gap-3 md:justify-start">
+          <div className="mt-6 flex flex-wrap justify-center gap-2 md:mt-10 md:justify-start sm:gap-3">
             {tour.attractions.map((attraction) => (
               <span
                 key={attraction}
-                className="rounded-full border border-white/10 bg-white/[0.08] px-4 py-2 text-sm font-bold text-slate-100"
+                className="rounded-full border border-white/10 bg-white/[0.08] px-3 py-1.5 text-xs font-bold text-slate-100 sm:px-4 sm:py-2 sm:text-sm"
               >
                 {attraction}
               </span>
@@ -162,25 +170,25 @@ export default async function TourDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="px-4 py-16 md:py-20">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.07] p-8">
-            <h2 className="text-3xl font-black">Included</h2>
-            <div className="mt-6 space-y-4">
+      <section className="px-4 py-10 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2 md:gap-8">
+          <div className="rounded-[1.25rem] border border-white/10 bg-white/[0.07] p-5 sm:rounded-[2rem] sm:p-8">
+            <h2 className="text-2xl font-black sm:text-3xl">Included</h2>
+            <div className="mt-4 space-y-3 sm:mt-6 sm:space-y-4">
               {tour.included.map((item) => (
-                <p key={item} className="flex items-start gap-3 text-slate-200">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" />
+                <p key={item} className="flex items-start gap-2 text-sm text-slate-200 sm:gap-3 sm:text-base">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300 sm:h-5 sm:w-5" />
                   {item}
                 </p>
               ))}
             </div>
           </div>
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.07] p-8">
-            <h2 className="text-3xl font-black">Not included</h2>
-            <div className="mt-6 space-y-4">
+          <div className="rounded-[1.25rem] border border-white/10 bg-white/[0.07] p-5 sm:rounded-[2rem] sm:p-8">
+            <h2 className="text-2xl font-black sm:text-3xl">Not included</h2>
+            <div className="mt-4 space-y-3 sm:mt-6 sm:space-y-4">
               {tour.excluded.map((item) => (
-                <p key={item} className="flex items-start gap-3 text-slate-200">
-                  <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-300" />
+                <p key={item} className="flex items-start gap-2 text-sm text-slate-200 sm:gap-3 sm:text-base">
+                  <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-amber-300 sm:h-5 sm:w-5" />
                   {item}
                 </p>
               ))}
@@ -192,12 +200,12 @@ export default async function TourDetailPage({ params }: PageProps) {
       <TourDetailExtras tour={tour} />
 
       {extraGallery.length > 0 && (
-        <section className="px-4 pb-24">
+        <section className="px-4 pb-16 pt-10 md:pb-24 md:pt-14">
           <div className="mx-auto max-w-7xl">
-            <SectionHeading eyebrow="Gallery" title="More from this trip" className="mb-10" />
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <SectionHeading eyebrow="Gallery" title="More from this trip" className="mb-6 md:mb-10" />
+            <div className="grid gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-3">
               {extraGallery.map((src, index) => (
-                <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-white/10">
+                <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 sm:rounded-[2rem]">
                   <Image
                     src={src}
                     alt={`${tour.title} gallery ${index + 1}`}

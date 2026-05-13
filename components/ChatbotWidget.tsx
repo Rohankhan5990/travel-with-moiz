@@ -273,9 +273,9 @@ export function ChatbotWidget() {
         }
         onClick={togglePanel}
         className={cn(
-          "fixed z-[55] flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white shadow-2xl shadow-black/35 ring-1 ring-black/10 transition hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300/70 sm:h-14 sm:w-14",
-          "bottom-[5.75rem] right-3 sm:bottom-[6.25rem] sm:right-5",
-          "max-[480px]:bottom-[10.25rem] max-[480px]:right-3",
+          "fixed z-[55] flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white shadow-2xl shadow-black/35 ring-1 ring-black/10 transition hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300/70 sm:h-14 sm:w-14",
+          "bottom-[6.25rem] right-4 sm:bottom-[7.25rem] sm:right-5",
+          "max-[480px]:bottom-[10.75rem]",
         )}
       >
         <Image
@@ -295,8 +295,8 @@ export function ChatbotWidget() {
           aria-label="Travel with Moiz chat"
           className={cn(
             "fixed z-[56] flex flex-col overflow-hidden rounded-xl border border-amber-500/25 bg-slate-950/96 shadow-2xl shadow-black/60 backdrop-blur-xl",
-            "bottom-[14.75rem] right-2.5 max-h-[min(52vh,22.5rem)] w-[min(17.75rem,calc(100vw-1.125rem))]",
-            "max-[480px]:bottom-[13.75rem]",
+            "bottom-[15rem] right-4 max-h-[min(52vh,22.5rem)] w-[min(17.75rem,calc(100vw-2rem))]",
+            "max-[480px]:bottom-[14.25rem]",
             "sm:bottom-[11.25rem] sm:right-5 sm:max-h-[min(72vh,32rem)] sm:w-[min(22rem,calc(100vw-2rem))] sm:rounded-2xl",
           )}
         >

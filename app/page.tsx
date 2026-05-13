@@ -71,7 +71,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="noise bg-[#f8fbf6] px-4 py-24">
+      <section className="noise bg-[#f8fbf6] px-4 py-14 sm:py-24">
         <div className="relative mx-auto max-w-7xl">
           <AnimatedSection>
             <SectionHeading
@@ -81,7 +81,7 @@ export default function Home() {
               tone="light"
             />
           </AnimatedSection>
-          <div className="mt-10 md:mt-12">
+          <div className="mt-6 sm:mt-10 md:mt-12">
             <PackagesCarousel tours={featuredTours} />
           </div>
         </div>

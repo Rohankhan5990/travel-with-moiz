@@ -11,7 +11,7 @@ type PackagesCarouselProps = {
 };
 
 const arrowBtnClass =
-  "flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-emerald-900/15 bg-white text-emerald-900 shadow-md shadow-emerald-950/10 transition active:scale-95 hover:border-emerald-700/30 hover:bg-emerald-50 disabled:pointer-events-none disabled:opacity-30 sm:h-12 sm:w-12";
+  "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-emerald-900/15 bg-white text-emerald-900 shadow-md shadow-emerald-950/10 transition active:scale-95 hover:border-emerald-700/30 hover:bg-emerald-50 disabled:pointer-events-none disabled:opacity-30 sm:h-11 sm:w-11 md:h-12 md:w-12";
 
 function CarouselNavPair({
   className,
@@ -35,7 +35,7 @@ function CarouselNavPair({
         disabled={!canPrev}
         className={arrowBtnClass}
       >
-        <ChevronLeft className="h-6 w-6" strokeWidth={2.25} aria-hidden />
+        <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.25} aria-hidden />
       </button>
       <button
         type="button"
@@ -44,7 +44,7 @@ function CarouselNavPair({
         disabled={!canNext}
         className={arrowBtnClass}
       >
-        <ChevronRight className="h-6 w-6" strokeWidth={2.25} aria-hidden />
+        <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.25} aria-hidden />
       </button>
     </div>
   );
@@ -81,18 +81,18 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
     if (!el) return;
     const card = el.querySelector<HTMLElement>("[data-package-card]");
     const w = card?.offsetWidth ?? 320;
-    const gap = 20;
+    const gap = window.matchMedia("(min-width: 640px)").matches ? 20 : 12;
     el.scrollBy({ left: dir * (w + gap), behavior: "smooth" });
   };
 
   return (
     <div
       className={cn(
-        "rounded-2xl border border-emerald-900/10 bg-white/95 p-3 shadow-xl shadow-emerald-950/10 sm:rounded-[2rem] sm:p-4 md:p-5",
+        "rounded-2xl border border-emerald-900/10 bg-white/95 p-2.5 shadow-xl shadow-emerald-950/10 sm:rounded-[2rem] sm:p-4 md:p-5",
       )}
     >
       <CarouselNavPair
-        className="mb-3 sm:hidden"
+        className="mb-2 gap-3 sm:hidden"
         canPrev={canPrev}
         canNext={canNext}
         onPrev={() => scrollByDir(-1)}
@@ -108,13 +108,13 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
             disabled={!canPrev}
             className={arrowBtnClass}
           >
-            <ChevronLeft className="h-6 w-6" strokeWidth={2.25} aria-hidden />
+            <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.25} aria-hidden />
           </button>
         </div>
 
         <div
           ref={scrollRef}
-          className="flex min-w-0 items-stretch snap-x snap-mandatory gap-5 overflow-x-auto overflow-y-visible scroll-smooth pb-4 pt-0 [scrollbar-width:thin]"
+          className="flex min-w-0 items-stretch snap-x snap-mandatory gap-3 overflow-x-auto overflow-y-visible scroll-smooth pb-3 pt-0 sm:gap-5 sm:pb-4 [scrollbar-width:thin]"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
           {tours.map((tour) => (
@@ -122,7 +122,7 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
               key={tour.slug}
               data-package-card
               className={cn(
-                "flex w-[min(100%,20rem)] shrink-0 snap-start sm:w-[22rem] md:w-96 lg:w-[24rem] xl:w-[25rem]",
+                "flex w-[min(calc(100vw-2.5rem),18.5rem)] shrink-0 snap-start sm:w-[22rem] md:w-96 lg:w-[24rem] xl:w-[25rem]",
               )}
             >
               <TourCard tour={tour} layout="carousel" />
@@ -138,7 +138,7 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
             disabled={!canNext}
             className={arrowBtnClass}
           >
-            <ChevronRight className="h-6 w-6" strokeWidth={2.25} aria-hidden />
+            <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.25} aria-hidden />
           </button>
         </div>
       </div>
