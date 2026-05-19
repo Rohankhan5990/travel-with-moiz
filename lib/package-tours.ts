@@ -196,8 +196,8 @@ const packageToursData: Tour[] = [
     slug: "fairy-meadows-5-days",
     duration: "5 Days - 4 Nights",
     location: "Raikot · Fairy Meadows · Beyal · Base Camp · Chilas",
-    pricePerHead: "Rs. 23,000",
-    couplePrice: "Rs. 47,999",
+    pricePerHead: "Rs. 30,000",
+    couplePrice: "Rs. 75,000",
     deluxePricePerHead: "Rs. 45,000",
     deluxeCouplePrice: "Rs. 105,000",
     summary:
