@@ -13,9 +13,11 @@ type TourCardLayout = "default" | "carousel";
 export function TourCard({
   tour,
   layout = "default",
+  priority = false,
 }: {
   tour: Tour;
   layout?: TourCardLayout;
+  priority?: boolean;
 }) {
   const isCarousel = layout === "carousel";
   const hasDeluxe = Boolean(tour.deluxePricePerHead && tour.deluxeCouplePrice);
@@ -33,6 +35,8 @@ export function TourCard({
           src={cardImage}
           alt={`${tour.title} destination`}
           fill
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
           sizes="(min-width: 1536px) 28rem, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
           className="object-cover object-center transition duration-500 group-hover:scale-105"
         />

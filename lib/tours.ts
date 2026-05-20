@@ -2,7 +2,8 @@ import { packageTours } from "@/lib/package-tours";
 
 export type { Tour } from "@/lib/tour-types";
 
-const placeImage = (filename: string) => `/images/pakistan-places-images/${filename}`;
+const placeImage = (filename: string) =>
+  `/images/pakistan-places-images/${filename.replace(/\.(png|jpe?g)$/i, ".webp")}`;
 
 const placeImages = {
   skardu: placeImage("skardu.webp"),

@@ -56,8 +56,8 @@ export function PackagesShowcase({ tours, variant = "onLight" }: PackagesShowcas
   return (
     <div className="space-y-6 sm:space-y-10 md:space-y-12">
       <div className="grid grid-cols-1 gap-3 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {featured.map((tour) => (
-          <TourCard key={tour.slug} tour={tour} />
+        {featured.map((tour, index) => (
+          <TourCard key={tour.slug} tour={tour} priority={index === 0} />
         ))}
       </div>
 

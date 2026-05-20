@@ -10,7 +10,9 @@ import {
 } from "lucide-react";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 
-const heroImage = "/images/brand/hero-banner.png";
+import { preferWebp } from "@/lib/optimized-image";
+
+const heroImage = preferWebp("/images/brand/hero-banner.png");
 
 const trustItems = [
   { Icon: Mountain, title: "Handpicked", text: "Destinations" },

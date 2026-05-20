@@ -1,4 +1,6 @@
-const card = (filename: string) => `/images/card-images/${filename}`;
+import { preferWebp } from "@/lib/optimized-image";
+
+const card = (filename: string) => preferWebp(`/images/card-images/${filename}`);
 
 /** Card thumbnails under /public/images/card-images — flyers stay on the detail page. */
 export const tourCardImageBySlug: Record<string, string> = {
@@ -16,5 +18,5 @@ export const tourCardImageBySlug: Record<string, string> = {
 };
 
 export function getTourCardImage(tour: { slug: string; heroImage: string }) {
-  return tourCardImageBySlug[tour.slug] ?? tour.heroImage;
+  return tourCardImageBySlug[tour.slug] ?? preferWebp(tour.heroImage);
 }

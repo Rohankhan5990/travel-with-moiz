@@ -21,6 +21,7 @@ export function DestinationGallery({ limit }: DestinationGalleryProps) {
             src={item.src}
             alt={item.alt}
             fill
+            loading="lazy"
             sizes="(min-width: 768px) 50vw, 100vw"
             className="object-cover transition duration-700 group-hover:scale-105"
           />

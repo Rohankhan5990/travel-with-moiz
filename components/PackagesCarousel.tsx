@@ -117,7 +117,7 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
           className="flex min-w-0 items-stretch snap-x snap-mandatory gap-3 overflow-x-auto overflow-y-visible scroll-smooth pb-3 pt-0 sm:gap-5 sm:pb-4 [scrollbar-width:thin]"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
-          {tours.map((tour) => (
+          {tours.map((tour, index) => (
             <div
               key={tour.slug}
               data-package-card
@@ -125,7 +125,7 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
                 "flex w-[min(calc(100vw-2.5rem),18.5rem)] shrink-0 snap-start sm:w-[22rem] md:w-96 lg:w-[24rem] xl:w-[25rem]",
               )}
             >
-              <TourCard tour={tour} layout="carousel" />
+              <TourCard tour={tour} layout="carousel" priority={index < 2} />
             </div>
           ))}
         </div>

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "compress:kashmir-review": "node scripts/compress-kashmir-review.mjs",
-    "build": "node scripts/generate-video-reviews-manifest.mjs && next build && node scripts/prepare-cf-deploy.mjs",
+    "build": "node scripts/optimize-images.mjs && node scripts/generate-video-reviews-manifest.mjs && next build && node scripts/prepare-cf-deploy.mjs",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "start": "serve -l 3000 out",
     "lint": "eslint",
     "deploy:pages": "npm run build && npx wrangler pages deploy",
@@ -33,6 +34,7 @@
     "eslint-config-next": "16.2.4",
     "ffmpeg-static": "^5.2.0",
     "serve": "^14.2.6",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

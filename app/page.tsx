@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { HomeResourceHints } from "@/components/HomeResourceHints";
 import { HomepageJsonLd } from "@/components/HomepageJsonLd";
 import { DestinationGallery } from "@/components/DestinationGallery";
 import { FAQ } from "@/components/FAQ";
@@ -31,6 +32,7 @@ const trustPoints = [
 export default function Home() {
   return (
     <>
+      <HomeResourceHints />
       <HomepageJsonLd />
       <Hero />
 
@@ -62,6 +64,7 @@ export default function Home() {
                     src={destination.src}
                     alt={destination.alt}
                     fill
+                    loading="lazy"
                     sizes="(min-width: 768px) 20vw, 100vw"
                     className="object-cover transition duration-700 group-hover:scale-105"
                   />
