@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function GalleryPage() {
   return (
-    <section className="min-h-screen bg-gradient-to-b from-slate-950 to-[#083344] px-4 pb-24 pt-36 text-white">
+    <section className="min-h-screen section-surface-dark px-4 pb-24 pt-32 text-white sm:pt-36">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Gallery"

@@ -42,7 +42,7 @@ function ClientReviewVideos() {
     <>
       <div className="mx-auto mt-20 max-w-2xl">
         <div className="h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" aria-hidden />
-        <p className="mt-14 text-center text-sm font-bold uppercase tracking-[0.35em] text-cyan-300">
+        <p className="mt-14 text-center text-sm font-semibold uppercase tracking-[0.35em] text-brand-gold-light">
           Video reviews
         </p>
         <p className="mx-auto mt-3 max-w-xl text-center text-base leading-7 text-slate-300">
@@ -55,8 +55,8 @@ function ClientReviewVideos() {
           const isActive = playingId === review.id;
           return (
             <li key={review.id}>
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/20 bg-gradient-to-b from-white/[0.16] to-white/[0.07] text-white shadow-[0_24px_50px_-14px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md transition duration-300 hover:-translate-y-1.5 hover:border-cyan-300/40 hover:shadow-[0_32px_64px_-16px_rgba(6,182,212,0.22)] hover:ring-cyan-400/20">
-                <div className="relative h-60 w-full shrink-0 overflow-hidden bg-gradient-to-br from-[#062a1f] via-[#073b2c] to-[#09251d] sm:h-64 md:h-72">
+              <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.12] to-white/[0.05] text-white shadow-[0_20px_48px_-14px_rgba(0,0,0,0.4)] ring-1 ring-white/8 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-brand-gold/30 hover:shadow-[0_28px_56px_-16px_rgba(212,168,83,0.15)]">
+                <div className="relative h-60 w-full shrink-0 overflow-hidden bg-gradient-to-br from-brand-forest-deep via-brand-forest to-brand-forest-dark sm:h-64 md:h-72">
                   <video
                     ref={(el) => setRef(review.id, el)}
                     className="absolute inset-0 h-full w-full object-cover"
@@ -88,7 +88,7 @@ function ClientReviewVideos() {
                         : "opacity-100 backdrop-blur-[2px] group-hover:bg-emerald-950/30"
                     }`}
                   >
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-[#073b2c] shadow-xl shadow-black/40 ring-4 ring-cyan-400/35 transition duration-300 group-hover:scale-105 group-hover:ring-cyan-300/55 sm:h-16 sm:w-16">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-brand-forest shadow-xl shadow-black/40 ring-4 ring-brand-gold/35 transition duration-300 group-hover:scale-105 group-hover:ring-brand-gold-light/50 sm:h-16 sm:w-16">
                       <Play className="ml-1 h-6 w-6 fill-current sm:h-7 sm:w-7" aria-hidden />
                     </span>
                   </button>
@@ -97,7 +97,7 @@ function ClientReviewVideos() {
                     className="pointer-events-none absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-white/25 bg-black/40 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white/95 backdrop-blur-sm"
                     aria-hidden
                   >
-                    <Video className="h-3.5 w-3.5 text-cyan-200" />
+                    <Video className="h-3.5 w-3.5 text-brand-gold-light" />
                     Guest video
                   </div>
                 </div>
@@ -125,7 +125,7 @@ export function ClientReviewsSection() {
   return (
     <section
       id="client-reviews"
-      className="scroll-mt-28 relative overflow-hidden bg-gradient-to-b from-[#073b2c] via-[#062a1f] to-[#09251d] px-4 py-24 md:scroll-mt-32"
+      className="scroll-mt-28 relative overflow-hidden section-surface-dark px-4 py-20 sm:py-24 md:scroll-mt-32"
     >
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_45%_at_50%_0%,rgba(45,212,191,0.14),transparent_55%)]"
@@ -140,7 +140,7 @@ export function ClientReviewsSection() {
           text="Written words and video messages from real guests—honest feedback on planning, support, and routes built around Pakistan’s best views."
         />
 
-        <p className="mt-14 text-center text-sm font-bold uppercase tracking-[0.35em] text-cyan-300">
+        <p className="mt-14 text-center text-sm font-semibold uppercase tracking-[0.35em] text-brand-gold-light">
           Written testimonials
         </p>
 
@@ -148,10 +148,10 @@ export function ClientReviewsSection() {
           {reviews.map((review) => (
             <article
               key={review.name}
-              className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-white/20 bg-gradient-to-b from-white/[0.16] to-white/[0.07] p-8 text-white shadow-[0_24px_50px_-14px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur-md transition duration-300 hover:-translate-y-1.5 hover:border-cyan-300/40 hover:shadow-[0_32px_64px_-16px_rgba(6,182,212,0.22)] hover:ring-cyan-400/20"
+              className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-b from-white/[0.12] to-white/[0.05] p-8 text-white shadow-[0_20px_48px_-14px_rgba(0,0,0,0.4)] ring-1 ring-white/8 backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-brand-gold/30 hover:shadow-[0_28px_56px_-16px_rgba(212,168,83,0.15)]"
             >
               <Quote
-                className="absolute right-5 top-5 h-11 w-11 text-cyan-300/20 transition duration-300 group-hover:text-cyan-200/35"
+                className="absolute right-5 top-5 h-11 w-11 text-brand-gold/20 transition duration-300 group-hover:text-brand-gold/35"
                 strokeWidth={1.25}
                 aria-hidden
               />
@@ -164,22 +164,22 @@ export function ClientReviewsSection() {
 
               <blockquote className="relative mt-5 flex-1">
                 <p className="text-[1.05rem] font-medium leading-8 tracking-tight text-slate-100">
-                  <span className="text-cyan-200/90">&ldquo;</span>
+                  <span className="text-brand-gold-light/90">&ldquo;</span>
                   {review.text}
-                  <span className="text-cyan-200/90">&rdquo;</span>
+                  <span className="text-brand-gold-light/90">&rdquo;</span>
                 </p>
               </blockquote>
 
               <footer className="mt-8 flex items-center gap-4 border-t border-white/15 pt-6">
                 <div
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-300 via-cyan-400 to-emerald-600 text-[0.8rem] font-black tracking-tight text-slate-950 shadow-lg shadow-emerald-950/30"
+                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-gold-light via-brand-gold to-emerald-700 text-[0.8rem] font-bold tracking-tight text-brand-forest-deep shadow-lg shadow-black/20"
                   aria-hidden
                 >
                   {reviewerInitials(review.name)}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="font-black text-white">{review.name}</p>
-                  <p className="mt-0.5 text-sm font-semibold text-cyan-200">{review.location}</p>
+                  <p className="font-semibold text-white">{review.name}</p>
+                  <p className="mt-0.5 text-sm font-medium text-brand-gold-light">{review.location}</p>
                   {review.trip ? (
                     <p className="mt-2 inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-white/85">
                       {review.trip}

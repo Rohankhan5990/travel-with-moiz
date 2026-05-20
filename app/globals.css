@@ -3,13 +3,30 @@
 :root {
   --background: #020617;
   --foreground: #f8fafc;
+
+  /* Brand palette */
+  --brand-forest: #073b2c;
+  --brand-forest-deep: #062a1f;
+  --brand-forest-dark: #09251d;
+  --brand-cream: #f8fbf6;
+  --brand-ink: #12392f;
+  --brand-gold: #d4a853;
+  --brand-gold-light: #f0c96a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand-forest: var(--brand-forest);
+  --color-brand-forest-deep: var(--brand-forest-deep);
+  --color-brand-forest-dark: var(--brand-forest-dark);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-light: var(--brand-gold-light);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-cormorant), ui-serif, Georgia, "Times New Roman", serif;
 }
 
 * {
@@ -23,11 +40,26 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 
 ::selection {
-  background: #06b6d4;
-  color: #020617;
+  background: color-mix(in srgb, var(--brand-gold) 35%, white);
+  color: var(--brand-forest-deep);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .noise {
@@ -39,7 +71,44 @@ body {
   position: absolute;
   inset: 0;
   content: "";
-  opacity: 0.08;
-  background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0);
-  background-size: 22px 22px;
+  opacity: 0.06;
+  background-image: radial-gradient(circle at 1px 1px, var(--brand-forest) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.heading-accent {
+  display: block;
+  width: 3rem;
+  height: 2px;
+  margin: 0.875rem auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--brand-gold) 20%,
+    var(--brand-gold-light) 50%,
+    var(--brand-gold) 80%,
+    transparent
+  );
+}
+
+.heading-accent-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.section-surface-light {
+  background-color: var(--brand-cream);
+}
+
+.section-surface-dark {
+  background: linear-gradient(
+    180deg,
+    var(--brand-forest) 0%,
+    var(--brand-forest-deep) 50%,
+    var(--brand-forest-dark) 100%
+  );
 }

@@ -34,44 +34,50 @@ export default function Home() {
       <HomepageJsonLd />
       <Hero />
 
-      <section className="bg-[#f8fbf6] px-4 pb-10 pt-8">
+      <section className="section-surface-light px-4 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-6 flex items-center justify-between gap-4">
-            <div>
-              <h2 className="text-3xl font-black text-[#073b2c]">Popular Destinations</h2>
-              <div className="mt-3 h-1 w-24 rounded-full bg-emerald-700" />
+          <AnimatedSection>
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+              <SectionHeading
+                eyebrow="Destinations"
+                title="Popular places across Pakistan"
+                text="From Hunza peaks to Skardu lakes — explore the routes we know best."
+                tone="light"
+                align="left"
+                className="mx-0 max-w-2xl text-left"
+              />
+              <Link
+                href="/gallery"
+                className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-emerald-900/10 bg-white px-5 py-3 text-sm font-semibold text-brand-forest shadow-md shadow-emerald-950/5 transition hover:border-emerald-700/25 hover:bg-emerald-50 sm:self-auto"
+              >
+                View all <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-            <Link
-              href="/gallery"
-              className="hidden items-center gap-2 rounded-full border border-emerald-900/10 bg-white px-5 py-3 text-sm font-black text-emerald-800 shadow-lg shadow-emerald-950/5 transition hover:bg-emerald-50 sm:inline-flex"
-            >
-              View All Destinations <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="grid gap-5 md:grid-cols-5">
+          </AnimatedSection>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 md:grid-cols-5">
             {popularDestinations.map((destination) => (
               <Link key={destination.title} href="/gallery" className="group">
-                <div className="relative h-36 overflow-hidden rounded-xl shadow-xl shadow-emerald-950/10">
+                <div className="relative h-40 overflow-hidden rounded-2xl shadow-lg shadow-emerald-950/10 ring-1 ring-emerald-900/8 sm:h-36">
                   <Image
                     src={destination.src}
                     alt={destination.alt}
                     fill
                     sizes="(min-width: 768px) 20vw, 100vw"
-                    className="object-cover transition duration-700 group-hover:scale-110"
+                    className="object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/85 via-transparent to-transparent" />
-                  <p className="absolute bottom-3 left-3 font-black text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-forest-deep/90 via-brand-forest/20 to-transparent" />
+                  <p className="absolute bottom-3 left-3 font-display text-lg font-semibold text-white">
                     {destination.title}
                   </p>
                 </div>
-                <p className="mt-2 text-sm text-slate-600">{destination.subtitle}</p>
+                <p className="mt-2.5 text-sm text-slate-600">{destination.subtitle}</p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="noise bg-[#f8fbf6] px-4 py-14 sm:py-24">
+      <section className="noise section-surface-light px-4 py-16 sm:py-24">
         <div className="relative mx-auto max-w-7xl">
           <AnimatedSection>
             <SectionHeading
@@ -81,13 +87,13 @@ export default function Home() {
               tone="light"
             />
           </AnimatedSection>
-          <div className="mt-6 sm:mt-10 md:mt-12">
+          <div className="mt-8 sm:mt-12">
             <PackagesCarousel tours={featuredTours} />
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-4 py-24">
+      <section className="bg-white px-4 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl">
           <AnimatedSection>
             <SectionHeading
@@ -98,9 +104,14 @@ export default function Home() {
           </AnimatedSection>
           <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {trustPoints.map(({ Icon, title, text }) => (
-              <div key={title} className="rounded-[2rem] border border-emerald-900/10 bg-[#f8fbf6] p-7 text-[#12392f] shadow-lg shadow-emerald-950/5">
-                <Icon className="h-9 w-9 text-emerald-700" />
-                <h3 className="mt-6 text-2xl font-black">{title}</h3>
+              <div
+                key={title}
+                className="rounded-2xl border border-emerald-900/8 bg-brand-cream p-7 text-brand-ink shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-950/8"
+              >
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-forest shadow-sm ring-1 ring-emerald-900/8">
+                  <Icon className="h-5 w-5" strokeWidth={1.75} />
+                </span>
+                <h3 className="mt-5 font-display text-2xl font-semibold text-brand-forest">{title}</h3>
                 <p className="mt-3 leading-7 text-slate-600">{text}</p>
               </div>
             ))}
@@ -108,7 +119,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#073b2c] px-4 py-24">
+      <section className="section-surface-dark px-4 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Gallery"
@@ -123,15 +134,19 @@ export default function Home() {
 
       <ClientReviewsSection />
 
-      <section className="bg-[#f8fbf6] px-4 py-24">
+      <section className="section-surface-light px-4 py-20 sm:py-24">
         <SectionHeading eyebrow="FAQ" title="Before you book" tone="light" />
         <div className="mt-12">
           <FAQ />
         </div>
-        <div className="mx-auto mt-12 max-w-3xl rounded-[2rem] border border-emerald-900/10 bg-white p-8 text-center text-[#12392f] shadow-2xl shadow-emerald-950/10">
-          <h3 className="text-3xl font-black">Ready for Hunza, Skardu or Kashmir?</h3>
-          <p className="mt-3 text-slate-600">Send one message and get package details, dates, and booking guidance.</p>
-          <WhatsAppButton className="mt-6 px-8 py-4">Get Tour Details</WhatsAppButton>
+        <div className="mx-auto mt-14 max-w-3xl rounded-2xl border border-emerald-900/8 bg-white p-8 text-center text-brand-ink shadow-xl shadow-emerald-950/8 sm:p-10">
+          <h3 className="font-display text-3xl font-semibold text-brand-forest">
+            Ready for Hunza, Skardu or Kashmir?
+          </h3>
+          <p className="mt-3 text-slate-600">
+            Send one message and get package details, dates, and booking guidance.
+          </p>
+          <WhatsAppButton className="mt-7 px-8 py-4">Get Tour Details</WhatsAppButton>
         </div>
       </section>
     </>

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="min-h-screen bg-gradient-to-b from-slate-950 to-[#083344] px-4 pb-24 pt-36 text-white">
+    <section className="min-h-screen section-surface-dark px-4 pb-24 pt-32 text-white sm:pt-36">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Contact"
@@ -31,31 +31,31 @@ export default function ContactPage() {
         <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3">
           <a
             href={brand.phoneHref}
-            className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-7 text-center backdrop-blur transition hover:-translate-y-1"
+            className="rounded-2xl border border-white/10 bg-white/[0.06] p-7 text-center backdrop-blur-sm transition hover:-translate-y-1 hover:border-brand-gold/30"
           >
-            <Phone className="mx-auto h-9 w-9 text-cyan-300" />
-            <h2 className="mt-5 text-xl font-black">Phone</h2>
+            <Phone className="mx-auto h-9 w-9 text-brand-gold-light" />
+            <h2 className="mt-5 font-display text-xl font-semibold">Phone</h2>
             <p className="mt-2 text-slate-300">{brand.phoneDisplay}</p>
           </a>
           <a
             href={brand.instagramUrl}
             target="_blank"
             rel="noreferrer"
-            className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-7 text-center backdrop-blur transition hover:-translate-y-1"
+            className="rounded-2xl border border-white/10 bg-white/[0.06] p-7 text-center backdrop-blur-sm transition hover:-translate-y-1 hover:border-brand-gold/30"
           >
-            <Camera className="mx-auto h-9 w-9 text-cyan-300" />
-            <h2 className="mt-5 text-xl font-black">Instagram</h2>
+            <Camera className="mx-auto h-9 w-9 text-brand-gold-light" />
+            <h2 className="mt-5 font-display text-xl font-semibold">Instagram</h2>
             <p className="mt-2 text-slate-300">@{brand.instagram}</p>
           </a>
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.08] p-7 text-center backdrop-blur">
-            <MapPin className="mx-auto h-9 w-9 text-cyan-300" />
-            <h2 className="mt-5 text-xl font-black">Service areas</h2>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-7 text-center backdrop-blur-sm">
+            <MapPin className="mx-auto h-9 w-9 text-brand-gold-light" />
+            <h2 className="mt-5 font-display text-xl font-semibold">Service areas</h2>
             <p className="mt-2 text-slate-300">Lahore, Islamabad, and custom departures</p>
           </div>
         </div>
 
-        <div className="mx-auto mt-10 max-w-3xl rounded-[2rem] border border-cyan-300/20 bg-slate-950/50 p-8 text-center">
-          <h2 className="text-3xl font-black">WhatsApp booking message</h2>
+        <div className="mx-auto mt-10 max-w-3xl rounded-2xl border border-brand-gold/25 bg-white/[0.04] p-8 text-center backdrop-blur-sm sm:p-10">
+          <h2 className="font-display text-3xl font-semibold">WhatsApp booking message</h2>
           <p className="mt-3 leading-8 text-slate-300">
             Tap below and the message will open with the correct Travel With Moiz
             number: {brand.phoneDisplay}.

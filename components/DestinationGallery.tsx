@@ -13,7 +13,7 @@ export function DestinationGallery({ limit }: DestinationGalleryProps) {
       {images.map((item, index) => (
         <div
           key={item.title}
-          className={`group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 ${
+          className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 ring-1 ring-white/5 ${
             index === 0 || index === 3 || index === 10 ? "md:col-span-2 md:row-span-2" : ""
           }`}
         >
@@ -22,10 +22,10 @@ export function DestinationGallery({ limit }: DestinationGalleryProps) {
             alt={item.alt}
             fill
             sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover transition duration-700 group-hover:scale-110"
+            className="object-cover transition duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent" />
-          <p className="absolute bottom-5 left-5 text-xl font-black text-white">
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-forest-deep/90 via-brand-forest/20 to-transparent" />
+          <p className="absolute bottom-5 left-5 font-display text-xl font-semibold text-white">
             {item.title}
           </p>
         </div>

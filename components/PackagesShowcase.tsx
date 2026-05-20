@@ -66,19 +66,19 @@ export function PackagesShowcase({ tours, variant = "onLight" }: PackagesShowcas
           <div
             className={cn(
               "mb-3 flex flex-col items-start justify-between gap-3 sm:mb-5 sm:flex-row sm:items-center sm:gap-4",
-              isDark ? "text-white" : "text-[#073b2c]",
+              isDark ? "text-white" : "text-brand-forest",
             )}
           >
             <div>
               <p
                 className={cn(
-                  "text-xs font-black uppercase tracking-[0.2em]",
-                  isDark ? "text-cyan-300/90" : "text-emerald-700",
+                  "text-xs font-semibold uppercase tracking-[0.2em]",
+                  isDark ? "text-brand-gold-light" : "text-emerald-700",
                 )}
               >
                 More packages
               </p>
-              <h3 className="mt-1 text-xl font-black leading-tight sm:text-3xl">
+              <h3 className="mt-1 font-display text-xl font-semibold leading-tight sm:text-3xl">
                 Swipe or use arrows
               </h3>
               <p

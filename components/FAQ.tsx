@@ -6,14 +6,14 @@ import { faqs } from "@/lib/tours";
 import { cn } from "@/lib/utils";
 
 export function FAQ() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(-1);
 
   return (
     <div className="mx-auto max-w-3xl space-y-3">
       {faqs.map((faq, index) => (
         <div
           key={faq.question}
-          className="overflow-hidden rounded-3xl border border-emerald-900/10 bg-white text-[#12392f] shadow-lg shadow-emerald-950/5"
+          className="overflow-hidden rounded-2xl border border-emerald-900/8 bg-white text-brand-ink shadow-sm"
         >
           <button
             type="button"
