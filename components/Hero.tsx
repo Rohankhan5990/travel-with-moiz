@@ -31,7 +31,7 @@ const stats = [
 
 function CountUp({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const inView = useInView(ref, { once: true, margin: "0px" });
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -89,7 +89,7 @@ function TripFinder() {
       </div>
 
       <div className="mt-5">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
           Travelling as
         </p>
         <div className="mt-2 grid grid-cols-4 gap-1.5">
@@ -102,7 +102,7 @@ function TripFinder() {
                 "rounded-xl px-1 py-2 text-xs font-semibold transition",
                 travelers === option
                   ? "bg-brand-gold text-brand-forest-deep shadow-md shadow-black/20"
-                  : "bg-white/8 text-white/75 hover:bg-white/15",
+                  : "bg-white/15 text-white hover:bg-white/25",
               )}
             >
               {option}
@@ -112,7 +112,7 @@ function TripFinder() {
       </div>
 
       <div className="mt-4">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">Days</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">Days</p>
         <div className="mt-2 grid grid-cols-6 gap-1.5">
           {dayOptions.map((option) => (
             <button
@@ -120,10 +120,10 @@ function TripFinder() {
               type="button"
               onClick={() => setDays(option)}
               className={cn(
-                "rounded-xl py-2 text-sm font-semibold transition",
+                "rounded-xl py-2 text-sm font-bold transition",
                 days === option
                   ? "bg-white text-brand-forest-deep shadow-md shadow-black/20"
-                  : "bg-white/8 text-white/75 hover:bg-white/15",
+                  : "bg-white/15 text-white hover:bg-white/25",
               )}
             >
               {option}
@@ -134,7 +134,7 @@ function TripFinder() {
 
       <div className="mt-4">
         <div className="flex items-center justify-between">
-          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
             <Wallet className="h-3.5 w-3.5" /> Budget / person
           </p>
           <p className="text-sm font-bold text-brand-gold-light">
@@ -161,7 +161,7 @@ function TripFinder() {
         <MapPin className="h-4 w-4" />
         Find my tour
       </button>
-      <p className="mt-3 text-center text-[11px] text-white/55">
+      <p className="mt-3 text-center text-[11px] text-white/65">
         Matched on-device from {tours.length} live packages — no signup needed.
       </p>
     </div>
@@ -180,69 +180,77 @@ export function Hero() {
   const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0, 0.55]);
 
   return (
-    <section ref={sectionRef} className="aurora relative isolate w-full max-w-full overflow-hidden bg-brand-night text-white">
-      <div className="absolute inset-0 -z-10">
+    <section ref={sectionRef} className="relative isolate w-full max-w-full overflow-hidden bg-brand-night text-white" style={{ minHeight: "100svh" }}>
+      {/* Full-bleed background image */}
+      <div className="absolute inset-0 -z-10 h-full w-full">
         <Image
           src={heroImage}
           alt="Pakistan mountain lake hero landscape"
           fill
           priority
           sizes="100vw"
-          className="object-contain object-center brightness-[1.02] contrast-[1.04] saturate-[1.08]"
+          className="object-cover object-center"
+          style={{ filter: "brightness(1.02) contrast(1.04) saturate(1.08)" }}
         />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-brand-night/92 via-brand-forest-dark/45 to-brand-night/35" />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_120%_80%_at_20%_40%,rgba(2,18,13,0.55)_0%,transparent_60%)]" />
+      {/* Overlay — lighter on mobile so photo shows through */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-black/55 via-black/20 to-black/70 sm:hidden" />
+      <div className="pointer-events-none absolute inset-0 -z-10 hidden bg-gradient-to-r from-brand-night/90 via-brand-forest-dark/50 to-brand-night/30 sm:block" />
+      <div className="pointer-events-none absolute inset-0 -z-10 hidden bg-[radial-gradient(ellipse_120%_80%_at_20%_40%,rgba(2,18,13,0.5)_0%,transparent_60%)] sm:block" />
       <motion.div
         style={{ opacity: overlayOpacity }}
         className="pointer-events-none absolute inset-0 -z-10 bg-brand-night"
       />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-t from-brand-night to-transparent" />
 
-      <motion.div
-        style={{ y: contentY }}
-        className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-4 pb-24 pt-32 sm:pt-36"
-      >
-        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr]">
+      {/* Content — vertically centred, all items visible in one screen */}
+      <div className="relative z-10 mx-auto flex h-[100svh] max-w-7xl flex-col justify-center px-4 pb-10 pt-20 sm:pb-16 sm:pt-24">
+        <div className="grid items-center gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 36 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.21, 0.65, 0.32, 1] }}
+            transition={{ duration: 0.85, ease: [0.21, 0.65, 0.32, 1] }}
           >
-            <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/35 bg-brand-gold/10 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.3em] text-brand-gold-light backdrop-blur-sm sm:text-xs">
+            {/* Badge */}
+            <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/35 bg-brand-gold/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold-light backdrop-blur-sm sm:px-4 sm:py-1.5 sm:text-xs">
               Northern Pakistan · Curated
             </p>
-            <h1 className="text-balance mt-6 font-display text-5xl font-semibold leading-[1.06] tracking-tight text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.55)] sm:text-6xl md:text-7xl lg:text-[5.25rem]">
+
+            {/* Heading — tighter on mobile */}
+            <h1 className="text-balance mt-3 font-display text-[2.4rem] font-semibold leading-[1.05] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.7)] sm:mt-5 sm:text-5xl md:text-6xl lg:text-7xl">
               Journeys That
               <span className="block bg-gradient-to-r from-brand-gold-light via-[#f7e3a8] to-brand-gold bg-clip-text italic text-transparent">
                 Stay Forever
               </span>
             </h1>
-            <p className="mt-6 max-w-lg text-lg leading-8 text-white/85 md:text-xl">
+
+            {/* Sub-text — hidden on very small screens to save space */}
+            <p className="mt-3 max-w-lg text-sm leading-6 text-white/85 sm:mt-4 sm:text-base sm:leading-7 md:text-lg">
               Hunza, Skardu, Kashmir, and the valleys in between — handcrafted
-              group and private tours, planned with care and booked in one
-              WhatsApp message.
+              tours booked with one WhatsApp message.
             </p>
 
-            <div className="mt-9 flex flex-wrap items-center gap-4">
-              <WhatsAppButton className="gold-glow bg-gradient-to-r from-brand-gold-light to-brand-gold px-8 py-4 text-base font-bold text-brand-forest-deep shadow-xl shadow-black/25 hover:brightness-105">
+            {/* CTA buttons */}
+            <div className="mt-4 flex flex-wrap items-center gap-2.5 sm:mt-6 sm:gap-4">
+              <WhatsAppButton className="gold-glow bg-gradient-to-r from-brand-gold-light to-brand-gold px-5 py-3 text-sm font-bold text-brand-forest-deep shadow-xl shadow-black/25 hover:brightness-105 sm:px-8 sm:py-4 sm:text-base">
                 Plan Your Trip
               </WhatsAppButton>
               <a
                 href="#trip-planner"
-                className="glass-soft inline-flex items-center gap-2 rounded-full px-6 py-4 text-sm font-semibold text-white transition hover:bg-white/15"
+                className="glass-soft inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/15 sm:px-6 sm:py-4"
               >
                 <Sparkles className="h-4 w-4 text-brand-gold-light" />
                 Try the AI planner
               </a>
             </div>
 
-            <div className="mt-12 flex max-w-md items-stretch justify-between gap-4 border-t border-white/12 pt-7">
+            {/* Stats row — always visible */}
+            <div className="mt-5 flex items-stretch justify-between gap-2 border-t border-white/15 pt-4 sm:mt-8 sm:max-w-md sm:gap-4 sm:pt-5">
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <CountUp value={stat.value} suffix={stat.suffix} />
-                  <p className="mt-1 text-xs font-medium uppercase tracking-[0.14em] text-white/55">
+                  <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.12em] text-white/55 sm:mt-1 sm:text-[10px] sm:tracking-[0.14em]">
                     {stat.label}
                   </p>
                 </div>
@@ -250,21 +258,22 @@ export function Hero() {
             </div>
           </motion.div>
 
+          {/* Trip finder card — desktop only */}
           <motion.div
-            initial={reduceMotion ? false : { opacity: 0, y: 44 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 36 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25, ease: [0.21, 0.65, 0.32, 1] }}
+            transition={{ duration: 0.85, delay: 0.2, ease: [0.21, 0.65, 0.32, 1] }}
             className="hidden justify-self-end lg:flex"
           >
             <TripFinder />
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       <a
         href="#destinations"
         aria-label="Scroll to destinations"
-        className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2 text-white/60 transition hover:text-white"
+        className="absolute bottom-5 left-1/2 z-20 -translate-x-1/2 text-white/60 transition hover:text-white"
       >
         <ChevronDown className={cn("h-6 w-6", !reduceMotion && "float-y")} />
       </a>

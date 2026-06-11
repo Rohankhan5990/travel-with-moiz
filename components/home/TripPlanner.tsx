@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -30,11 +30,20 @@ export function TripPlanner() {
   const [budget, setBudget] = useState(35000);
   const [vibe, setVibe] = useState("");
   const [planned, setPlanned] = useState(false);
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   const matches = useMemo(
     () => matchTours({ travelers, days, budget, vibe }, tours).slice(0, 3),
     [travelers, days, budget, vibe],
   );
+
+  const handlePlan = () => {
+    setPlanned(true);
+    // On mobile the results panel is below the form — scroll to it after render
+    setTimeout(() => {
+      resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+  };
 
   return (
     <section id="trip-planner" className="aurora section-surface-night overflow-hidden px-4 py-20 sm:py-28">
@@ -139,7 +148,7 @@ export function TripPlanner() {
 
             <button
               type="button"
-              onClick={() => setPlanned(true)}
+              onClick={handlePlan}
               className="gold-glow mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-gold-light to-brand-gold px-6 py-4 text-sm font-bold text-brand-forest-deep transition hover:-translate-y-0.5 hover:brightness-105"
             >
               <Wand2 className="h-4 w-4" />
@@ -148,7 +157,7 @@ export function TripPlanner() {
           </div>
 
           {/* Results panel */}
-          <div aria-live="polite">
+          <div ref={resultsRef} aria-live="polite" className="scroll-mt-24">
             {!planned ? (
               <div className="glass-soft flex h-full min-h-[20rem] flex-col items-center justify-center rounded-3xl p-10 text-center">
                 <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-gold/15 text-brand-gold-light ring-1 ring-brand-gold/35">
