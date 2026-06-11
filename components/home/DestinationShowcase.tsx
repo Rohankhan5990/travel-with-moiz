@@ -44,19 +44,19 @@ const destinations: Destination[] = [
   {
     name: "Naran",
     tagline: "Saif-ul-Malook and Babusar Top",
-    image: "/images/card-images/naran.webp",
+    image: "/images/pakistan-places-images/naran-kaghan-1.webp",
     region: "Naran",
   },
   {
     name: "Swat",
     tagline: "Kalam's meadows and Malam Jabba",
-    image: "/images/card-images/swat.webp",
+    image: "/images/pakistan-places-images/swat-mahodand.jpg",
     region: "Swat",
   },
   {
     name: "Kumrat",
     tagline: "Untouched forests and river camps",
-    image: "/images/card-images/kumrat.webp",
+    image: "/images/pakistan-places-images/kumrat-valley.jpg",
     region: "Kumrat",
   },
 ];
