@@ -11,5 +11,5 @@ remote = true
 [[d1_databases]]
 binding = "DB"
 database_name = "travel-with-moiz-chatbot"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "8064334e-fc19-463a-b14f-bc0e77079a38"
 migrations_dir = "migrations"

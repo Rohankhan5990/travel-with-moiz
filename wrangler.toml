@@ -1,7 +1,15 @@
 # Cloudflare Workers — static assets from Next.js export (`output: "export"` → ./out)
 #
-# Your CI runs: npm run build && npx wrangler deploy
-# That command needs [assets] below (NOT pages_build_output_dir alone).
+# This site is a static export, NOT OpenNext. Wrangler 4.68+ autoconfig detects
+# Next.js and runs `opennextjs-cloudflare build` unless disabled.
+#
+# Workers Builds (Cloudflare dashboard → Settings → Build):
+#   Build command:  npm run build
+#   Deploy command: npm run deploy
+# (or: npx wrangler deploy --x-autoconfig=false after npm run build)
+#
+# Local / CI deploy:
+#   npm run deploy
 #
 # Workers assets: max 25 MiB per file.
 # Kashmir review uses public/reviews-videos/kashmir-keran-tour.mp4 — create it with:

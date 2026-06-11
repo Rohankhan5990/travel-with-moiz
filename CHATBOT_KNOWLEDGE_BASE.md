@@ -113,8 +113,8 @@ Pack: day‑bag raincoat sunscreen warm layers power‑bank CNIC.
 - **Duration:** 5 Days ‑ 4 Nights
 - **Areas:** Raikot · Fairy Meadows · Beyal Camp · glacier viewpoints · Chilas
 - **Prices (website):**
-  - **Per head:** Rs. 23,000
-  - **Couple:** Rs. 47,999
+  - **Per head:** Rs. 30,000
+  - **Couple:** Rs. 75,000
   - **Deluxe per head:** Rs. 45,000
   - **Deluxe couple:** Rs. 105,000
 

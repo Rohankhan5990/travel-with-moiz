@@ -8,8 +8,8 @@
     "optimize:images": "node scripts/optimize-images.mjs",
     "start": "serve -l 3000 out",
     "lint": "eslint",
-    "deploy:pages": "npm run build && npx wrangler pages deploy",
-    "deploy": "npm run build && npx wrangler deploy"
+    "deploy:pages": "npm run build && wrangler pages deploy out",
+    "deploy": "npm run build && wrangler deploy --x-autoconfig=false"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -36,6 +36,7 @@
     "serve": "^14.2.6",
     "sharp": "^0.34.5",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.100.0"
   }
 }
