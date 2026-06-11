@@ -5,7 +5,7 @@ export function preferWebp(src: string): string {
 
 /** Above-the-fold homepage images to preload in document head. */
 export const homepagePreloadImages = [
-  "/images/brand/hero-banner.webp",
+  "/images/brand/background.webp",
   "/images/card-images/shogran.webp",
   "/images/card-images/kumrat.webp",
 ] as const;

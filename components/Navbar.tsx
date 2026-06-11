@@ -29,7 +29,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:pt-5">
+    <header className="fixed inset-x-0 top-0 z-50 w-full max-w-full overflow-x-hidden px-4 pt-4 sm:pt-5">
       <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-2xl border border-white/12 bg-slate-950/35 px-4 py-2.5 text-white shadow-lg shadow-black/10 backdrop-blur-xl sm:rounded-full sm:py-3">
         <Link href="/" className="flex items-center gap-3">
           <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full shadow-md shadow-black/30 ring-1 ring-white/20 sm:h-12 sm:w-12">

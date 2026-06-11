@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/brand/hero-banner.png",
+        url: "/images/brand/background.jpg",
         width: 1200,
         height: 630,
         alt: "Pakistan mountains and lakes — Travel With Moiz",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     title: "Travel With Moiz | Hunza, Skardu & Kashmir Tours",
     description:
       "Premium Pakistan tour packages with WhatsApp booking — Hunza, Skardu, Kashmir, and more.",
-    images: ["/images/brand/hero-banner.png"],
+    images: ["/images/brand/background.jpg"],
   },
   robots: {
     index: true,
@@ -110,12 +110,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} h-full w-full overflow-x-hidden antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-brand-forest-deep">
+      <body className="flex min-h-full w-full min-w-0 flex-col overflow-x-hidden bg-brand-forest-deep">
         <RootJsonLd />
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="w-full min-w-0 flex-1 overflow-x-hidden">{children}</main>
         <Footer />
         <FloatingWhatsApp />
         <ChatbotWidget />

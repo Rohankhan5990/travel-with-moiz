@@ -37,7 +37,7 @@ export function TripPlanner() {
   );
 
   return (
-    <section id="trip-planner" className="aurora section-surface-night px-4 py-20 sm:py-28">
+    <section id="trip-planner" className="aurora section-surface-night overflow-hidden px-4 py-20 sm:py-28">
       <div className="relative z-10 mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="AI Trip Planner"

@@ -19,7 +19,7 @@ import type { TravelerType } from "@/lib/trip-match";
 import { preferWebp } from "@/lib/optimized-image";
 import { cn } from "@/lib/utils";
 
-const heroImage = preferWebp("/images/brand/hero-banner.png");
+const heroImage = preferWebp("/images/brand/background.jpg");
 
 const regionCount = new Set(tours.flatMap((tour) => getTourRegions(tour))).size;
 
@@ -180,20 +180,17 @@ export function Hero() {
   const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0, 0.55]);
 
   return (
-    <section ref={sectionRef} className="aurora relative isolate overflow-hidden bg-brand-night text-white">
-      <motion.div style={{ y: imageY }} className="absolute inset-0 -z-10">
+    <section ref={sectionRef} className="aurora relative isolate w-full max-w-full overflow-hidden bg-brand-night text-white">
+      <div className="absolute inset-0 -z-10">
         <Image
           src={heroImage}
           alt="Pakistan mountain lake hero landscape"
           fill
           priority
           sizes="100vw"
-          className={cn(
-            "object-cover object-center brightness-[1.02] contrast-[1.05] saturate-[1.1]",
-            !reduceMotion && "ken-burns",
-          )}
+          className="object-contain object-center brightness-[1.02] contrast-[1.04] saturate-[1.08]"
         />
-      </motion.div>
+      </div>
 
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-brand-night/92 via-brand-forest-dark/45 to-brand-night/35" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_120%_80%_at_20%_40%,rgba(2,18,13,0.55)_0%,transparent_60%)]" />

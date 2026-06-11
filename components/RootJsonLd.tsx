@@ -9,7 +9,7 @@ export function RootJsonLd() {
     name: brand.name,
     url: siteUrl,
     logo: `${siteUrl}${brand.logoSrc}`,
-    image: `${siteUrl}/images/brand/hero-banner.png`,
+    image: `${siteUrl}/images/brand/background.jpg`,
     description:
       "Premium Pakistan tour packages — Hunza, Skardu, Kashmir, Deosai, and northern valleys with WhatsApp booking.",
     telephone: "+923224294542",

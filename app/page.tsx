@@ -45,8 +45,8 @@ export default function Home() {
 
       <TripPlanner />
 
-      <section className="noise section-surface-light px-4 py-16 sm:py-24">
-        <div className="relative mx-auto max-w-7xl">
+      <section className="noise section-surface-light overflow-x-hidden px-4 py-16 sm:py-24">
+        <div className="relative mx-auto max-w-7xl min-w-0">
           <AnimatedSection>
             <SectionHeading
               eyebrow="Signature packages"

@@ -123,20 +123,19 @@ export function PackagesShowcase({ tours, variant = "onLight" }: PackagesShowcas
             </div>
           </div>
 
-          <div className="relative">
+          <div className="scroll-rail-host relative max-w-full overflow-hidden">
             <div
               ref={scrollRef}
               className={cn(
-                "flex items-stretch snap-x snap-mandatory gap-3 overflow-x-auto overflow-y-visible pb-3 pt-1 [-ms-overflow-style:none] sm:gap-5 sm:pb-4 [scrollbar-width:thin]",
+                "scroll-rail no-scrollbar snap-x snap-mandatory gap-3 pb-3 pt-1 [-ms-overflow-style:none] sm:gap-5 sm:pb-4 [scrollbar-width:thin]",
                 isDark ? "scrollbar-thumb-white/20 scrollbar-track-transparent" : "scrollbar-thumb-emerald-900/20",
               )}
-              style={{ WebkitOverflowScrolling: "touch" }}
             >
               {rest.map((tour) => (
                 <div
                   key={tour.slug}
                   data-package-card
-                  className="flex w-[min(calc(100vw-2.25rem),19rem)] shrink-0 snap-start sm:w-96 lg:w-[26rem] xl:w-[28rem]"
+                  className="flex w-[19rem] max-w-[calc(100%-0.5rem)] shrink-0 snap-start sm:w-96 sm:max-w-none lg:w-[26rem] xl:w-[28rem]"
                 >
                   <TourCard tour={tour} />
                 </div>

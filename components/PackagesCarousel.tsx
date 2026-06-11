@@ -88,7 +88,7 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
   return (
     <div
       className={cn(
-        "rounded-2xl border border-emerald-900/10 bg-white/95 p-2.5 shadow-xl shadow-emerald-950/10 sm:rounded-[2rem] sm:p-4 md:p-5",
+        "scroll-rail-host max-w-full overflow-hidden rounded-2xl border border-emerald-900/10 bg-white/95 p-2.5 shadow-xl shadow-emerald-950/10 sm:rounded-[2rem] sm:p-4 md:p-5",
       )}
     >
       <CarouselNavPair
@@ -99,7 +99,7 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
         onNext={() => scrollByDir(1)}
       />
 
-      <div className="grid items-stretch gap-2 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-3 md:gap-4">
+      <div className="grid min-w-0 max-w-full items-stretch gap-2 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-3 md:gap-4">
         <div className="hidden min-w-[3rem] place-self-center sm:flex sm:justify-end">
           <button
             type="button"
@@ -114,15 +114,14 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
 
         <div
           ref={scrollRef}
-          className="flex min-w-0 items-stretch snap-x snap-mandatory gap-3 overflow-x-auto overflow-y-visible scroll-smooth pb-3 pt-0 sm:gap-5 sm:pb-4 [scrollbar-width:thin]"
-          style={{ WebkitOverflowScrolling: "touch" }}
+          className="scroll-rail no-scrollbar snap-x snap-mandatory gap-3 scroll-smooth pb-3 pt-0 sm:gap-5 sm:pb-4 [scrollbar-width:thin]"
         >
           {tours.map((tour, index) => (
             <div
               key={tour.slug}
               data-package-card
               className={cn(
-                "flex w-[min(calc(100vw-2.5rem),18.5rem)] shrink-0 snap-start sm:w-[22rem] md:w-96 lg:w-[24rem] xl:w-[25rem]",
+                "flex w-[18.5rem] max-w-[calc(100%-0.5rem)] shrink-0 snap-start sm:w-[22rem] sm:max-w-none md:w-96 lg:w-[24rem] xl:w-[25rem]",
               )}
             >
               <TourCard tour={tour} layout="carousel" priority={index < 2} />

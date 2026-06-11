@@ -24,7 +24,7 @@ export function RecentlyViewed() {
         <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-brand-gold-light">
           <History className="h-4 w-4" /> Continue planning
         </p>
-        <div className="no-scrollbar mt-5 flex snap-x gap-4 overflow-x-auto pb-2">
+        <div className="no-scrollbar scroll-rail mt-5 snap-x gap-4 pb-2">
           {recent.map((tour) => (
             <Link
               key={tour.slug}

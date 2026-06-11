@@ -25,7 +25,7 @@ const destinationLinks = [
 export function Footer() {
   return (
     <footer className="section-surface-night relative overflow-hidden border-t border-white/8 px-4 pb-10 pt-20 text-white">
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[60rem] -translate-x-1/2 rounded-full bg-brand-gold/6 blur-3xl" />
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-full max-w-4xl -translate-x-1/2 rounded-full bg-brand-gold/6 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl">
         <div className="grid gap-14 lg:grid-cols-[1.2fr_0.6fr_0.6fr_0.6fr]">

@@ -319,9 +319,9 @@ export function ChatbotWidget() {
           aria-label="Travel with Moiz chat"
           className={cn(
             "fixed z-[56] flex flex-col overflow-hidden rounded-xl border border-amber-500/25 bg-slate-950/96 shadow-2xl shadow-black/60 backdrop-blur-xl",
-            "bottom-[15rem] right-4 max-h-[min(52vh,22.5rem)] w-[min(17.75rem,calc(100vw-2rem))]",
+            "bottom-[15rem] right-4 max-h-[min(52vh,22.5rem)] w-[min(17.75rem,calc(100%-2rem))]",
             "max-[480px]:bottom-[14.25rem]",
-            "sm:bottom-[11.25rem] sm:right-5 sm:max-h-[min(72vh,32rem)] sm:w-[min(22rem,calc(100vw-2rem))] sm:rounded-2xl",
+            "sm:bottom-[11.25rem] sm:right-5 sm:max-h-[min(72vh,32rem)] sm:w-[min(22rem,calc(100%-2.5rem))] sm:rounded-2xl",
           )}
         >
           <header className="flex items-center gap-2 border-b border-white/10 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 px-2.5 py-2 sm:gap-3 sm:px-4 sm:py-3.5">

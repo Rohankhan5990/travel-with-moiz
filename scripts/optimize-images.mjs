@@ -19,7 +19,7 @@ const JOBS = [
   },
   {
     dir: path.join(PUBLIC, "images", "brand"),
-    glob: /^hero-banner\.png$/i,
+    glob: /^(hero-banner|background)\.(png|jpe?g)$/i,
     maxWidth: 1920,
     quality: 85,
   },
