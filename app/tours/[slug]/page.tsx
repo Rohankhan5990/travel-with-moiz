@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { CheckCircle2, MapPin, XCircle } from "lucide-react";
 import { ItineraryAccordion } from "@/components/ItineraryAccordion";
+import { RecordTourVisit } from "@/components/RecordTourVisit";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TourDetailExtras } from "@/components/TourDetailExtras";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -67,6 +68,7 @@ export default async function TourDetailPage({ params }: PageProps) {
   return (
     <article className="bg-slate-950 text-white">
       <TourJsonLd tour={tour} slug={slug} />
+      <RecordTourVisit slug={slug} />
       <section className="border-b border-white/10 px-4 pb-8 pt-[5.25rem] sm:pb-10 sm:pt-28 md:pt-32">
         <div className="mx-auto max-w-5xl">
           <div className="relative mx-auto w-full overflow-hidden rounded-[1.15rem] border border-white/10 bg-slate-900/80 shadow-2xl shadow-black/40 sm:rounded-[2rem]">

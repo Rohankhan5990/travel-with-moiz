@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock, Crown, MapPin, Sparkles, Users } from "lucide-react";
 import { whatsappIcon } from "@/components/WhatsAppButton";
+import { WishlistButton } from "@/components/WishlistButton";
 import type { Tour } from "@/lib/tour-types";
 import { getTourCardImage } from "@/lib/tour-card-images";
+import { getTourDifficulty } from "@/lib/tour-meta";
 import { createWhatsAppUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 import { formatTourDurationBadge } from "@/lib/tour-duration";
@@ -41,9 +43,15 @@ export function TourCard({
           className="object-cover object-center transition duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/5" />
-        <div className="absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-semibold text-brand-forest shadow-md sm:text-xs">
-          {formatTourDurationBadge(tour.duration)}
+        <div className="absolute left-3 top-3 flex flex-col items-start gap-1.5">
+          <span className="rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-semibold text-brand-forest shadow-md sm:text-xs">
+            {formatTourDurationBadge(tour.duration)}
+          </span>
+          <span className="rounded-full bg-black/40 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white backdrop-blur-sm">
+            {getTourDifficulty(tour)}
+          </span>
         </div>
+        <WishlistButton slug={tour.slug} className="absolute right-3 top-3" />
       </div>
     </Link>
   );

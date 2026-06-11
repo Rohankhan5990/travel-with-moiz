@@ -8,10 +8,12 @@
   --brand-forest: #073b2c;
   --brand-forest-deep: #062a1f;
   --brand-forest-dark: #09251d;
+  --brand-night: #02120d;
   --brand-cream: #f8fbf6;
   --brand-ink: #12392f;
   --brand-gold: #d4a853;
   --brand-gold-light: #f0c96a;
+  --brand-glacier: #7dd3fc;
 }
 
 @theme inline {
@@ -20,10 +22,12 @@
   --color-brand-forest: var(--brand-forest);
   --color-brand-forest-deep: var(--brand-forest-deep);
   --color-brand-forest-dark: var(--brand-forest-dark);
+  --color-brand-night: var(--brand-night);
   --color-brand-cream: var(--brand-cream);
   --color-brand-ink: var(--brand-ink);
   --color-brand-gold: var(--brand-gold);
   --color-brand-gold-light: var(--brand-gold-light);
+  --color-brand-glacier: var(--brand-glacier);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-cormorant), ui-serif, Georgia, "Times New Roman", serif;
@@ -41,6 +45,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
 }
 
 ::selection {
@@ -111,4 +116,164 @@ body {
     var(--brand-forest-deep) 50%,
     var(--brand-forest-dark) 100%
   );
+}
+
+/* ---------------------------------------------------------------------------
+ * Premium surface & light system
+ * ------------------------------------------------------------------------- */
+
+/* Deep cinematic section — near-black forest with aurora light pools. */
+.section-surface-night {
+  background:
+    radial-gradient(70rem 40rem at 85% -10%, rgba(13, 84, 63, 0.55), transparent 60%),
+    radial-gradient(50rem 30rem at -10% 110%, rgba(212, 168, 83, 0.12), transparent 60%),
+    linear-gradient(180deg, var(--brand-forest-dark) 0%, var(--brand-night) 100%);
+}
+
+/* Aurora ribbon — soft animated light wash for hero / feature sections. */
+.aurora {
+  position: relative;
+  isolation: isolate;
+}
+
+.aurora::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  background:
+    radial-gradient(45rem 26rem at 20% 30%, rgba(125, 211, 252, 0.14), transparent 65%),
+    radial-gradient(40rem 24rem at 80% 20%, rgba(240, 201, 106, 0.14), transparent 65%),
+    radial-gradient(50rem 30rem at 60% 85%, rgba(16, 185, 129, 0.16), transparent 65%);
+  filter: blur(40px);
+  animation: aurora-drift 24s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(-3%, -2%, 0) rotate(-1.5deg) scale(1);
+  }
+  100% {
+    transform: translate3d(3%, 2%, 0) rotate(1.5deg) scale(1.06);
+  }
+}
+
+/* Glass panels */
+.glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  box-shadow:
+    0 24px 60px -24px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.glass-soft {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Gold ring glow used on premium CTAs and active states. */
+.gold-glow {
+  box-shadow:
+    0 0 0 1px rgba(212, 168, 83, 0.45),
+    0 12px 40px -12px rgba(212, 168, 83, 0.45);
+}
+
+/* Slow cinematic zoom for hero imagery (pairs with parallax). */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate3d(1.5%, -1.5%, 0);
+  }
+}
+
+.ken-burns {
+  animation: ken-burns 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Shimmer for skeleton loaders. */
+@keyframes shimmer {
+  0% {
+    background-position: -60rem 0;
+  }
+  100% {
+    background-position: 60rem 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.14) 50%,
+    rgba(255, 255, 255, 0.05) 60%
+  );
+  background-size: 120rem 100%;
+  animation: shimmer 2.2s linear infinite;
+}
+
+/* Gentle float for decorative elements / map markers. */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-y {
+  animation: float-y 5s ease-in-out infinite;
+}
+
+/* Slow dash crawl for route lines on the interactive map. */
+@keyframes route-dash {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
+
+.route-dash {
+  stroke-dasharray: 3 9;
+  animation: route-dash 6s linear infinite;
+}
+
+/* Hide scrollbars on snap rails while keeping scrollability. */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Thin themed scrollbar for in-panel scrolling (compare tray, chat). */
+.scrollbar-luxe {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 168, 83, 0.5) transparent;
+}
+
+.scrollbar-luxe::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.scrollbar-luxe::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: rgba(212, 168, 83, 0.5);
+}
+
+/* Balanced multiline headlines. */
+.text-balance {
+  text-wrap: balance;
 }

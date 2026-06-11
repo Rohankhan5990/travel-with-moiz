@@ -8,11 +8,14 @@ import { Hero } from "@/components/Hero";
 import { ClientReviewsSection } from "@/components/ClientReviewsSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { PackagesCarousel } from "@/components/PackagesCarousel";
+import { RecentlyViewed } from "@/components/RecentlyViewed";
+import { DestinationShowcase } from "@/components/home/DestinationShowcase";
+import { PakistanMap } from "@/components/home/PakistanMap";
+import { TripPlanner } from "@/components/home/TripPlanner";
+import { WhatsAppCtaSection } from "@/components/home/WhatsAppCtaSection";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
-import { featuredTours, popularDestinations } from "@/lib/tours";
-import { ArrowRight, Car, HeartHandshake, Map, ShieldCheck, Users, WandSparkles } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { featuredTours } from "@/lib/tours";
+import { Car, HeartHandshake, Map, ShieldCheck, Users, WandSparkles } from "lucide-react";
 
 export const metadata: Metadata = {
   alternates: {
@@ -36,55 +39,17 @@ export default function Home() {
       <HomepageJsonLd />
       <Hero />
 
-      <section className="section-surface-light px-4 py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl">
-          <AnimatedSection>
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-              <SectionHeading
-                eyebrow="Destinations"
-                title="Popular places across Pakistan"
-                text="From Hunza peaks to Skardu lakes — explore the routes we know best."
-                tone="light"
-                align="left"
-                className="mx-0 max-w-2xl text-left"
-              />
-              <Link
-                href="/gallery"
-                className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-emerald-900/10 bg-white px-5 py-3 text-sm font-semibold text-brand-forest shadow-md shadow-emerald-950/5 transition hover:border-emerald-700/25 hover:bg-emerald-50 sm:self-auto"
-              >
-                View all <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </AnimatedSection>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 md:grid-cols-5">
-            {popularDestinations.map((destination) => (
-              <Link key={destination.title} href="/gallery" className="group">
-                <div className="relative h-40 overflow-hidden rounded-2xl shadow-lg shadow-emerald-950/10 ring-1 ring-emerald-900/8 sm:h-36">
-                  <Image
-                    src={destination.src}
-                    alt={destination.alt}
-                    fill
-                    loading="lazy"
-                    sizes="(min-width: 768px) 20vw, 100vw"
-                    className="object-cover transition duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-forest-deep/90 via-brand-forest/20 to-transparent" />
-                  <p className="absolute bottom-3 left-3 font-display text-lg font-semibold text-white">
-                    {destination.title}
-                  </p>
-                </div>
-                <p className="mt-2.5 text-sm text-slate-600">{destination.subtitle}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <RecentlyViewed />
+
+      <DestinationShowcase />
+
+      <TripPlanner />
 
       <section className="noise section-surface-light px-4 py-16 sm:py-24">
         <div className="relative mx-auto max-w-7xl">
           <AnimatedSection>
             <SectionHeading
-              eyebrow="Tour packages"
+              eyebrow="Signature packages"
               title="Browse every departure in one swipe"
               text="Swipe through packages or use the arrows — open any card for the full flyer and WhatsApp booking."
               tone="light"
@@ -122,12 +87,14 @@ export default function Home() {
         </div>
       </section>
 
+      <PakistanMap />
+
       <section className="section-surface-dark px-4 py-20 sm:py-24">
         <div className="mx-auto max-w-7xl">
           <SectionHeading
             eyebrow="Gallery"
             title="Cinematic destinations across Pakistan"
-            text="Skardu lakes, Hunza peaks, Kashmir valleys, Deosai plains, and famous adventure stops."
+            text="Skardu lakes, Hunza peaks, Kashmir valleys, Deosai plains, and famous adventure stops — tap any frame for fullscreen."
           />
           <div className="mt-12">
             <DestinationGallery limit={8} />
@@ -136,6 +103,8 @@ export default function Home() {
       </section>
 
       <ClientReviewsSection />
+
+      <WhatsAppCtaSection />
 
       <section className="section-surface-light px-4 py-20 sm:py-24">
         <SectionHeading eyebrow="FAQ" title="Before you book" tone="light" />
