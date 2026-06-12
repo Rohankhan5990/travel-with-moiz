@@ -180,7 +180,7 @@ export function Hero() {
   const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0, 0.55]);
 
   return (
-    <section ref={sectionRef} className="relative isolate w-full max-w-full overflow-hidden bg-brand-night text-white" style={{ minHeight: "100svh" }}>
+    <section ref={sectionRef} className="relative isolate w-full max-w-full overflow-hidden bg-brand-night text-white" style={{ height: "100svh" }}>
       {/* Full-bleed background image */}
       <div className="absolute inset-0 -z-10 h-full w-full">
         <Image
@@ -194,8 +194,10 @@ export function Hero() {
         />
       </div>
 
-      {/* Overlay — lighter on mobile so photo shows through */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-black/55 via-black/20 to-black/70 sm:hidden" />
+      {/* Mobile overlay — strong enough to read text clearly */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-black/50 sm:hidden" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-black/60 via-black/40 to-black/75 sm:hidden" />
+      {/* Desktop overlay */}
       <div className="pointer-events-none absolute inset-0 -z-10 hidden bg-gradient-to-r from-brand-night/90 via-brand-forest-dark/50 to-brand-night/30 sm:block" />
       <div className="pointer-events-none absolute inset-0 -z-10 hidden bg-[radial-gradient(ellipse_120%_80%_at_20%_40%,rgba(2,18,13,0.5)_0%,transparent_60%)] sm:block" />
       <motion.div
@@ -204,53 +206,53 @@ export function Hero() {
       />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-24 bg-gradient-to-t from-brand-night to-transparent" />
 
-      {/* Content — vertically centred, all items visible in one screen */}
-      <div className="relative z-10 mx-auto flex h-[100svh] max-w-7xl flex-col justify-center px-4 pb-10 pt-20 sm:pb-16 sm:pt-24">
-        <div className="grid items-center gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+      {/* Content */}
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 pb-8 pt-20 sm:px-8 sm:pb-20 sm:pt-28">
+        <div className="grid items-center gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, ease: [0.21, 0.65, 0.32, 1] }}
           >
             {/* Badge */}
-            <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/35 bg-brand-gold/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold-light backdrop-blur-sm sm:px-4 sm:py-1.5 sm:text-xs">
+            <p className="inline-flex items-center gap-2 rounded-full border border-brand-gold/40 bg-black/35 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-gold-light backdrop-blur-sm sm:bg-brand-gold/10 sm:px-4 sm:py-1.5 sm:text-xs">
               Northern Pakistan · Curated
             </p>
 
-            {/* Heading — tighter on mobile */}
-            <h1 className="text-balance mt-3 font-display text-[2.4rem] font-semibold leading-[1.05] tracking-tight text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.7)] sm:mt-5 sm:text-5xl md:text-6xl lg:text-7xl">
+            {/* Heading */}
+            <h1 className="mt-3 font-display text-[2.6rem] font-semibold leading-[1.08] tracking-tight text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.95),0_1px_6px_rgba(0,0,0,0.85)] sm:mt-5 sm:text-5xl md:text-6xl lg:text-7xl">
               Journeys That
-              <span className="block bg-gradient-to-r from-brand-gold-light via-[#f7e3a8] to-brand-gold bg-clip-text italic text-transparent">
+              <span className="block bg-gradient-to-r from-brand-gold-light via-[#f7e3a8] to-brand-gold bg-clip-text italic text-transparent [text-shadow:none]">
                 Stay Forever
               </span>
             </h1>
 
-            {/* Sub-text — hidden on very small screens to save space */}
-            <p className="mt-3 max-w-lg text-sm leading-6 text-white/85 sm:mt-4 sm:text-base sm:leading-7 md:text-lg">
-              Hunza, Skardu, Kashmir, and the valleys in between — handcrafted
-              tours booked with one WhatsApp message.
+            {/* Sub-text */}
+            <p className="mt-3 text-[0.9rem] leading-[1.65] text-white/90 [text-shadow:0_1px_10px_rgba(0,0,0,0.95)] sm:mt-4 sm:max-w-lg sm:text-base sm:leading-7 sm:text-white/85 sm:[text-shadow:none] md:text-lg">
+              Hunza, Skardu, Kashmir, and the valleys in between —{" "}
+              handcrafted tours, one WhatsApp message away.
             </p>
 
             {/* CTA buttons */}
-            <div className="mt-4 flex flex-wrap items-center gap-2.5 sm:mt-6 sm:gap-4">
-              <WhatsAppButton className="gold-glow bg-gradient-to-r from-brand-gold-light to-brand-gold px-5 py-3 text-sm font-bold text-brand-forest-deep shadow-xl shadow-black/25 hover:brightness-105 sm:px-8 sm:py-4 sm:text-base">
+            <div className="mt-5 flex items-center gap-3 sm:mt-7 sm:gap-4">
+              <WhatsAppButton className="gold-glow bg-gradient-to-r from-brand-gold-light to-brand-gold px-6 py-3.5 text-sm font-bold text-brand-forest-deep shadow-xl shadow-black/30 hover:brightness-105 sm:px-8 sm:py-4 sm:text-base">
                 Plan Your Trip
               </WhatsAppButton>
               <a
                 href="#trip-planner"
-                className="glass-soft inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/15 sm:px-6 sm:py-4"
+                className="glass-soft inline-flex items-center gap-2 rounded-full px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-white/15 sm:px-6 sm:py-4"
               >
                 <Sparkles className="h-4 w-4 text-brand-gold-light" />
                 Try the AI planner
               </a>
             </div>
 
-            {/* Stats row — always visible */}
-            <div className="mt-5 flex items-stretch justify-between gap-2 border-t border-white/15 pt-4 sm:mt-8 sm:max-w-md sm:gap-4 sm:pt-5">
+            {/* Stats row */}
+            <div className="mt-6 flex items-end justify-between gap-3 border-t border-white/20 pt-5 sm:mt-9 sm:max-w-md sm:gap-4 sm:pt-6">
               {stats.map((stat) => (
-                <div key={stat.label}>
+                <div key={stat.label} className="text-left">
                   <CountUp value={stat.value} suffix={stat.suffix} />
-                  <p className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.12em] text-white/55 sm:mt-1 sm:text-[10px] sm:tracking-[0.14em]">
+                  <p className="mt-1 text-[9.5px] font-semibold uppercase tracking-[0.13em] text-white/75 [text-shadow:0_1px_6px_rgba(0,0,0,0.8)] sm:text-[10px] sm:text-white/55 sm:[text-shadow:none]">
                     {stat.label}
                   </p>
                 </div>
