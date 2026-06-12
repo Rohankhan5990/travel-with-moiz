@@ -116,12 +116,13 @@ export function PakistanMap() {
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
-          <div className="glass-soft relative overflow-hidden rounded-3xl p-2 sm:p-4">
+          {/* Map: scrollable horizontally on mobile so pins are readable */}
+          <div className="glass-soft relative overflow-x-auto overflow-y-hidden rounded-3xl p-2 sm:overflow-hidden sm:p-4">
             <svg
               viewBox="0 0 800 620"
               role="group"
               aria-label="Interactive map of northern Pakistan destinations"
-              className="h-auto w-full"
+              className="h-auto min-w-[560px] w-full sm:min-w-0"
             >
               {/* Contour backdrop */}
               {[90, 150, 210, 270, 330].map((r, i) => (
@@ -160,10 +161,10 @@ export function PakistanMap() {
                 <circle cx={HUB.x} cy={HUB.y} r={14} fill="none" stroke="rgba(240,201,106,0.4)" />
                 <text
                   x={HUB.x}
-                  y={HUB.y + 32}
+                  y={HUB.y + 34}
                   textAnchor="middle"
                   className="fill-white/70"
-                  fontSize={15}
+                  fontSize={18}
                   fontWeight={600}
                 >
                   Islamabad
@@ -206,11 +207,11 @@ export function PakistanMap() {
                     />
                     <text
                       x={stop.x}
-                      y={stop.y - 22}
+                      y={stop.y - 24}
                       textAnchor="middle"
-                      fontSize={16}
+                      fontSize={18}
                       fontWeight={isActive ? 700 : 500}
-                      className={isActive ? "fill-brand-gold-light" : "fill-white/75"}
+                      className={isActive ? "fill-brand-gold-light" : "fill-white/80"}
                     >
                       {stop.name}
                     </text>
