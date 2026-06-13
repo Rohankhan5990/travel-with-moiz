@@ -33,7 +33,7 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-4">
               <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full shadow-lg shadow-black/30 ring-2 ring-brand-gold/40">
                 <Image
-                  src={brand.logoSrc}
+                  src={brand.logoUiSrc}
                   alt=""
                   width={56}
                   height={56}

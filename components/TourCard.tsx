@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Crown, MapPin, Sparkles, Users } from "lucide-react";
+import { TourCardImage } from "@/components/TourCardImage";
 import { whatsappIcon } from "@/components/WhatsAppButton";
 import { WishlistButton } from "@/components/WishlistButton";
 import type { Tour } from "@/lib/tour-types";
@@ -33,14 +34,10 @@ export function TourCard({
           isCarousel ? "aspect-[5/4]" : "aspect-[4/3] sm:aspect-[16/10]",
         )}
       >
-        <Image
+        <TourCardImage
           src={cardImage}
           alt={`${tour.title} destination`}
-          fill
           priority={priority}
-          loading={priority ? undefined : "lazy"}
-          sizes="(min-width: 1536px) 28rem, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
-          className="object-cover object-center transition duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/5" />
         <div className="absolute left-3 top-3 flex flex-col items-start gap-1.5">

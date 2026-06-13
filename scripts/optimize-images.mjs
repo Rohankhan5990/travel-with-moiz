@@ -16,12 +16,14 @@ const JOBS = [
     glob: /\.png$/i,
     maxWidth: 900,
     quality: 82,
+    responsiveWidths: [48, 480, 720],
   },
   {
     dir: path.join(PUBLIC, "images", "brand"),
     glob: /^(hero-banner|background|travelwithmoiz)\.(png|jpe?g)$/i,
     maxWidth: 1920,
     quality: 85,
+    responsiveWidths: [128],
   },
   {
     dir: path.join(PUBLIC, "images", "packages"),
@@ -37,7 +39,18 @@ const JOBS = [
   },
 ];
 
-async function optimizeFile(filePath, maxWidth, quality) {
+async function writeWebp(image, outPath, width, quality) {
+  await image
+    .clone()
+    .resize({
+      width,
+      withoutEnlargement: true,
+    })
+    .webp({ quality, effort: 4 })
+    .toFile(outPath);
+}
+
+async function optimizeFile(filePath, maxWidth, quality, responsiveWidths = []) {
   const ext = path.extname(filePath);
   const outPath = filePath.replace(new RegExp(`${ext}$`, "i"), ".webp");
 
@@ -45,12 +58,13 @@ async function optimizeFile(filePath, maxWidth, quality) {
   const image = sharp(filePath).rotate();
   const meta = await image.metadata();
 
-  const pipeline = image.resize({
-    width: meta.width && meta.width > maxWidth ? maxWidth : undefined,
-    withoutEnlargement: true,
-  });
+  await writeWebp(image, outPath, meta.width && meta.width > maxWidth ? maxWidth : undefined, quality);
 
-  await pipeline.webp({ quality, effort: 4 }).toFile(outPath);
+  for (const width of responsiveWidths) {
+    const variantPath = outPath.replace(/\.webp$/i, `-${width}.webp`);
+    const variantQuality = width <= 48 ? 35 : width <= 480 ? 72 : 78;
+    await writeWebp(image, variantPath, width, variantQuality);
+  }
 
   const outStat = fs.statSync(outPath);
   const saved =
@@ -76,7 +90,7 @@ function formatBytes(bytes) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-async function runJob({ dir, glob, maxWidth, quality }) {
+async function runJob({ dir, glob, maxWidth, quality, responsiveWidths }) {
   if (!fs.existsSync(dir)) {
     console.warn("[optimize-images] Skip missing dir: %s", dir);
     return;
@@ -88,7 +102,7 @@ async function runJob({ dir, glob, maxWidth, quality }) {
   console.info("[optimize-images] %s (%d files)", path.relative(PUBLIC, dir), files.length);
 
   for (const name of files) {
-    await optimizeFile(path.join(dir, name), maxWidth, quality);
+    await optimizeFile(path.join(dir, name), maxWidth, quality, responsiveWidths);
   }
 }
 

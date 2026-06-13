@@ -16,10 +16,9 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { tours } from "@/lib/tours";
 import { getTourRegions } from "@/lib/tour-meta";
 import type { TravelerType } from "@/lib/trip-match";
-import { preferWebp } from "@/lib/optimized-image";
 import { cn } from "@/lib/utils";
 
-const heroImage = preferWebp("/images/brand/background.jpg");
+const heroImage = "/images/brand/background.jpg";
 
 const regionCount = new Set(tours.flatMap((tour) => getTourRegions(tour))).size;
 
@@ -185,7 +184,7 @@ export function Hero() {
           src={heroImage}
           alt="Pakistan mountain lake hero landscape"
           fill
-          priority
+          preload
           sizes="100vw"
           className="object-cover object-center"
           style={{ filter: "brightness(1.02) contrast(1.04) saturate(1.08)" }}
