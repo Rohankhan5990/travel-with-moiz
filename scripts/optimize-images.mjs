@@ -19,9 +19,15 @@ const JOBS = [
   },
   {
     dir: path.join(PUBLIC, "images", "brand"),
-    glob: /^(hero-banner|background)\.(png|jpe?g)$/i,
+    glob: /^(hero-banner|background|travelwithmoiz)\.(png|jpe?g)$/i,
     maxWidth: 1920,
     quality: 85,
+  },
+  {
+    dir: path.join(PUBLIC, "images", "packages"),
+    glob: /\.png$/i,
+    maxWidth: 1024,
+    quality: 90,
   },
   {
     dir: path.join(PUBLIC, "images", "pakistan-places-images"),

@@ -175,8 +175,6 @@ export function Hero() {
     target: sectionRef,
     offset: ["start start", "end start"],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", reduceMotion ? "0%" : "18%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", reduceMotion ? "0%" : "-12%"]);
   const overlayOpacity = useTransform(scrollYProgress, [0, 1], [0, 0.55]);
 
   return (

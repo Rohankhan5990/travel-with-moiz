@@ -1,7 +1,7 @@
 import type { Tour } from "./tour-types";
 import { tourBookingMessage } from "@/lib/whatsapp";
 
-const pkg = (filename: string) => `/images/packages/${filename}`;
+const pkg = (filename: string) => `/images/packages/${filename.replace(/\.png$/i, ".webp")}`;
 
 /** First digit group in `duration` (e.g. "4 Days - 3 Nights" → 4) for listing order. */
 function durationDayOrder(duration: string): number {

@@ -12,9 +12,40 @@ if (process.env.SKIP_PREPARE_CF_DEPLOY === "1") {
 }
 
 const MAX_BYTES = 25 * 1024 * 1024;
+const OUT_IMAGES = path.join(process.cwd(), "out", "images");
 const OUT_VIDEOS = path.join(process.cwd(), "out", "reviews-videos");
 
+function removeRedundantImageSources(dir) {
+  if (!fs.existsSync(dir)) return 0;
+
+  let removedBytes = 0;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      removedBytes += removeRedundantImageSources(full);
+      continue;
+    }
+    if (!/\.(png|jpe?g)$/i.test(entry.name)) continue;
+    if (entry.name === "background.jpg" && path.basename(dir) === "brand") continue;
+
+    const webp = full.replace(/\.(png|jpe?g)$/i, ".webp");
+    if (!fs.existsSync(webp)) continue;
+
+    removedBytes += fs.statSync(full).size;
+    fs.unlinkSync(full);
+  }
+  return removedBytes;
+}
+
 function main() {
+  const removedImageBytes = removeRedundantImageSources(OUT_IMAGES);
+  if (removedImageBytes > 0) {
+    console.info(
+      "[prepare-cf-deploy] Removed %s MiB of redundant PNG/JPG image sources from out/.",
+      (removedImageBytes / (1024 * 1024)).toFixed(1),
+    );
+  }
+
   if (!fs.existsSync(OUT_VIDEOS)) return;
 
   for (const file of fs.readdirSync(OUT_VIDEOS)) {

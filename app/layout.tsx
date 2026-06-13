@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { ChatbotWidget } from "@/components/ChatbotWidget";
-import { FloatingWhatsApp } from "@/components/WhatsAppButton";
+import { DeferredChatbotWidget } from "@/components/DeferredChatbotWidget";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { RootJsonLd } from "@/components/RootJsonLd";
 import { getSiteUrl } from "@/lib/site";
 import { brand } from "@/lib/whatsapp";
@@ -118,7 +118,7 @@ export default function RootLayout({
         <main className="w-full min-w-0 flex-1 overflow-x-hidden">{children}</main>
         <Footer />
         <FloatingWhatsApp />
-        <ChatbotWidget />
+        <DeferredChatbotWidget />
       </body>
     </html>
   );

@@ -116,7 +116,7 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
           ref={scrollRef}
           className="scroll-rail no-scrollbar snap-x snap-mandatory gap-3 scroll-smooth pb-3 pt-0 sm:gap-5 sm:pb-4 [scrollbar-width:thin]"
         >
-          {tours.map((tour, index) => (
+          {tours.map((tour) => (
             <div
               key={tour.slug}
               data-package-card
@@ -124,7 +124,7 @@ export function PackagesCarousel({ tours }: PackagesCarouselProps) {
                 "flex w-[18.5rem] max-w-[calc(100%-0.5rem)] shrink-0 snap-start sm:w-[22rem] sm:max-w-none md:w-96 lg:w-[24rem] xl:w-[25rem]",
               )}
             >
-              <TourCard tour={tour} layout="carousel" priority={index < 2} />
+              <TourCard tour={tour} layout="carousel" />
             </div>
           ))}
         </div>

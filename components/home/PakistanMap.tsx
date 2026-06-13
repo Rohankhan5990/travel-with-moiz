@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -93,6 +93,26 @@ function routePath(stop: MapStop) {
 export function PakistanMap() {
   const reduceMotion = useReducedMotion();
   const [active, setActive] = useState<MapStop>(stops[0]);
+  const mapScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mapScroll = mapScrollRef.current;
+    if (!mapScroll) return;
+
+    const centerMap = () => {
+      mapScroll.scrollLeft = (mapScroll.scrollWidth - mapScroll.clientWidth) / 2;
+    };
+
+    const resizeObserver = new ResizeObserver(centerMap);
+    resizeObserver.observe(mapScroll);
+    if (mapScroll.firstElementChild) {
+      resizeObserver.observe(mapScroll.firstElementChild);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   const tourCountByRegion = useMemo(() => {
     const counts = new Map<Region, number>();
@@ -117,12 +137,15 @@ export function PakistanMap() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
           {/* Map: scrollable horizontally on mobile so pins are readable */}
-          <div className="glass-soft relative overflow-x-auto overflow-y-hidden rounded-3xl p-2 sm:overflow-hidden sm:p-4">
+          <div
+            ref={mapScrollRef}
+            className="glass-soft relative overflow-x-auto overflow-y-hidden rounded-3xl p-2 sm:overflow-hidden sm:p-4"
+          >
             <svg
               viewBox="0 0 800 620"
               role="group"
               aria-label="Interactive map of northern Pakistan destinations"
-              className="h-auto min-w-[560px] w-full sm:min-w-0"
+              className="h-auto min-w-[480px] w-full sm:min-w-0"
             >
               {/* Contour backdrop */}
               {[90, 150, 210, 270, 330].map((r, i) => (

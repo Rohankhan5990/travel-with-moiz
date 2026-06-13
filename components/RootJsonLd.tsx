@@ -1,4 +1,5 @@
 import { brand } from "@/lib/whatsapp";
+import { serializeJsonLd } from "@/lib/json-ld";
 import { getSiteUrl } from "@/lib/site";
 
 export function RootJsonLd() {
@@ -28,7 +29,7 @@ export function RootJsonLd() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }

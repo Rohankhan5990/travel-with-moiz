@@ -3,13 +3,16 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { CheckCircle2, MapPin, XCircle } from "lucide-react";
 import { ItineraryAccordion } from "@/components/ItineraryAccordion";
+import { MobileTourBookingBar } from "@/components/MobileTourBookingBar";
 import { RecordTourVisit } from "@/components/RecordTourVisit";
 import { SectionHeading } from "@/components/SectionHeading";
+import { TourCard } from "@/components/TourCard";
 import { TourDetailExtras } from "@/components/TourDetailExtras";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { TourJsonLd } from "@/components/TourJsonLd";
 import { getTourBySlug, tours } from "@/lib/tours";
 import { formatTourDurationBadge } from "@/lib/tour-duration";
+import { getTourRegions } from "@/lib/tour-meta";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -64,11 +67,20 @@ export default async function TourDetailPage({ params }: PageProps) {
   }
 
   const extraGallery = tour.gallery.filter((src) => src !== tour.heroImage);
+  const tourRegions = getTourRegions(tour);
+  const relatedTours = tours
+    .filter(
+      (candidate) =>
+        candidate.slug !== tour.slug &&
+        getTourRegions(candidate).some((region) => tourRegions.includes(region)),
+    )
+    .slice(0, 3);
 
   return (
-    <article className="bg-slate-950 text-white">
+    <article className="tour-detail-page bg-slate-950 pb-24 text-white md:pb-0">
       <TourJsonLd tour={tour} slug={slug} />
       <RecordTourVisit slug={slug} />
+      <MobileTourBookingBar message={tour.whatsappMessage} price={tour.pricePerHead} />
       <section className="border-b border-white/10 px-4 pb-8 pt-[5.25rem] sm:pb-10 sm:pt-28 md:pt-32">
         <div className="mx-auto max-w-5xl">
           <div className="relative mx-auto w-full overflow-hidden rounded-[1.15rem] border border-white/10 bg-slate-900/80 shadow-2xl shadow-black/40 sm:rounded-[2rem]">
@@ -216,6 +228,24 @@ export default async function TourDetailPage({ params }: PageProps) {
                     className="object-cover"
                   />
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {relatedTours.length > 0 && (
+        <section className="bg-brand-cream px-4 py-16 text-brand-ink md:py-24">
+          <div className="mx-auto max-w-7xl">
+            <SectionHeading
+              eyebrow="Related packages"
+              title="More routes you may love"
+              text="Compare nearby routes, trip lengths, and prices before choosing your departure."
+              tone="light"
+            />
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedTours.map((relatedTour) => (
+                <TourCard key={relatedTour.slug} tour={relatedTour} />
               ))}
             </div>
           </div>

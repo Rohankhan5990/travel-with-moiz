@@ -50,13 +50,13 @@ const destinations: Destination[] = [
   {
     name: "Swat",
     tagline: "Kalam's meadows and Malam Jabba",
-    image: "/images/pakistan-places-images/swat-mahodand.jpg",
+    image: "/images/pakistan-places-images/swat-mahodand.webp",
     region: "Swat",
   },
   {
     name: "Kumrat",
     tagline: "Untouched forests and river camps",
-    image: "/images/pakistan-places-images/kumrat-valley.jpg",
+    image: "/images/pakistan-places-images/kumrat-valley.webp",
     region: "Kumrat",
   },
 ];
@@ -74,7 +74,7 @@ export function DestinationShowcase() {
         </AnimatedSection>
 
         <div className="mt-12 grid auto-rows-[200px] grid-cols-1 gap-4 sm:auto-rows-[220px] sm:grid-cols-2 md:grid-cols-4">
-          {destinations.map((destination, index) => (
+          {destinations.map((destination) => (
             <AnimatedSection key={destination.name} className={cn("h-full", destination.span)}>
               <Link
                 href={`/tours?region=${encodeURIComponent(destination.region)}#explorer`}
@@ -84,7 +84,7 @@ export function DestinationShowcase() {
                   src={destination.image}
                   alt={`${destination.name} — ${destination.tagline}`}
                   fill
-                  loading={index === 0 ? "eager" : "lazy"}
+                  loading="lazy"
                   sizes="(min-width: 768px) 25vw, (min-width: 640px) 50vw, 100vw"
                   className="object-cover transition duration-[1.2s] ease-out group-hover:scale-[1.07]"
                 />

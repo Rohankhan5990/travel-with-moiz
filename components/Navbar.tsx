@@ -39,7 +39,6 @@ export function Navbar() {
               width={48}
               height={48}
               className="h-full w-full object-cover"
-              priority
             />
           </span>
           <span className="hidden sm:block">

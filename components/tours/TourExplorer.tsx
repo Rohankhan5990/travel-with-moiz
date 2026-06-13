@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
@@ -51,6 +51,9 @@ const durationFilters = [
 
 const BUDGET_MAX = 60000;
 const COMPARE_LIMIT = 3;
+const travelTypeFilters = ["Family", "Couple", "Group", "Custom"] as const;
+type TravelTypeFilter = (typeof travelTypeFilters)[number];
+const subscribeToBrowserCapabilities = () => () => {};
 
 /** Minimal typing for the Web Speech API (Chrome/Edge/Safari). */
 type SpeechRecognitionLike = {
@@ -193,12 +196,17 @@ export function TourExplorer() {
   const [region, setRegion] = useState<Region | null>(initial.region);
   const [duration, setDuration] = useState(initial.duration);
   const [budget, setBudget] = useState(initial.budget);
+  const [travelType, setTravelType] = useState<TravelTypeFilter | null>(null);
   const [savedOnly, setSavedOnly] = useState(false);
   const [compare, setCompare] = useState<string[]>([]);
   const [showCompare, setShowCompare] = useState(false);
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
-  const speechSupported = useMemo(() => getSpeechRecognition() !== null, []);
+  const speechSupported = useSyncExternalStore(
+    subscribeToBrowserCapabilities,
+    () => getSpeechRecognition() !== null,
+    () => false,
+  );
 
   // Re-apply when the URL params change in place (e.g. footer destination links
   // clicked while already on /tours). Render-phase adjustment, not an effect.
@@ -246,9 +254,15 @@ export function TourExplorer() {
         return price === null || price <= budget;
       });
     }
+    if (travelType) {
+      result =
+        travelType === "Custom"
+          ? []
+          : result.filter((tour) => tour.category.includes(travelType));
+    }
     if (savedOnly) result = result.filter((tour) => wishlist.includes(tour.slug));
     return result;
-  }, [query, region, duration, budget, savedOnly, wishlist]);
+  }, [query, region, duration, budget, travelType, savedOnly, wishlist]);
 
   const compareTours = compare
     .map((slug) => tours.find((tour) => tour.slug === slug))
@@ -265,7 +279,12 @@ export function TourExplorer() {
   };
 
   const hasActiveFilters =
-    query || region || duration !== durationFilters[0] || budget < BUDGET_MAX || savedOnly;
+    query ||
+    region ||
+    duration !== durationFilters[0] ||
+    budget < BUDGET_MAX ||
+    travelType ||
+    savedOnly;
 
   return (
     <div id="explorer">
@@ -339,6 +358,28 @@ export function TourExplorer() {
           ))}
         </div>
 
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <span className="mr-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">
+            Travel type
+          </span>
+          {travelTypeFilters.map((option) => (
+            <button
+              key={option}
+              type="button"
+              onClick={() => setTravelType(travelType === option ? null : option)}
+              aria-pressed={travelType === option}
+              className={cn(
+                "rounded-full border px-4 py-2 text-xs font-semibold transition sm:text-sm",
+                travelType === option
+                  ? "border-brand-gold/50 bg-brand-gold/15 text-brand-gold-light"
+                  : "border-white/10 bg-white/5 text-white/65 hover:bg-white/10",
+              )}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+
         <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-x-6 gap-y-4">
           <div className="flex items-center gap-2">
             <SlidersHorizontal className="h-4 w-4 text-white/50" />
@@ -405,6 +446,7 @@ export function TourExplorer() {
               setRegion(null);
               setDuration(durationFilters[0]);
               setBudget(BUDGET_MAX);
+              setTravelType(null);
               setSavedOnly(false);
             }}
             className="ml-3 font-semibold text-brand-gold-light underline-offset-4 hover:underline"
@@ -432,7 +474,7 @@ export function TourExplorer() {
       ) : (
         <motion.div layout={!reduceMotion} className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
-            {filtered.map((tour) => {
+            {filtered.map((tour, index) => {
               const comparing = compare.includes(tour.slug);
               return (
                 <motion.div
@@ -444,7 +486,7 @@ export function TourExplorer() {
                   transition={{ duration: 0.35 }}
                   className="relative"
                 >
-                  <TourCard tour={tour} />
+                  <TourCard tour={tour} priority={index === 0} />
                   <button
                     type="button"
                     onClick={() => toggleCompare(tour.slug)}

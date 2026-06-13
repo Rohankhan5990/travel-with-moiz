@@ -1,4 +1,5 @@
 import type { Tour } from "@/lib/tour-types";
+import { serializeJsonLd } from "@/lib/json-ld";
 import { getSiteUrl } from "@/lib/site";
 
 type Props = { tour: Tour; slug: string };
@@ -23,6 +24,12 @@ export function TourJsonLd({ tour, slug }: Props) {
     description: tour.summary,
     url,
     image: `${siteUrl}${tour.heroImage}`,
+    provider: {
+      "@type": "TravelAgency",
+      name: "Travel With Moiz",
+      url: siteUrl,
+      telephone: "+923224294542",
+    },
     touristType: ["Adventure", "Sightseeing"],
     itinerary: {
       "@type": "ItemList",
@@ -48,11 +55,11 @@ export function TourJsonLd({ tour, slug }: Props) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbs) }}
       />
     </>
   );
