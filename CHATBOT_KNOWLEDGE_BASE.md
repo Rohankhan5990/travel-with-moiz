@@ -52,7 +52,7 @@ Children: packages that define it often say **under 3–4 free (lap/seat permitt
 - **Duration:** 2 Days ‑ 1 Night
 - **Areas:** Shogran · Siri Paye · Kiwai · Balakot · Khanpur Dam
 - **Prices (website):**
-  - Standard **per head Rs.11,000** · **couple Rs.25,000**
+  - Standard **per head Rs.14,000** · **couple Rs.30,000**
   - Deluxe **solo Rs.20,000** · **couple Rs.40,000**
 
 **Summary**  

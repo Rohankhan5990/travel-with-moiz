@@ -15,8 +15,8 @@ const packageToursData: Tour[] = [
     slug: "shogran-siri-paye-khanpur",
     duration: "2 Days - 1 Night",
     location: "Shogran · Siri Paye · Kiwai · Balakot · Khanpur Dam",
-    pricePerHead: "Rs. 11,000",
-    couplePrice: "Rs. 25,000",
+    pricePerHead: "Rs. 14,000",
+    couplePrice: "Rs. 30,000",
     deluxePricePerHead: "Rs. 20,000",
     deluxeCouplePrice: "Rs. 40,000",
     summary:
@@ -70,7 +70,7 @@ const packageToursData: Tour[] = [
     category: ["Weekend", "Group", "Family", "Couple"],
     whatsappMessage: tourBookingMessage("02 Days Shogran, Siri Paye & Khanpur"),
     packageDetail: [
-      "Standard: Solo Rs. 11,000/- · Couple Rs. 25,000/-",
+      "Standard: Solo Rs. 14,000/- · Couple Rs. 30,000/-",
       "Deluxe: Solo Rs. 20,000/- · Couple Rs. 40,000/-",
       "Duration: 2 Days, 1 Night — departure every Friday night",
     ],
